@@ -12,7 +12,8 @@
 
             <li class="menu-header">Starter</li>
             <li class="nav-item dropdown">
-                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>
+                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i>
+                    <span>
                         Darah Wanita</span></a>
                 <ul class="dropdown-menu">
                     <li><a class="nav-link" href="/jenis">Jenis Darah</a></li>
@@ -22,6 +23,8 @@
             </li>
             <li class="active"><a class="nav-link" href="/question"><i class="far fa-square"></i>
                     <span>Pertanyaan Gejala</span></a></li>
+            <li class="active"><a class="nav-link" href=""><i class="far fa-square"></i>
+                    <span>Gejala</span></a></li>
             <li class="active"><a class="nav-link" href="/diagnosa"><i class="far fa-square"></i>
                     <span>Diagnosis</span></a></li>
             <li class="active"><a class="nav-link" href="/ibdh"><i class="far fa-square"></i>
@@ -34,7 +37,7 @@
             <li class="nav-item dropdown">
                 <a href="#" class="nav-link has-dropdown"><i class="far fa-user"></i> <span>Profile</span></a>
                 <ul class="dropdown-menu">
-                    <li><a href="auth-forgot-password.html">User</a></li>
+                    <li><a href="/Puser">User</a></li>
                     <li><a class="beep beep-sidebar" href="auth-login-2.html">Admin</a></li>
                 </ul>
             </li>

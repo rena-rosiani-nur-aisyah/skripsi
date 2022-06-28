@@ -102,3 +102,7 @@ Route::get('/twarna', function () {
 Route::get('/first', function () {
     return view('users.landing');
 });
+
+Route::get('/Puser', function () {
+    return view('category.profilUser');
+});
