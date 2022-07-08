@@ -75,7 +75,13 @@ Route::get('/tjenis', function () {
     return view('partials.tjenis');
 });
 
+Route::get('/gejala', function () {
+    return view('category.gejala');
+});
 
+Route::get('/tgejala', function () {
+    return view('partials.tgejala');
+});
 
 
 Route::get('/editdiagnos', function () {

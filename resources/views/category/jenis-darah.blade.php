@@ -18,7 +18,7 @@
                             <div class="card-header">
                                 <h4>Jenis-jenis Darah Wanita</h4>
                                 <div class="card-header-action">
-                                    <a href="/tjenis" data-tab="summary-tab" class="btn active">+ Tambah
+                                    <a href="{{ url('tjenis') }}" class="btn active">+ Tambah
                                         Jenis</a>
                                 </div>
                             </div>
@@ -43,7 +43,8 @@
                                                 <td>{{ $value->rata }}</td>
                                                 <td> <a href="/edit"> <img src="/images/icon/edit.png" alt="edit"
                                                             width="30"> </a>
-                                                    <a href=""> <img src="/images/icon/delete.png" alt="delete" width="30">
+                                                    <a href=""> <img src="/images/icon/delete.png" alt="delete"
+                                                            width="30">
                                                     </a>
                                                 </td>
                                             </tr>

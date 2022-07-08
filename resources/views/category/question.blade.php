@@ -5,7 +5,7 @@
             <div class="card-header">
                 <h4>Pertanyaan</h4>
                 <div class="card-header-action">
-                    <a href="/sifatssummary-chart" data-tab="summary-tab" class="btn active">+ Tambah Pertanyaan</a>
+                    <a href="{{ url() }}" class="btn active">+ Tambah Pertanyaan</a>
                 </div>
             </div>
             <div class="card-body p-0">
@@ -24,8 +24,10 @@
                                     <td>{{ $question->pertanyaan }}</td>
                                     <td>{{ $question->name }}</td>
                                     <td>
-                                        <a href="/equestion"> <img src="/images/icon/edit.png" alt="edit" width="30"> </a>
-                                        <a href="#"> <img src="/images/icon/delete.png" alt="delete" width="30"> </a>
+                                        <a href="/equestion"> <img src="/images/icon/edit.png" alt="edit" width="30">
+                                        </a>
+                                        <a href="#"> <img src="/images/icon/delete.png" alt="delete" width="30">
+                                        </a>
                                     </td>
                                 </tr>
                             @endforeach

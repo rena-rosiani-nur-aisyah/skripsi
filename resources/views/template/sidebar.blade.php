@@ -23,7 +23,7 @@
             </li>
             <li class="active"><a class="nav-link" href="/question"><i class="far fa-square"></i>
                     <span>Pertanyaan Gejala</span></a></li>
-            <li class="active"><a class="nav-link" href=""><i class="far fa-square"></i>
+            <li class="active"><a class="nav-link" href="/gejala"><i class="far fa-square"></i>
                     <span>Gejala</span></a></li>
             <li class="active"><a class="nav-link" href="/diagnosa"><i class="far fa-square"></i>
                     <span>Diagnosis</span></a></li>

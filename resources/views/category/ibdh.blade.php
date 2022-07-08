@@ -5,7 +5,7 @@
             <div class="card-header">
                 <h4>Pelaksanaan Ibadah</h4>
                 <div class="card-header-action">
-                    <a href="/sifatssummary-chart" data-tab="summary-tab" class="btn active">+ Tambah Ibadah</a>
+                    <a href="{{ url() }}" class="btn active">+ Tambah Ibadah</a>
                 </div>
             </div>
             <div class="card-body p-0">
@@ -28,8 +28,10 @@
                                     <td>{{ $posts->mubah }}</td>
                                     <td>{{ $posts->haram }}</td>
                                     <td>
-                                        <a href="/editibdh"> <img src="/images/icon/edit.png" alt="edit" width="30"> </a>
-                                        <a href="#"> <img src="/images/icon/delete.png" alt="delete" width="30"> </a>
+                                        <a href="/editibdh"> <img src="/images/icon/edit.png" alt="edit" width="30">
+                                        </a>
+                                        <a href="#"> <img src="/images/icon/delete.png" alt="delete" width="30">
+                                        </a>
                                     </td>
                                 </tr>
                             @endforeach

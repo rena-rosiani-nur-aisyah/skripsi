@@ -5,7 +5,7 @@
             <div class="card-header">
                 <h4>Sifat Darah</h4>
                 <div class="card-header-action">
-                    <a href="/sifatssummary-chart" data-tab="summary-tab" class="btn active">+ Tambah Sifat</a>
+                    <a href="{{ url('/sifats') }}" class="btn active">+ Tambah Sifat</a>
                 </div>
             </div>
             <div class="card-body p-0">
@@ -26,8 +26,10 @@
                                     <td>{{ $post->ciri }}</td>
                                     <td>{{ $post->karakter }}</td>
                                     <td>
-                                        <a href="/edits"> <img src="/images/icon/edit.png" alt="edit" width="30"> </a>
-                                        <a href="#"> <img src="/images/icon/delete.png" alt="delete" width="30"> </a>
+                                        <a href="/edits"> <img src="/images/icon/edit.png" alt="edit" width="30">
+                                        </a>
+                                        <a href="#"> <img src="/images/icon/delete.png" alt="delete" width="30">
+                                        </a>
                                     </td>
                                 </tr>
                             @endforeach
