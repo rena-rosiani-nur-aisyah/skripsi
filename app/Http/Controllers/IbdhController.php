@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Ibdh;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreIbdhRequest;
 use App\Http\Requests\UpdateIbdhRequest;
-use Illuminate\Support\Facades\DB;
+use App\Models\post;
 
 class IbdhController extends Controller
 {
@@ -16,9 +19,7 @@ class IbdhController extends Controller
      */
     public function index()
     {
-        $items = DB::table('ibdhs')
-            ->join('posts', 'ibdhs.jenis_id', '=', 'posts.id')
-            ->get();
+        $items = DB::table('ibdhs')->get();
         // dd($items);
         $data = [
             'items' => $items
@@ -33,7 +34,11 @@ class IbdhController extends Controller
      */
     public function create()
     {
-        //
+        $list = post::get();
+        $data = [
+            'items' => $list
+        ];
+        return view('partials.tambah.tibdh', $data);
     }
 
     /**
@@ -42,9 +47,15 @@ class IbdhController extends Controller
      * @param  \App\Http\Requests\StoreIbdhRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreIbdhRequest $request)
+    public function store(Request $request)
     {
-        //
+        $insert = Ibdh::create([
+            'jenisDarah' => $request->jenisDarah,
+            'wajib' => $request->wajib,
+            'mubah' => $request->mubah,
+            'haram' => $request->haram
+        ]);
+        return redirect(url('/ibdh'));
     }
 
     /**
@@ -53,9 +64,10 @@ class IbdhController extends Controller
      * @param  \App\Models\Ibdh  $ibdh
      * @return \Illuminate\Http\Response
      */
-    public function show(Ibdh $ibdh)
+    public function show($id)
     {
-        //
+        $post = Ibdh::find($id);
+        return view('partials.edit.eibadah', compact('post'));
     }
 
     /**
@@ -64,9 +76,13 @@ class IbdhController extends Controller
      * @param  \App\Models\Ibdh  $ibdh
      * @return \Illuminate\Http\Response
      */
-    public function edit(Ibdh $ibdh)
+    public function edit($id)
     {
-        //
+        $post = Ibdh::find($id);
+        $data = [
+            'post' => $post
+        ];
+        return view('partials.edit.eibadah', $data);
     }
 
     /**
@@ -76,9 +92,16 @@ class IbdhController extends Controller
      * @param  \App\Models\Ibdh  $ibdh
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateIbdhRequest $request, Ibdh $ibdh)
+    public function update(UpdateIbdhRequest $request)
     {
-        //
+        $post = Ibdh::where('id', $request->id);
+        $post->update([
+            'jenisDarah' => $request->jenisDarah,
+            'wajib' => $request->wajib,
+            'mubah' => $request->mubah,
+            'haram' => $request->haram
+        ]);
+        return redirect(url('/ibdh'))->with('Berhasil,', 'Data telah diubah!');
     }
 
     /**
@@ -87,8 +110,10 @@ class IbdhController extends Controller
      * @param  \App\Models\Ibdh  $ibdh
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Ibdh $ibdh)
+    public function destroy($id)
     {
-        //
+        $post = Ibdh::find($id);
+        $post->delete();
+        return redirect(url('/ibdh'))->with('Berhasil', 'Data telah dihapus!');
     }
 }

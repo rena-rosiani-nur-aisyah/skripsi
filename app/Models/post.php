@@ -18,18 +18,13 @@ class post extends Model
         'rata'
     ];
 
-    public function question()
-    {
-        $this->hasMany(question::class);
-    }
+    // public function diagnosis()
+    // {
+    //     $this->belongsTo(diagnosis::class);
+    // }
 
-    public function diagnosis()
-    {
-        $this->belongsTo(diagnosis::class);
-    }
-
-    public function ibdh()
-    {
-        $this->belongsTo(ibdh::class);
-    }
+    // public function ibdh()
+    // {
+    //     $this->belongsTo(ibdh::class);
+    // }
 }

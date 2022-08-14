@@ -8,4 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class materi extends Model
 {
     use HasFactory;
+    protected $table = 'materis';
+
+    protected $fillable = [
+        'jenis_darah',
+        'keterangan'
+    ];
+
+    public function post()
+    {
+        return $this->belongsTo(post::class);
+    }
 }

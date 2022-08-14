@@ -11,13 +11,9 @@ class Ibdh extends Model
     protected $table = 'ibdhs';
 
     protected $fillable = [
+        'jenisDarah',
         'wajib',
         'mubah',
         'haram'
     ];
-
-    public function post()
-    {
-        return $this->belongsTo(post::class);
-    }
 }

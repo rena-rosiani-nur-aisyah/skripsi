@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\diagnosis;
+use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\DB;
 use App\Http\Requests\StorediagnosisRequest;
 use App\Http\Requests\UpdatediagnosisRequest;
-use Illuminate\Support\Facades\DB;
+use App\Models\post;
 
 class DiagnosisController extends Controller
 {
@@ -16,10 +19,7 @@ class DiagnosisController extends Controller
      */
     public function index()
     {
-        $items = DB::table('diagnoses')
-            ->join('posts', 'diagnoses.jenis_id', '=', 'posts.id')
-            ->join('questions', 'diagnoses.question_id', '=', 'questions.id')
-            ->get();
+        $items = DB::table('diagnoses')->get();
         // dd($items);
         $data = [
             'items' => $items
@@ -43,9 +43,13 @@ class DiagnosisController extends Controller
      * @param  \App\Http\Requests\StorediagnosisRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StorediagnosisRequest $request)
+    public function store(Request $request)
     {
-        //
+        $insert = diagnosis::create([
+            'gejala' => $request->gejala,
+            'hasil' => $request->hasil
+        ]);
+        return redirect('/diagnosa');
     }
 
     /**
@@ -54,9 +58,11 @@ class DiagnosisController extends Controller
      * @param  \App\Models\diagnosis  $diagnosis
      * @return \Illuminate\Http\Response
      */
-    public function show(diagnosis $diagnosis)
+    public function show($id)
     {
-        //
+        $post = diagnosis::find($id);
+        // dd($post);
+        return view('partials.edit.ediagnosis', compact('post'));
     }
 
     /**
@@ -65,9 +71,13 @@ class DiagnosisController extends Controller
      * @param  \App\Models\diagnosis  $diagnosis
      * @return \Illuminate\Http\Response
      */
-    public function edit(diagnosis $diagnosis)
+    public function edit($id)
     {
-        //
+        $post = diagnosis::find($id);
+        $data = [
+            'post' => $post
+        ];
+        return view('partials.edit.ediagnosis', $data);
     }
 
     /**
@@ -77,9 +87,14 @@ class DiagnosisController extends Controller
      * @param  \App\Models\diagnosis  $diagnosis
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdatediagnosisRequest $request, diagnosis $diagnosis)
+    public function update(Request $request)
     {
-        //
+        $post = diagnosis::where('id', $request->id);
+        $post->update([
+            'gejala' => $request->gejala,
+            'hasil' => $request->hasil
+        ]);
+        return redirect(url('/diagnosa'))->with('Berhasil,', 'Data telah diubah');
     }
 
     /**
@@ -88,8 +103,10 @@ class DiagnosisController extends Controller
      * @param  \App\Models\diagnosis  $diagnosis
      * @return \Illuminate\Http\Response
      */
-    public function destroy(diagnosis $diagnosis)
+    public function destroy($id)
     {
-        //
+        $post = diagnosis::find($id);
+        $post->delete();
+        return redirect(url('/diagnosa'))->with('Berhasil,', 'Data telah dihapus');
     }
 }

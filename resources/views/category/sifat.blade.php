@@ -26,9 +26,11 @@
                                     <td>{{ $post->ciri }}</td>
                                     <td>{{ $post->karakter }}</td>
                                     <td>
-                                        <a href="/edits"> <img src="/images/icon/edit.png" alt="edit" width="30">
+                                        <a href="/editsifat/{{ $post->id }}"> <img src="/images/icon/edit.png"
+                                                alt="edit" width="30">
                                         </a>
-                                        <a href="#"> <img src="/images/icon/delete.png" alt="delete" width="30">
+                                        <a href="/deletesifat/{{ $post->id }}"> <img src="/images/icon/delete.png"
+                                                alt="delete" width="30">
                                         </a>
                                     </td>
                                 </tr>

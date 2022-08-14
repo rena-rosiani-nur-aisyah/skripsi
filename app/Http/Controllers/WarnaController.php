@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\warna;
 use App\Http\Requests\StorewarnaRequest;
 use App\Http\Requests\UpdatewarnaRequest;
+use Illuminate\Http\Request;
 use DB;
 
 class WarnaController extends Controller
@@ -41,9 +42,13 @@ class WarnaController extends Controller
      * @param  \App\Http\Requests\StorewarnaRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StorewarnaRequest $request)
+    public function store(Request $request)
     {
-        //
+        $insert = warna::create([
+            'name' => $request->name,
+            'image' => $request->image
+        ]);
+        return redirect(url('/warna'));
     }
 
     /**

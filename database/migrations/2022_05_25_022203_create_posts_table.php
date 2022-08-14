@@ -16,9 +16,6 @@ class CreatePostsTable extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('question_id');
-            $table->foreignId('diagnos_id');
-            $table->foreignId('ibadah_id');
             $table->string('name');
             $table->string('minimal');
             $table->string('maksimal');

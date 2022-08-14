@@ -15,7 +15,7 @@ class CreateIbdhsTable extends Migration
     {
         Schema::create('ibdhs', function (Blueprint $table) {
             $table->id();
-            $table->string('jenis_id');
+            $table->string('jenisDarah');
             $table->text('wajib');
             $table->text('mubah');
             $table->text('haram');

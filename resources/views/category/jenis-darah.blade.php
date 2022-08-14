@@ -24,7 +24,7 @@
                             </div>
                             <div class="card-body">
                                 <div class="table">
-                                    <table class="table table-bordered table-md">
+                                    <table class="table table-bordered table-md col-lg-12">
                                         <tr>
                                             <th>No.</th>
                                             <th>Nama Darah</th>
@@ -41,11 +41,11 @@
                                                 <td>{{ $value->minimal }}</td>
                                                 <td>{{ $value->maksimal }}</td>
                                                 <td>{{ $value->rata }}</td>
-                                                <td> <a href="/edit"> <img src="/images/icon/edit.png" alt="edit"
-                                                            width="30"> </a>
-                                                    <a href=""> <img src="/images/icon/delete.png" alt="delete"
-                                                            width="30">
-                                                    </a>
+                                                <td> <a href="/show/{{ $value->id }}"> <img src="/images/icon/edit.png"
+                                                            alt="edit" width="30"> </a>
+                                                    <a href="/delete/{{ $value->id }}"><img src="/images/icon/delete.png"
+                                                            alt="delete" width="30"></a>
+                                                    </form>
                                                 </td>
                                             </tr>
                                         @endforeach

@@ -6,7 +6,7 @@
                 <div class="card-header">
                     <h4>Warna Darah</h4>
                     <div class="card-header-action">
-                        <a href="{{ url('/twarna') }}" data-tab="summary-tab" class="btn active">+ Tambah Warna</a>
+                        <a href="{{ url('/twarna') }}" class="btn active">+ Tambah Warna</a>
                     </div>
                 </div>
                 <div class="card-body">

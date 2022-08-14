@@ -15,7 +15,7 @@ class CreateMaterisTable extends Migration
     {
         Schema::create('materis', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('jenis_id');
+            $table->string('jenis_darah');
             $table->text('keterangan');
             $table->timestamps();
         });

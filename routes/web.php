@@ -1,15 +1,20 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\DashboardAdmin;
 use App\Http\Controllers\DiagnosisController;
+use App\Http\Controllers\GejalaController;
 use App\Models\post;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\IbdhController;
+use App\Http\Controllers\MateriController;
 use App\Http\Controllers\PostController;
-use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\SifatController;
 use App\Http\Controllers\WarnaController;
+use Symfony\Component\HttpKernel\Profiler\Profile;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,85 +35,175 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/test', function () {
-    return view('category.index');
-});
-
-Route::get('/test/create', function () {
-    return view('category.index');
-});
-
+// route untuk menu jenis
 Route::get('/jenis', [PostController::class, 'index']);
 
-Route::get('/warna', [WarnaController::class, 'index']);
+Route::get('/show/{id}', [PostController::class, 'show'])->name('show');
 
-Route::get('/question', [QuestionController::class, 'index']);
+Route::post('/edit/{id}', [PostController::class, 'update'])->name('edit');
 
-Route::get('/sifat', [SifatController::class, 'index']);
+Route::get('/delete/{id}', [PostController::class, 'destroy'])->name('delete');
 
-Route::get('/diagnosa', [DiagnosisController::class, 'index']);
-
-Route::get('/ibdh', [IbdhController::class, 'index']);
-
-Route::get('/edit', function () {
-    return view('category.create');
-});
-
-Route::get('/equestion', function () {
-    return view('partials.equestion');
-});
-
-Route::get('/edits', function () {
-    return view('partials.editsifat');
-});
-
-
-Route::get('/editw', function () {
-    return view('partials.editwarna');
-});
-
-Route::get('/sifats', function () {
-    return view('partials.tsifat');
-});
+Route::post('/tjenis', [PostController::class, 'store']);
 
 Route::get('/tjenis', function () {
-    return view('partials.tjenis');
-});
-
-Route::get('/gejala', function () {
-    return view('category.gejala');
-});
-
-Route::get('/tgejala', function () {
-    return view('partials.tgejala');
+    return view('partials.tambah.tjenis');
 });
 
 
-Route::get('/editdiagnos', function () {
-    return view('partials.ediagnosis');
+
+// semua route untuk sifat
+Route::get('/sifat', [SifatController::class, 'index']);
+
+Route::post('/sifat-store', [SifatController::class, 'store'])->name('sifat.store');
+
+Route::get('/showsifat/{id}', [SifatController::class, 'show'])->name('showsifat');
+
+Route::get('/editsifat/{id}', [SifatController::class, 'edit'])->name('editsifat');
+
+Route::post('updatesifat', [SifatController::class, 'update'])->name('updatesifat');
+
+Route::get('/deletesifat/{id}', [SifatController::class, 'destroy'])->name('deletesifat');
+
+Route::get('/sifats', function () {
+    return view('partials.tambah.tsifat');
 });
 
 
-Route::get('/editibdh', function () {
-    return view('partials.eibadah');
-});
 
-Route::get('/materi', function () {
-    return view('category.materi');
-});
 
-Route::get('/emateri', function () {
-    return view('partials.emateri');
+
+
+// semua route untuk warna
+Route::get('/warna', [WarnaController::class, 'index']);
+
+Route::post('/twarna-store', [WarnaController::class, 'store'])->name('twarna.store');
+
+Route::get('/editw', function () {
+    return view('partials.edit.editwarna');
 });
 
 Route::get('/twarna', function () {
-    return view('partials.twarna');
+    return view('partials.tambah.twarna');
 });
 
-Route::get('/first', function () {
-    return view('users.landing');
+
+
+// route untuk semua gejala
+Route::get('/gejala', [GejalaController::class, 'index']);
+Route::post('/gejala-store', [GejalaController::class, 'store'])->name('gejala.store');
+Route::get('/tampilgejala/{id}', [GejalaController::class, 'show'])->name('tampilgejala');
+Route::post('updategejala', [GejalaController::class, 'update'])->name('updategejala');
+Route::get('/editgejala/{id}', [GejalaController::class, 'edit'])->name('editgejala');
+Route::get('/deletegejala/{id}', [GejalaController::class, 'destroy'])->name('deletegejala');
+
+Route::get('/tgejala', function () {
+    return view('partials.tambah.tgejala');
 });
 
+Route::get('/editgejala', function () {
+    return view('partials.edit.editgejala');
+});
+
+
+
+
+// semua route untuk diagnosis
+Route::get('/diagnosa', [DiagnosisController::class, 'index']);
+
+Route::post('/tdiagnosis-store', [DiagnosisController::class, 'store'])->name('tdiagnosis.store');
+// Route::get('/tdiagnosis', [DiagnosisController::class, 'create']);
+
+Route::get('/showdiagnosis/{id}', [DiagnosisController::class, 'show'])->name('showdiagnosis');
+
+Route::post('/updatediagnosis/{id}', [DiagnosisController::class, 'update'])->name('updatediagnosis');
+
+Route::get('/editdiagnosis/{id}', [DiagnosisController::class, 'edit'])->name('editdiagnosis');
+
+Route::get('deletediagnosis/{id}', [DiagnosisController::class, 'destroy'])->name('deletediagnosis');
+
+Route::get('/editdiagnos', function () {
+    return view('partials.edit.ediagnosis');
+});
+Route::get('/tambahdiagnosis', function () {
+    return view('partials.tambah.tdiagnosis');
+});
+
+
+
+
+// semua route untuk ibadah
+Route::get('/ibdh', [IbdhController::class, 'index']);
+Route::post('/ibdh-store', [IbdhController::class, 'store'])->name('ibdh.store');
+// Route::get('tibadah', [IbdhController::class, 'create']);
+Route::get('/tampilkanibadah/{id}', [IbdhController::class, 'show'])->name('tampilkanibadah');
+Route::post('/updateibadah/{id}', [IbdhController::class, 'update'])->name('updateibadah');
+Route::get('/editibadah/{id}', [IbdhController::class, 'edit'])->name('editibadah');
+Route::get('/deleteibadah/{id}', [IbdhController::class, 'destroy'])->name('deleteibadah');
+Route::get('/editibdh', function () {
+    return view('partials.edit.eibadah');
+});
+Route::get('/tambahibadah', function () {
+    return view('partials.tambah.tibdh');
+});
+
+
+
+
+// semua route untuk materi
+Route::get('/materi', [MateriController::class, 'index']);
+Route::post('/materi-store', [MateriController::class, 'store'])->name('materi.store');
+Route::get('/editmateri/{id}', [MateriController::class, 'edit'])->name('editmateri');
+Route::get('/tampilkanmateri/{id}', [MateriController::class, 'show'])->name('tampilkanmateri');
+Route::post('/updatemateri/{id}', [MateriController::class, 'update'])->name('updatemateri');
+Route::get('/deletemateri/{id}', [MateriController::class, 'destroy'])->name('deletemateri');
+Route::get('tmateri', function () {
+    return view('partials.tambah.tmateri');
+});
+
+Route::get('/emateri', function () {
+    return view('partials.edit.emateri');
+});
+
+
+
+
+
+//rout profil dari sisi admin
 Route::get('/Puser', function () {
     return view('category.profilUser');
 });
+Route::get('/admin', function () {
+    return view('category.profiladmin');
+});
+// Route::get('');
+
+
+// Profile user dari sisi user
+Route::get('/profile', function () {
+    return view('users.profile');
+});
+
+
+// semua route untuk sisi user
+Route::get('/landing', function () {
+    return view('users.landing');
+});
+
+Route::get('/main', function () {
+    return view('users.main');
+});
+
+Route::get('/diagnosisuser', function () {
+    return view('users.diagnosis-user');
+});
+
+Route::get('/riwayat', function () {
+    return view('users.riwayat');
+});
+
+Route::get('/pengetahuan', function () {
+    return view('users.pengetahuan');
+});
+
+// Route::get('/profile');

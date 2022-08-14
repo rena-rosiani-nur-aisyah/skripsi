@@ -8,7 +8,7 @@
         </div>
         <ul class="sidebar-menu">
             <li class="menu-header">Dashboard</li>
-            <a href="/test" class="nav-link has-dropdown"> <i class="fas fa-fire"></i> <span>Dashboard</span></a>
+            <a href="/" class="nav-link has-dropdown"> <i class="fas fa-fire"></i> <span>Dashboard</span></a>
 
             <li class="menu-header">Starter</li>
             <li class="nav-item dropdown">
@@ -21,8 +21,6 @@
                     <li><a class="nav-link" href="/warna">Warna Darah</a></li>
                 </ul>
             </li>
-            <li class="active"><a class="nav-link" href="/question"><i class="far fa-square"></i>
-                    <span>Pertanyaan Gejala</span></a></li>
             <li class="active"><a class="nav-link" href="/gejala"><i class="far fa-square"></i>
                     <span>Gejala</span></a></li>
             <li class="active"><a class="nav-link" href="/diagnosa"><i class="far fa-square"></i>
@@ -30,7 +28,7 @@
             <li class="active"><a class="nav-link" href="/ibdh"><i class="far fa-square"></i>
                     <span>Pelaksanaan Ibadah</span></a></li>
             <li class="active"><a class="nav-link" href="/materi"><i class="far fa-square"></i>
-                    <span>Materi</span></a></li>
+                    <span>Basis Pengetahuan</span></a></li>
             <li class="nav-item dropdown">
             </li>
             <li class="menu-header">Data</li>
@@ -38,7 +36,7 @@
                 <a href="#" class="nav-link has-dropdown"><i class="far fa-user"></i> <span>Profile</span></a>
                 <ul class="dropdown-menu">
                     <li><a href="/Puser">User</a></li>
-                    <li><a class="beep beep-sidebar" href="auth-login-2.html">Admin</a></li>
+                    <li><a class="beep beep-sidebar" href="/admin">Admin</a></li>
                 </ul>
             </li>
         </ul>
