@@ -8,8 +8,7 @@
             </div>
         </div>
         <div class="card-body">
-            <div class="section-title mt-0"> Data Gejala</div>
-            <table class="table table-sm">
+            <table class="table table-bordered table-md col-lg-12">
                 <thead>
                     <tr>
                         <th scope="col">Gejala</th>
@@ -24,9 +23,9 @@
                             <td>{{ $post->gejala }}</td>
                             <td>{{ $post->status }}</td>
                             <td>
-                                <a href="/editgejala/{{ $post->idgejala }}"> <img src="/images/icon/edit.png" alt="edit"
+                                <a href="/tampilgejala/{{ $post->id }}"> <img src="/images/icon/edit.png" alt="edit"
                                         width="30"> </a>
-                                <a href="/deletegejala/{{ $post->idgejala }}"> <img src="/images/icon/delete.png"
+                                <a href="/deletegejala/{{ $post->id }}"> <img src="/images/icon/delete.png"
                                         alt="delete" width="30">
                                 </a>
                             </td>

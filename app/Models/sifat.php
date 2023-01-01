@@ -11,8 +11,8 @@ class sifat extends Model
     protected $table = 'sifats';
 
     protected $fillable = [
-        'name',
-        'ciri',
-        'karakter'
+        'warna',
+        'karakter',
+        'ciri'
     ];
 }

@@ -15,5 +15,5 @@ class gejala extends Model
         'gejala',
         'status'
     ];
-    protected $primaryKey = 'idgejala';
+    protected $primaryKey = 'id';
 }

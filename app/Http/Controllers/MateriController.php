@@ -41,6 +41,10 @@ class MateriController extends Controller
      */
     public function store(Request $request)
     {
+        $validateData = $request->validate([
+            'jenis_darah' => 'required',
+            'keterangan' => 'required'
+        ]);
         $insert = materi::create([
             'jenis_darah' => $request->jenis_darah,
             'keterangan' => $request->keterangan
@@ -66,14 +70,14 @@ class MateriController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        $post = materi::find($id);
-        $data = [
-            'post' => $post
-        ];
-        return view('partials.edit.emateri', $data);
-    }
+    // public function edit($id)
+    // {
+    //     $post = materi::find($id);
+    //     $data = [
+    //         'post' => $post
+    //     ];
+    //     return view('partials.edit.emateri', $data);
+    // }
 
     /**
      * Update the specified resource in storage.
@@ -82,7 +86,7 @@ class MateriController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         $post = materi::where('id', $request->id);
         $post->update([

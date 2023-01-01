@@ -22,7 +22,7 @@
                     <div class="tab-pane fade show active" id="home6" role="tabpanel" aria-labelledby="home-tab6">
                         <div class="card-header">
                             <div class="card-body text-left">
-                                <h1>Selamat Datang!</h1>
+                                <h1>Selamat Datang! <b>{{ Auth::user()->email }}</b></h1>
                                 <h6>Terima kasih sudah melakukan login</h6>
                             </div>
                             <div class="col-lg-6 order-1 order-lg-2 hero-img">

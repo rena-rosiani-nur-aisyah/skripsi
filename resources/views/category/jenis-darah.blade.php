@@ -28,7 +28,7 @@
                                         <tr>
                                             <th>No.</th>
                                             <th>Nama Darah</th>
-                                            <th>Masa Minimal</th>
+                                            <th>Masa Minmal</th>
                                             <th>Masa Maksimal</th>
                                             <th>Masa Rata-rata</th>
                                             <th>Action</th>

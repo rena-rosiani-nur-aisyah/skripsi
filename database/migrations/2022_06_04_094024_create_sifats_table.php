@@ -15,9 +15,9 @@ class CreateSifatsTable extends Migration
     {
         Schema::create('sifats', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('ciri');
+            $table->string('warna');
             $table->string('karakter');
+            $table->string('ciri');
             $table->timestamps();
         });
     }

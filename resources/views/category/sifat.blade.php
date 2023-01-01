@@ -13,18 +13,18 @@
                     <table class="table table-striped mb-0">
                         <thead>
                             <tr>
-                                <th>Nama</th>
+                                <th>Warna</th>
+                                <th>Karakter</th>
                                 <th>Ciri-ciri</th>
-                                <th>Karakteristik</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($items as $post)
                                 <tr>
-                                    <td>{{ $post->name }}</td>
-                                    <td>{{ $post->ciri }}</td>
+                                    <td>{{ $post->warna }}</td>
                                     <td>{{ $post->karakter }}</td>
+                                    <td>{{ $post->ciri }}</td>
                                     <td>
                                         <a href="/editsifat/{{ $post->id }}"> <img src="/images/icon/edit.png"
                                                 alt="edit" width="30">

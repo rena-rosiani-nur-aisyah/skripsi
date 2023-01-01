@@ -25,6 +25,12 @@ class PostController extends Controller
 
     public function store(Request $request)
     {
+        $validateData = $request->validate([
+            'name' => 'required',
+            'minimal' => 'required',
+            'maksimal' => 'required',
+            'rata' => 'required'
+        ]);
         // dd($request->all());
         $insert =  post::create([
             'name' => $request->name,

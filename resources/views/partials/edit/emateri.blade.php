@@ -17,7 +17,9 @@
                 <div class="form-group row mb-3">
                     <label class="col-form-label  col-12 col-md-3 col-lg-3">Keterangan</label>
                     <div class="col-sm-10 col-md-9">
-                        <textarea class="form-control" name="keterangan" value="{{ $post->keterangan }}"></textarea>
+                        <div class="form-floating">
+                            <textarea class="form-control" name="keterangan" id="keterangan" style="height: 100px" value="{{ $post->keterangan }}"></textarea>
+                        </div>
                     </div>
                 </div>
 

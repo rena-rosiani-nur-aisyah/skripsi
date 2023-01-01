@@ -42,6 +42,10 @@ class GejalaController extends Controller
      */
     public function store(Request $request)
     {
+        $validateData = $request->validate([
+            'gejala' => 'required',
+            'status' => 'required'
+        ]);
         $insert = gejala::create([
             'gejala' => $request->gejala,
             'status' => $request->status
@@ -67,14 +71,14 @@ class GejalaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        $post = gejala::find($id);
-        $data = [
-            'post' => $post
-        ];
-        return view('partials.edit.editgejala', $data);
-    }
+    // public function edit($id)
+    // {
+    //     $post = gejala::find($id);
+    //     $data = [
+    //         'post' => $post
+    //     ];
+    //     return view('partials.edit.editgejala', $data);
+    // }
 
     /**
      * Update the specified resource in storage.
@@ -83,14 +87,10 @@ class GejalaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
-        $post = gejala::where('idgejala', $request->idgejala);
-
-        $post->update([
-            'gejala' => $request->gejala,
-            'status' => $request->status
-        ]);
+        $post = gejala::find($id);
+        $post->update($request->all());
         return redirect(url('/gejala'))->with('Berhasil!', 'Data telah diubah.');
     }
 

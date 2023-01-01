@@ -8,14 +8,14 @@
                     <a href="{{ url('/tmateri') }}" class="btn active">+ Tambah Materi</a>
                 </div>
             </div>
-            <div class="card-body p-0">
-                <div class="table-responsive">
-                    <table class="table table-striped mb-0">
+            <div class="card-body">
+                <div class="table">
+                    <table class="table table-bordered table-md col-lg-12">
                         <thead>
                             <tr>
-                                <th>Jenis Darah</th>
+                                <th class="col-lg-2">Jenis Darah</th>
                                 <th>Keterangan</th>
-                                <th>Action</th>
+                                <th class="col-lg-2">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -24,7 +24,7 @@
                                     <td>{{ $post->jenis_darah }}</td>
                                     <td>{{ $post->keterangan }}</td>
                                     <td>
-                                        <a href="/editmateri/{{ $post->id }}"> <img src="/images/icon/edit.png"
+                                        <a href="/tampilkanmateri/{{ $post->id }}"> <img src="/images/icon/edit.png"
                                                 alt="edit" width="30">
                                         </a>
                                         <a href="/deletemateri/{{ $post->id }}"> <img src="/images/icon/delete.png"

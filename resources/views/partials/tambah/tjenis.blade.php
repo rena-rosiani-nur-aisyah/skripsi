@@ -10,35 +10,48 @@
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="inputName">Nama</label>
-                        <input type="username" class="form-control" name="name" placeholder="Nama">
-                        {{-- <select name="name" class="form-control">
-                            <option value="Haid">Haid</option>
-                            <option value="Istihadho">Istihadho</option>
-                            <option value="Nifas">Nifas</option>
-                        </select> --}}
+                        <input type="username" class="form-control @error('name') is-invalid @enderror" name="name"
+                            placeholder="Nama">
+                        @error('name')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
+
                     </div>
                     <div class="form-group col-md-6">
                         <label for="inputText">Masa Minimal</label>
-                        <input type="text" class="form-control" name="minimal" placeholder="Masa Minimal">
+                        <input type="text" class="form-control @error('minimal') is-invalid @enderror" name="minimal"
+                            placeholder="Masa Minimal">
+                        @error('minimal')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
                     <div class="form-group col-md-6">
                         <label for="inputText">Masa Maksimal</label>
-                        <input type="text" class="form-control" name="maksimal" placeholder="Masa Maksimal">
+                        <input type="text" class="form-control @error('maksimal') is-invalid @enderror" name="maksimal"
+                            placeholder="Masa Maksimal">
+                        @error('maksimal')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
                     <div class="form-group col-md-6">
                         <label for="inputText">Masa Rata-rata</label>
-                        <input type="text" class="form-control" name="rata" placeholder="Masa Rata-rata">
-                    </div>
-                </div>
-                <div class="form-group mb-0">
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="gridCheck">
-                        <label class="form-check-label" for="gridCheck">
-                            Check me out
-                        </label>
+                        <input type="text" class="form-control @error('rata') is-invalid @enderror" name="rata"
+                            placeholder="Masa Rata-rata">
+                        @error('rata')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
                 </div>
                 <div class="card-footer">
+                    <a href="/jenis" class="btn btn-primary">Kembali</a>
                     <button class="btn btn-primary">Submit</button>
                 </div>
             </form>

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-    <title>female blood tracker</title>
+    <title>Period Tracker</title>
 
     <!-- General CSS Files -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -27,7 +27,7 @@
         <section class="section">
 
             <div class="section-header  mb-6">
-                <h1>female blood tracker</h1>
+                <h1>Period Tracker</h1>
                 <div class="section-header-breadcrumb">
                     <div class="breadcrumb-item active"><a href="/landing">Home</a></div>
                     <div class="breadcrumb-item"><a href="/login">Sign In</a></div>

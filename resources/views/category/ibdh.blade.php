@@ -5,19 +5,19 @@
             <div class="card-header">
                 <h4>Pelaksanaan Ibadah</h4>
                 <div class="card-header-action">
-                    <a href="{{ url('/tibadah') }}" class="btn active">+ Tambah Ibadah</a>
+                    <a href="{{ url('/tambahibadah') }}" class="btn active">+ Tambah Ibadah</a>
                 </div>
             </div>
-            <div class="card-body p-0">
-                <div class="table-responsive">
-                    <table class="table table-striped mb-0">
+            <div class="card-body">
+                <div class="table">
+                    <table class="table table-bordered table-md col-lg-12">
                         <thead>
                             <tr>
-                                <th>Jenis Darah</th>
+                                <th class="col-lg-2">Jenis Darah</th>
                                 <th>Ibadah diwajibkan</th>
                                 <th>Ibadah dibolehkan</th>
                                 <th>Ibadah diharamkan</th>
-                                <th>Action</th>
+                                <th class="col-lg-2">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -28,7 +28,7 @@
                                     <td>{{ $posts->mubah }}</td>
                                     <td>{{ $posts->haram }}</td>
                                     <td>
-                                        <a href="/editibadah/{{ $posts->id }}"> <img src="/images/icon/edit.png"
+                                        <a href="/tampilkanibadah/{{ $posts->id }}"> <img src="/images/icon/edit.png"
                                                 alt="edit" width="30">
                                         </a>
                                         <a href="/deleteibadah/{{ $posts->id }}"> <img src="/images/icon/delete.png"

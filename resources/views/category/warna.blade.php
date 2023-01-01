@@ -27,9 +27,11 @@
                                     <td><img src="{{ $value->image }}" alt="" style="height: 100px; width: 100px">
                                     </td>
                                     <td>
-                                        <a href="/editw"> <img src="/images/icon/edit.png" alt="edit" width="30">
+                                        <a href="/tampilinwarna/{{ $value->id }}"> <img src="/images/icon/edit.png"
+                                                alt="edit" width="30">
                                         </a>
-                                        <a href="#"> <img src="/images/icon/delete.png" alt="delete" width="30">
+                                        <a href="/deletewarna/{{ $value->id }}"> <img src="/images/icon/delete.png"
+                                                alt="delete" width="30">
                                         </a>
                                     </td>
                                 </tr>

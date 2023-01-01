@@ -14,6 +14,7 @@ use App\Http\Controllers\MateriController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\SifatController;
 use App\Http\Controllers\WarnaController;
+use App\Models\warna;
 use Symfony\Component\HttpKernel\Profiler\Profile;
 
 /*
@@ -78,7 +79,9 @@ Route::get('/sifats', function () {
 Route::get('/warna', [WarnaController::class, 'index']);
 
 Route::post('/twarna-store', [WarnaController::class, 'store'])->name('twarna.store');
-
+Route::get('/tampilinwarna/{id}', [WarnaController::class, 'show'])->name('tampilinwarna');
+Route::get('/deletewarna/{id}', [WarnaController::class, 'destroy'])->name('deletewarna');
+Route::post('/updatewarna/{id}', [WarnaController::class, 'update'])->name('updatewarna');
 Route::get('/editw', function () {
     return view('partials.edit.editwarna');
 });
@@ -93,8 +96,8 @@ Route::get('/twarna', function () {
 Route::get('/gejala', [GejalaController::class, 'index']);
 Route::post('/gejala-store', [GejalaController::class, 'store'])->name('gejala.store');
 Route::get('/tampilgejala/{id}', [GejalaController::class, 'show'])->name('tampilgejala');
-Route::post('updategejala', [GejalaController::class, 'update'])->name('updategejala');
-Route::get('/editgejala/{id}', [GejalaController::class, 'edit'])->name('editgejala');
+Route::post('/updategejala/{id}', [GejalaController::class, 'update'])->name('updategejala');
+// Route::get('/editgejala/{id}', [GejalaController::class, 'edit'])->name('editgejala');
 Route::get('/deletegejala/{id}', [GejalaController::class, 'destroy'])->name('deletegejala');
 
 Route::get('/tgejala', function () {
@@ -153,9 +156,9 @@ Route::get('/tambahibadah', function () {
 // semua route untuk materi
 Route::get('/materi', [MateriController::class, 'index']);
 Route::post('/materi-store', [MateriController::class, 'store'])->name('materi.store');
-Route::get('/editmateri/{id}', [MateriController::class, 'edit'])->name('editmateri');
+// Route::get('/editmateri/{id}', [MateriController::class, 'edit'])->name('editmateri');
 Route::get('/tampilkanmateri/{id}', [MateriController::class, 'show'])->name('tampilkanmateri');
-Route::post('/updatemateri/{id}', [MateriController::class, 'update'])->name('updatemateri');
+Route::post('updatemateri', [MateriController::class, 'update'])->name('updatemateri');
 Route::get('/deletemateri/{id}', [MateriController::class, 'destroy'])->name('deletemateri');
 Route::get('tmateri', function () {
     return view('partials.tambah.tmateri');

@@ -9,20 +9,39 @@
                 @csrf
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label for="inputEmail4">Nama</label>
-                        <input type="name" class="form-control" name="name" placeholder="Nama">
+                        <label for="warna">Warna</label>
+                        <input type="text" class="form-control @error('warna') is-invalid @enderror" name="warna"
+                            placeholder="Warna">
+                        @error('warna')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="inputPassword4">Ciri-ciri</label>
-                        <input type="text" class="form-control" name="ciri" placeholder="Ciri-ciri">
+                        <label for="karakter">Karakter</label>
+                        <input type="text" class="form-control @error('karakter') is-invalid @enderror" name="karakter"
+                            placeholder="karakter-karakter">
+                        @error('karakter')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="inputPassword4">Karakteristik</label>
-                        <input type="text" class="form-control" name="karakter" placeholder="Karakteristik">
+                        <label for="ciri">Ciri</label>
+                        <input type="text" class="form-control @error('ciri') is-invalid @enderror" name="ciri"
+                            placeholder="ciri">
+                        @error('ciri')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
                 </div>
         </div>
         <div class="card-footer">
+            <a href="{{ url('sifat') }}" class="btn btn-primary">Kembali</a>
             <button class="btn btn-primary">Submit</button>
         </div>
         </form>

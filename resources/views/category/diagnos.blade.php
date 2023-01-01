@@ -8,9 +8,9 @@
                     <a href="{{ url('/tambahdiagnosis') }}" class="btn active">+ Tambah Diagnosis</a>
                 </div>
             </div>
-            <div class="card-body p-0">
-                <div class="table-responsive">
-                    <table class="table table-striped mb-0">
+            <div class="card-body">
+                <div class="table">
+                    <table class="table table-bordered table-md col-lg-12">
                         <thead>
                             <tr>
                                 <th>Gejala</th>
@@ -24,7 +24,7 @@
                                     <td>{{ $diagnosis->gejala }}</td>
                                     <td>{{ $diagnosis->hasil }}</td>
                                     <td>
-                                        <a href="/editdiagnosis/{{ $diagnosis->id }}"> <img src="/images/icon/edit.png"
+                                        <a href="/showdiagnosis/{{ $diagnosis->id }}"> <img src="/images/icon/edit.png"
                                                 alt="edit" width="30"> </a>
                                         <a href="/deletediagnosis/{{ $diagnosis->id }}"> <img src="/images/icon/delete.png"
                                                 alt="delete" width="30">

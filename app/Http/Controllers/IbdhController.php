@@ -32,14 +32,14 @@ class IbdhController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        $list = post::get();
-        $data = [
-            'items' => $list
-        ];
-        return view('partials.tambah.tibdh', $data);
-    }
+    // public function create()
+    // {
+    //     $list = post::get();
+    //     $data = [
+    //         'items' => $list
+    //     ];
+    //     return view('partials.tambah.tibdh', $data);
+    // }
 
     /**
      * Store a newly created resource in storage.
@@ -49,6 +49,12 @@ class IbdhController extends Controller
      */
     public function store(Request $request)
     {
+        $validateData = $request->validate([
+            'jenisDarah' => 'required',
+            'wajib' => 'required',
+            'mubah' => 'required',
+            'haram' => 'required'
+        ]);
         $insert = Ibdh::create([
             'jenisDarah' => $request->jenisDarah,
             'wajib' => $request->wajib,
@@ -76,14 +82,14 @@ class IbdhController extends Controller
      * @param  \App\Models\Ibdh  $ibdh
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        $post = Ibdh::find($id);
-        $data = [
-            'post' => $post
-        ];
-        return view('partials.edit.eibadah', $data);
-    }
+    // public function edit($id)
+    // {
+    //     // $post = Ibdh::find($id);
+    //     // $data = [
+    //     //     'post' => $post
+    //     // ];
+    //     // return view('partials.edit.eibadah', $data);
+    // }
 
     /**
      * Update the specified resource in storage.
@@ -92,16 +98,11 @@ class IbdhController extends Controller
      * @param  \App\Models\Ibdh  $ibdh
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateIbdhRequest $request)
+    public function update(Request $request, $id)
     {
-        $post = Ibdh::where('id', $request->id);
-        $post->update([
-            'jenisDarah' => $request->jenisDarah,
-            'wajib' => $request->wajib,
-            'mubah' => $request->mubah,
-            'haram' => $request->haram
-        ]);
-        return redirect(url('/ibdh'))->with('Berhasil,', 'Data telah diubah!');
+        $post = Ibdh::find($id);
+        $post->update($request->all());
+        return redirect(url('/ibdh'))->with('Berhasil!', 'Data telah diubah.');
     }
 
     /**

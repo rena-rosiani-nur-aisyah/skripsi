@@ -43,10 +43,15 @@ class SifatController extends Controller
      */
     public function store(Request $request)
     {
+        $validateData = $request->validate([
+            'warna' => 'required',
+            'karakter' => 'required',
+            'ciri' => 'required'
+        ]);
         $insert =  sifat::create([
-            'name' => $request->name,
-            'ciri' => $request->ciri,
-            'karakter' => $request->karakter
+            'warna' => $request->warna,
+            'karakter' => $request->karakter,
+            'ciri' => $request->ciri
         ]);
         return redirect(url('/sifat'));
     }
@@ -91,9 +96,9 @@ class SifatController extends Controller
         $update = sifat::where('id', $request->id);
 
         $update->update([
-            'name' => $request->name,
-            'ciri' => $request->ciri,
+            'warna' => $request->warna,
             'karakter' => $request->karakter,
+            'ciri' => $request->ciri,
         ]);
         return redirect(url('/sifat'))->with('Berhasil,', 'Data telah diubah');
     }

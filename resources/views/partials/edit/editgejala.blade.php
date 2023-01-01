@@ -4,7 +4,7 @@
         <div class="card-header">
             <h4>Edit Gejala</h4>
         </div>
-        <form action="{{ url('updategejala') }}" method="POST">
+        <form action="/updategejala/{{ $post->id }}" method="POST">
             @csrf
             <div class="card-body">
                 <div class="form-row">
@@ -21,6 +21,7 @@
                 </div>
             </div>
             <div class="card-footer">
+                <a href="/gejala" class="btn btn-primary">Kembali</a>
                 <button class="btn btn-primary">Submit</button>
             </div>
         </form>

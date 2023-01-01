@@ -45,6 +45,10 @@ class DiagnosisController extends Controller
      */
     public function store(Request $request)
     {
+        $validateData = $request->validate([
+            'gejala' => 'required',
+            'hasil' => 'required'
+        ]);
         $insert = diagnosis::create([
             'gejala' => $request->gejala,
             'hasil' => $request->hasil
@@ -71,14 +75,14 @@ class DiagnosisController extends Controller
      * @param  \App\Models\diagnosis  $diagnosis
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        $post = diagnosis::find($id);
-        $data = [
-            'post' => $post
-        ];
-        return view('partials.edit.ediagnosis', $data);
-    }
+    // public function edit($id)
+    // {
+    //     $post = diagnosis::find($id);
+    //     $data = [
+    //         'post' => $post
+    //     ];
+    //     return view('partials.edit.ediagnosis', $data);
+    // }
 
     /**
      * Update the specified resource in storage.
@@ -87,14 +91,11 @@ class DiagnosisController extends Controller
      * @param  \App\Models\diagnosis  $diagnosis
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
-        $post = diagnosis::where('id', $request->id);
-        $post->update([
-            'gejala' => $request->gejala,
-            'hasil' => $request->hasil
-        ]);
-        return redirect(url('/diagnosa'))->with('Berhasil,', 'Data telah diubah');
+        $post = diagnosis::find($id);
+        $post->update($request->all());
+        return redirect(url('/diagnosa'))->with('Berhasil', 'Data telah dihapus.');
     }
 
     /**

@@ -44,6 +44,15 @@ class WarnaController extends Controller
      */
     public function store(Request $request)
     {
+        $validatedata = $request->validate([
+            'name' => 'required',
+            'image' => 'image|file|max:1024'
+        ]);
+
+        if ($request->file('image')) {
+            $validatedata['image'] = $request->file('image')->store('warna');
+        }
+
         $insert = warna::create([
             'name' => $request->name,
             'image' => $request->image
@@ -57,9 +66,10 @@ class WarnaController extends Controller
      * @param  \App\Models\warna  $warna
      * @return \Illuminate\Http\Response
      */
-    public function show(warna $warna)
+    public function show($id)
     {
-        //
+        $post = warna::find($id);
+        return view('partials.edit.editwarna', compact('post'));
     }
 
     /**
@@ -80,9 +90,11 @@ class WarnaController extends Controller
      * @param  \App\Models\warna  $warna
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdatewarnaRequest $request, warna $warna)
+    public function update(Request $request, $id)
     {
-        //
+        $post = warna::find($id);
+        $post->update($request->all());
+        return redirect(url('/warna'))->with('Berhasil!', 'Data telah diubah.');
     }
 
     /**
@@ -91,8 +103,10 @@ class WarnaController extends Controller
      * @param  \App\Models\warna  $warna
      * @return \Illuminate\Http\Response
      */
-    public function destroy(warna $warna)
+    public function destroy(Request $request, $id)
     {
-        //
+        $post = warna::find($id);
+        $post->delete($request->filled($id));
+        return redirect(url('/warna'))->with('Berhasil', 'Data telah dihapus.');
     }
 }
