@@ -24,7 +24,7 @@ class DiagnosisController extends Controller
         $data = [
             'items' => $items
         ];
-        return view('category.diagnos', $data);
+        return view('category.admin.diagnosis.hasil.diagnos', $data);
     }
 
     /**
@@ -66,7 +66,7 @@ class DiagnosisController extends Controller
     {
         $post = diagnosis::find($id);
         // dd($post);
-        return view('partials.edit.ediagnosis', compact('post'));
+        return view('category.admin.diagnosis.hasil.ediagnosis', compact('post'));
     }
 
     /**

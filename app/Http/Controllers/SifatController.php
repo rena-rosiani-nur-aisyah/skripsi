@@ -22,7 +22,7 @@ class SifatController extends Controller
         $data = [
             'items' => $items
         ];
-        return view('category.sifat', $data);
+        return view('category.admin.basis.sifat', $data);
     }
 
     /**
@@ -46,12 +46,14 @@ class SifatController extends Controller
         $validateData = $request->validate([
             'warna' => 'required',
             'karakter' => 'required',
-            'ciri' => 'required'
+            'ciri' => 'required',
+            'klasifikasi' => 'required'
         ]);
         $insert =  sifat::create([
             'warna' => $request->warna,
             'karakter' => $request->karakter,
-            'ciri' => $request->ciri
+            'ciri' => $request->ciri,
+            'klasifikasi' => $request->klasifikasi
         ]);
         return redirect(url('/sifat'));
     }
@@ -65,7 +67,7 @@ class SifatController extends Controller
     public function show(sifat $sifat, $id)
     {
         $post = sifat::find($id);
-        return view('partials.edit.editsifat', compact('post'));
+        return view('category.admin.basis.edit.editsifat', compact('post'));
     }
 
     /**
@@ -80,7 +82,7 @@ class SifatController extends Controller
         $data = [
             'post' => $post
         ];
-        return view('partials.edit.editsifat', $data);
+        return view('category.admin.basis.edit.editsifat', $data);
     }
 
     /**
@@ -99,6 +101,7 @@ class SifatController extends Controller
             'warna' => $request->warna,
             'karakter' => $request->karakter,
             'ciri' => $request->ciri,
+            'klasifikasi' => $request->klasifikasi
         ]);
         return redirect(url('/sifat'))->with('Berhasil,', 'Data telah diubah');
     }

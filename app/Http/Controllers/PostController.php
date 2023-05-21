@@ -15,7 +15,7 @@ class PostController extends Controller
         $data = [
             'items' => $items
         ];
-        return view('category.jenis-darah', $data);
+        return view('category.admin.penyakit.jenis-darah', $data);
     }
 
     // public function create()
@@ -27,16 +27,12 @@ class PostController extends Controller
     {
         $validateData = $request->validate([
             'name' => 'required',
-            'minimal' => 'required',
-            'maksimal' => 'required',
-            'rata' => 'required'
+            'keterangan' => 'required',
         ]);
         // dd($request->all());
         $insert =  post::create([
             'name' => $request->name,
-            'minimal' => $request->minimal,
-            'maksimal' => $request->maksimal,
-            'rata' => $request->rata
+            'keterangan' => $request->keterangan,
         ]);
         return redirect(url('/jenis'));
     }
@@ -52,7 +48,7 @@ class PostController extends Controller
     {
 
         $post = Post::find($id);
-        return view('category.create', compact('post'));
+        return view('category.admin.penyakit.create', compact('post'));
     }
 
     public function update(Request $request,  $id)

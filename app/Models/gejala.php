@@ -12,8 +12,9 @@ class gejala extends Model
     protected $table = 'gejalas';
 
     protected $fillable = [
+        'kode_gejala',
         'gejala',
-        'status'
+        'value'
     ];
     protected $primaryKey = 'id';
 }

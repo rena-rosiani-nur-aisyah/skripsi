@@ -12,9 +12,16 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\IbdhController;
 use App\Http\Controllers\MateriController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\RuleController;
 use App\Http\Controllers\SifatController;
+use App\Http\Controllers\SyaratamyizController;
+use App\Http\Controllers\SyaratHaidController;
+use App\Http\Controllers\SyaratIstihadhahController;
+use App\Http\Controllers\SyaratNifasController;
 use App\Http\Controllers\WarnaController;
 use App\Models\warna;
+use Database\Factories\SyaratIstihadhahFactory;
+use GuzzleHttp\Psr7\Request;
 use Symfony\Component\HttpKernel\Profiler\Profile;
 
 /*
@@ -48,9 +55,39 @@ Route::get('/delete/{id}', [PostController::class, 'destroy'])->name('delete');
 Route::post('/tjenis', [PostController::class, 'store']);
 
 Route::get('/tjenis', function () {
-    return view('partials.tambah.tjenis');
+    return view('category.admin.penyakit.tjenis');
 });
 
+//Syarat dan Ketentuan HAID
+Route::get('/syaratHaid', [SyaratHaidController::class, 'index']);
+Route::get('/snkhaidshow/{id}', [SyaratHaidController::class, 'show'])->name('snkhaidshow');
+Route::post('/snkhaidupdate/{id}', [SyaratHaidController::class, 'update'])->name('snkhaidupdate');
+Route::get('/snkhaiddelete/{id}', [SyaratHaidController::class, 'destroy'])->name('snkhaiddelete');
+Route::post('/tsyaratHaid', [SyaratHaidController::class, 'store']);
+Route::get('/tsyaratHaid', function () {
+    return view('partials.tambah.tsyaratHaid');
+});
+
+//route Syarat dan Ketentuan Istihadhah
+Route::get('/syaratIstihadhah', [SyaratIstihadhahController::class, 'index']);
+Route::get('/snkisthdhshow/{id}', [SyaratIstihadhahController::class, 'show'])->name('snkisthdhshow');
+Route::post('/snkisthdhupdate/{id}', [SyaratIstihadhahController::class, 'update'])->name('snkisthdhupdate');
+Route::get('/snkisthdhdelete/{id}', [SyaratIstihadhahController::class, 'destroy'])->name('snkisthdhdelete');
+Route::post('/tsnkisthdh', [SyaratIstihadhahController::class, 'store']);
+Route::get('/tsnkisthdh', function () {
+    return view('partials.tambah.tsyaratIstihdh');
+});
+
+
+//route snk tamyiz
+Route::get('/syaratamyiz', [SyaratamyizController::class, 'index']);
+Route::get('/snktamshow/{id}', [SyaratamyizController::class, 'show'])->name('snktamshow');
+Route::post('/snktamupdate/{id}', [SyaratamyizController::class, 'update'])->name('snktamupdate');
+Route::get('/snktamdelete/{id}', [SyaratamyizController::class, 'destroy'])->name('snktamdelete');
+Route::post('/tsyaratamyiz', [SyaratamyizController::class, 'store']);
+Route::get('/tsyaratamyiz', function () {
+    return view('partials.tambah.tsyaratamyiz');
+});
 
 
 // semua route untuk sifat
@@ -71,12 +108,21 @@ Route::get('/sifats', function () {
 });
 
 
-
+// syarat nifas
+Route::get('/syaratNifas', [SyaratNifasController::class, 'index']);
+Route::post('/syaratn-store', [SyaratNifasController::class, 'store'])->name('syaratn.store');
+Route::get('/showsyaratn/{id}', [SyaratNifasController::class, 'show'])->name('showsyaratn');
+Route::get('/editsyaratn/{id}', [SyaratNifasController::class, 'edit'])->name('editsyaratn');
+Route::post('/updatesyaratn/{id}', [SyaratNifasController::class, 'update'])->name('updatesyaratn');
+Route::get('/deletesyaratn/{id}', [SyaratNifasController::class, 'destroy'])->name('deletesyaratn');
+Route::get('/tsyaratnifas', function () {
+    return view('partials.tambah.tsyaratNifas');
+});
 
 
 
 // semua route untuk warna
-Route::get('/warna', [WarnaController::class, 'index']);
+Route::get('/warna', [WarnaController::class, 'index'])->name('warna');
 
 Route::post('/twarna-store', [WarnaController::class, 'store'])->name('twarna.store');
 Route::get('/tampilinwarna/{id}', [WarnaController::class, 'show'])->name('tampilinwarna');
@@ -168,7 +214,8 @@ Route::get('/emateri', function () {
     return view('partials.edit.emateri');
 });
 
-
+//route untuk rule
+Route::get('/rule', [RuleController::class, 'index']);
 
 
 

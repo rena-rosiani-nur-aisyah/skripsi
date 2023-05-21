@@ -15,20 +15,6 @@
                         <div class="profile-widget-header">
                             <img alt="image" src="../backend/assets/img/avatar/avatar-1.png"
                                 class="rounded-circle profile-widget-picture">
-                            {{-- <div class="profile-widget-items">
-                                <div class="profile-widget-item">
-                                    <div class="profile-widget-item-label">Tugas</div>
-                                    <div class="profile-widget-item-value">187</div>
-                                </div>
-                                <div class="profile-widget-item">
-                                    <div class="profile-widget-item-label">Finish</div>
-                                    <div class="profile-widget-item-value">6,8K</div>
-                                </div>
-                                <div class="profile-widget-item">
-                                    <div class="profile-widget-item-label">Reward</div>
-                                    <div class="profile-widget-item-value">2,1K</div>
-                                </div>
-                            </div> --}}
                         </div>
                         <div class="card-body">
                             <div class="form-group row">

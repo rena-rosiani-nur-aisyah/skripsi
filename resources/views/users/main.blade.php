@@ -22,7 +22,8 @@
                     <div class="tab-pane fade show active" id="home6" role="tabpanel" aria-labelledby="home-tab6">
                         <div class="card-header">
                             <div class="card-body text-left">
-                                <h1>Selamat Datang! <b>{{ Auth::user()->email }}</b></h1>
+                                <h1>Selamat Datang!</h1>
+                                {{-- <b>{{ Auth::user()->name }}</b> --}}
                                 <h6>Terima kasih sudah melakukan login</h6>
                             </div>
                             <div class="col-lg-6 order-1 order-lg-2 hero-img">
@@ -37,43 +38,83 @@
                             </div> --}}
                             <div class="card-body">
                                 <h5 class="text-center">Selamat menikmati fitur unggulan kami!</h5>
-                                <ul class="list-unstyled">
-                                    <li class="media">
-                                        <img class="mr-3" src="/images/vektor/menstruation.png"
-                                            alt="Generic placeholder image" width="80" height="80">
-                                        <div class="media-body">
-                                            <h5 class="mt-0 mb-1">Diagnosis</h5>
-                                            <p>Dengan menu diagnosis, Anda dapat menantukan jenis darah yang Anda alami</p>
+                                <br>
+                                <div class="row sortable-card">
+                                    {{-- Diagnosis --}}
+                                    <div class="col-12 col-md-6 col-lg-4">
+                                        <div class="card card-primary">
+                                            <div class="card-header">
+                                                <h4>Diagnosis</h4>
+                                            </div>
+                                            <center>
+                                                <img class="mr-3" src="/images/vektor/menstruation.png"
+                                                    alt="Generic placeholder image" width="80" height="80">
+                                            </center>
+                                            <div class="card-body">
+                                                <p>Dengan menu diagnosis, Anda dapat menantukan jenis darah yang Anda alami
+                                                </p>
+                                                <div class="card-header-action">
+                                                    <a href="/diagnosisuser" class="btn btn-primary">View More <i
+                                                            class="fas fa-chevron-right"></i></a>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </li>
-                                    <li class="media my-4">
-                                        <img class="mr-3" src="/images/vektor/long-term.png"
-                                            alt="Generic placeholder image" width="80" height="80">
-                                        <div class="media-body">
-                                            <h5 class="mt-0 mb-1">Riwayat</h5>
-                                            <p>Melalui menu riwayat, Anda tidak perlu kembali mencatat hasil diagnosis yang
-                                                sudah dilakukan,
-                                                karna sistem dapat menyimpan hasil diagnosis yang sudah Anda lakukan</p>
+                                    </div>
+
+                                    {{-- Riwayat --}}
+                                    <div class="col-12 col-md-6 col-lg-4">
+                                        <div class="card card-secondary">
+                                            <div class="card-header">
+                                                <h4>Riwayat</h4>
+
+                                            </div>
+                                            <center>
+                                                <img class="mr-3" src="/images/vektor/long-term.png"
+                                                    alt="Generic placeholder image" width="80" height="80">
+                                            </center>
+                                            <div class="card-body">
+                                                <p>Melalui menu riwayat, Anda tidak perlu kembali mencatat hasil diagnosis
+                                                    yang
+                                                    sudah dilakukan,
+                                                    karna sistem dapat menyimpan hasil diagnosis yang sudah Anda lakukan</p>
+                                                <div class="card-header-action">
+                                                    <a href="/riwayat" class="btn btn-primary">View More <i
+                                                            class="fas fa-chevron-right"></i></a>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </li>
-                                    <li class="media">
-                                        <img class="mr-3" src="/images/vektor/open-book.png"
-                                            alt="Generic placeholder image" width="80" height="80">
-                                        <div class="media-body">
-                                            <h5 class="mt-0 mb-1">Pengetahuan</h5>
-                                            <p class="mb-0">Selain Anda dapat melakukan diagnosis dan dapat melihat
-                                                riwayat hasil diagnosis,
-                                                Anda juga dapat mengakses menu pengetahuan untuk mempelejari dan mengetahui
-                                                tentang Haid, Nifas,
-                                                dan Istihadhoh.</p>
+
+                                    </div>
+
+                                    {{-- Basis Pengetahuan --}}
+                                    <div class="col-12 col-md-6 col-lg-4">
+                                        <div class="card card-danger">
+                                            <div class="card-header">
+                                                <h4>Basis Pengetahuan</h4>
+                                            </div>
+                                            <center>
+                                                <img class="mr-3" src="/images/vektor/open-book.png"
+                                                    alt="Generic placeholder image" width="80" height="80">
+                                            </center>
+                                            <div class="card-body">
+                                                <p class="mb-0">
+                                                    Anda dapat mengakses menu pengetahuan untuk mempelejari dan
+                                                    mengetahui
+                                                    tentang Haid, Nifas,
+                                                    dan Istihadhoh.
+                                                </p>
+                                                <div class="card-header-action">
+                                                    <a href="/pengetahuan" class="btn btn-primary">View More <i
+                                                            class="fas fa-chevron-right"></i></a>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </li>
-                                </ul>
+
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-
-
                     <div class="tab-pane fade" id="profile6" role="tabpanel" aria-labelledby="profile-tab6">
                         <div class="card-header">
                             <div class="card-body text-left">
@@ -85,11 +126,14 @@
                             </div>
                             <br>
                             <p>
-                                Website ini dibuat berdasarkan kebutuhan dari masyarakat untuk mendeteksi atau mendiagnosis
+                                Website ini dibuat berdasarkan kebutuhan dari masyarakat untuk mendeteksi atau
+                                mendiagnosis
                                 jenis darah yang keluar dari qubul wanita.
-                                website ini didedikasikan untuk masyarakat yang beragama Islam. Dalam penentuan hukum yang
+                                website ini didedikasikan untuk masyarakat yang beragama Islam. Dalam penentuan hukum
+                                yang
                                 dipakai menggunakan Madzhab Syafi'i yang juga berkaitan dengan sisi medis.
-                                Walaupun website ini berlandaskan hukum dari Madzhab Syafi'i, website women tracker inipun
+                                Walaupun website ini berlandaskan hukum dari Madzhab Syafi'i, website women tracker
+                                inipun
                                 dapat digunakan oleh Madzhab manapun.
                             </p>
                         </div>
@@ -99,7 +143,8 @@
                                     Melalui website ini masyarakat dapat mengetahui dan menentukan darah wanita, apakah
                                     termasuk
                                     haid ataukah istihadhoh, apakah termasuk nifas ataukah istihadho.
-                                    Website inipun menjawab pertanyaan-pertanyaan yang sering ditanyakan masyarakat seputar
+                                    Website inipun menjawab pertanyaan-pertanyaan yang sering ditanyakan masyarakat
+                                    seputar
                                     fiqh
                                     ketika haid, nifas, dan istihadhoh, ibadah apa saja yang bisa dilakukan, yang wajib
                                     dilakukan, dan yang diharamkan ketika mengalami haid, nifas, atau istihadhoh.
@@ -110,11 +155,19 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
     </div>
+    <footer class="main-footer">
+        <div class="footer-left">
+            Copyright &copy; 2018 <div class="bullet"></div> Design By <a href="#">Rena Rosiani Nur
+                Aisyah</a>
+        </div>
+        <div class="footer-right">
+            2.3.0
+        </div>
+    </footer>
     </div>
     </div>
 @endsection

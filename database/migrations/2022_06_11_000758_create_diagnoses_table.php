@@ -15,7 +15,7 @@ class CreateDiagnosesTable extends Migration
     {
         Schema::create('diagnoses', function (Blueprint $table) {
             $table->id();
-            $table->string('gejala');
+            $table->string('kode');
             $table->string('hasil');
             $table->timestamps();
         });

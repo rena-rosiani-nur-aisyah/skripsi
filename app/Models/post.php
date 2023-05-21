@@ -13,18 +13,6 @@ class post extends Model
 
     protected $fillable = [
         'name',
-        'minimal',
-        'maksimal',
-        'rata'
+        'keterangan',
     ];
-
-    // public function diagnosis()
-    // {
-    //     $this->belongsTo(diagnosis::class);
-    // }
-
-    // public function ibdh()
-    // {
-    //     $this->belongsTo(ibdh::class);
-    // }
 }

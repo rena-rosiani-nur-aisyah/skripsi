@@ -8,59 +8,55 @@
                 <div class="breadcrumb-item">Profile User</div>
             </div>
         </div>
-        <div class="section-body">
-            <div class="row mt-sm-2">
-                <div class="col-12 col-md-6 col-lg-12">
-                    <div class="card profile-widget">
-                        <div class="profile-widget-header">
-                            <img alt="image" src="../backend/assets/img/avatar/avatar-1.png"
-                                class="rounded-circle profile-widget-picture">
+        <div class="row">
+            <div class="col-12 col-md-12 col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Tabel Data Profil User</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-md">
+                                <tr>
+                                    <th>No.</th>
+                                    <th>Nama</th>
+                                    <th>Created At</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Irwansyah Saputra</td>
+                                    <td>2017-01-09</td>
+                                    <td>
+                                        <div class="badge badge-success">Active</div>
+                                    </td>
+                                    <td><a href="#" class="btn btn-secondary">Detail</a></td>
+                                </tr>
+                            </table>
                         </div>
-
-                        <div class="card">
-                            <div class="card-header">
-                                <h4>Informasi User</h4>
-                            </div>
-                            <div class="card-body">
-                                <div class="form-group row">
-                                    <label for="name" class="col-sm-3 col-form-label">Nama </label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control" name="name" placeholder="Nama">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="email" class="col-sm-3  col-form-label">Email</label>
-                                    <div class="col-sm-9">
-                                        <input type="email" class="form-control" name="email" placeholder="Email">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="usia" class="col-sm-3 col-form-label">Usia</label>
-                                    <div class="col-sm-9">
-                                        <input type="usia" class="form-control" name="usia" placeholder="Usia">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-
-
-                        <div class="profile-widget-description">
-                            <div class="profile-widget-name">Ujang Maman <div
-                                    class="text-muted d-inline font-weight-normal">
-                                    <div class="slash"></div> Ratting User
-                                </div>
-                            </div>
-                            Ujang maman is a superhero name in <b>Indonesia</b>, especially in my family. He is not a
-                            fictional character but an original hero in my family, a hero for his children and for his
-                            wife. So, I use the name as a user in this template. Not a tribute, I'm just bored with
-                            <b>'John Doe'</b>.
-                        </div>
-
+                    </div>
+                    <div class="card-footer text-right">
+                        <nav class="d-inline-block">
+                            <ul class="pagination mb-0">
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="#" tabindex="-1"><i
+                                            class="fas fa-chevron-left"></i></a>
+                                </li>
+                                <li class="page-item active"><a class="page-link" href="#">1 <span
+                                            class="sr-only">(current)</span></a></li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#">2</a>
+                                </li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#"><i class="fas fa-chevron-right"></i></a>
+                                </li>
+                            </ul>
+                        </nav>
                     </div>
                 </div>
-
             </div>
-        </div>
+
     </section>
 @endsection

@@ -15,8 +15,9 @@ class CreateGejalasTable extends Migration
     {
         Schema::create('gejalas', function (Blueprint $table) {
             $table->id('id');
+            $table->string('kode_gejala');
             $table->string('gejala');
-            $table->string('status');
+            $table->string('value');
             $table->timestamps();
         });
     }

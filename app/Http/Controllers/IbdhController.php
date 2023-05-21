@@ -24,7 +24,7 @@ class IbdhController extends Controller
         $data = [
             'items' => $items
         ];
-        return view('category.ibdh', $data);
+        return view('category.admin.basis.ibdh', $data);
     }
 
     /**
@@ -73,7 +73,7 @@ class IbdhController extends Controller
     public function show($id)
     {
         $post = Ibdh::find($id);
-        return view('partials.edit.eibadah', compact('post'));
+        return view('category.admin.basis.edit.eibadah', compact('post'));
     }
 
     /**

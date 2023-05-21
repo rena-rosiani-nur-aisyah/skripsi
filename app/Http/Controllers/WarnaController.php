@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use DB;
 use App\Models\warna;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use App\Http\Requests\StorewarnaRequest;
 use App\Http\Requests\UpdatewarnaRequest;
-use Illuminate\Http\Request;
-use DB;
+use Illuminate\Contracts\Support\ValidatedData;
+use Illuminate\Support\Facades\DB as FacadesDB;
+use Illuminate\Support\Facades\Storage;
 
 class WarnaController extends Controller
 {
@@ -23,7 +27,7 @@ class WarnaController extends Controller
             'list' => $list
         ];
 
-        return view('category.warna', $data);
+        return view('category.admin.basis.warna', $data);
     }
 
     /**
@@ -46,18 +50,25 @@ class WarnaController extends Controller
     {
         $validatedata = $request->validate([
             'name' => 'required',
-            'image' => 'image|file|max:1024'
+            'image' => 'image|file|max:2048'
         ]);
 
-        if ($request->file('image')) {
-            $validatedata['image'] = $request->file('image')->store('warna');
-        }
-
-        $insert = warna::create([
+        $findEvent = warna::create([
             'name' => $request->name,
             'image' => $request->image
         ]);
-        return redirect(url('/warna'));
+
+        $validatedata = $request->image;
+        if (!empty($validatedata)) {
+            $image = time() . '.' . $request->image->extension();
+            $image = $image;
+            $findEvent_folder = $request->image->storeAs('', $image);
+            $findEvent->image = $image;
+        }
+
+
+        $findEvent->save();
+        return redirect()->route('warna')->with('success', 'Successfully Update event');
     }
 
     /**
@@ -69,7 +80,7 @@ class WarnaController extends Controller
     public function show($id)
     {
         $post = warna::find($id);
-        return view('partials.edit.editwarna', compact('post'));
+        return view('category.admin.basis.edit.editwarna', compact('post'));
     }
 
     /**
@@ -92,8 +103,25 @@ class WarnaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $post = warna::find($id);
-        $post->update($request->all());
+        $warna = warna::find($id);
+
+        // Jika gambar ada, simpan gambar
+        if (!empty($validatedata)) {
+            $image = time() . '.' . $request->image->extension();
+            $image = $image;
+            $findEvent_folder = $request->image->storeAs('', $image);
+            $warna->image = $image;
+        }
+
+        // Jika gambar tidak ada, pastikan nama tidak kosong sebelum melakukan pembaruan
+        if ($request->filled('name')) {
+            $warna->name = $request->input('name');
+        }
+
+        $warna->save();
+
+        //return redirect()->back()->with('success', 'User updated successfully!');
+
         return redirect(url('/warna'))->with('Berhasil!', 'Data telah diubah.');
     }
 

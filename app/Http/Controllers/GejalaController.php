@@ -21,7 +21,7 @@ class GejalaController extends Controller
             'items' => $items
         ];
 
-        return view('category.gejala', $data);
+        return view('category.admin.gejala.gejala', $data);
     }
 
     /**
@@ -43,12 +43,14 @@ class GejalaController extends Controller
     public function store(Request $request)
     {
         $validateData = $request->validate([
+            'kode_gejala' => 'required',
             'gejala' => 'required',
-            'status' => 'required'
+            'value' => 'required'
         ]);
         $insert = gejala::create([
+            'kode_gejala' => $request->kode_gejala,
             'gejala' => $request->gejala,
-            'status' => $request->status
+            'value' => $request->value
         ]);
         return redirect(url('/gejala'));
     }
@@ -62,7 +64,7 @@ class GejalaController extends Controller
     public function show($id)
     {
         $post = gejala::find($id);
-        return view('partials.edit.editgejala', compact('post'));
+        return view('category.admin.gejala.editgejala', compact('post'));
     }
 
     /**
@@ -89,8 +91,15 @@ class GejalaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $post = gejala::find($id);
-        $post->update($request->all());
+        $request->validate([
+            'gejala' => 'required'
+        ]);
+        $post = gejala::where('id', $request->id);
+        $post->update([
+            'kode_gejala' => $request->kode_gejala,
+            'gejala' => $request->gejala,
+            'value' => $request->value
+        ]);
         return redirect(url('/gejala'))->with('Berhasil!', 'Data telah diubah.');
     }
 
@@ -101,8 +110,9 @@ class GejalaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
+        // gejala::destroy($gejala->kode_gejala);
         $post = gejala::find($id);
         $post->delete();
         return redirect(url('/gejala'))->with('Berhasil,', 'Data telah dihapus');

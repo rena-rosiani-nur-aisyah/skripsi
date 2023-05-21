@@ -13,6 +13,7 @@ class sifat extends Model
     protected $fillable = [
         'warna',
         'karakter',
-        'ciri'
+        'ciri',
+        'klasifikasi'
     ];
 }

@@ -18,6 +18,7 @@ class CreateSifatsTable extends Migration
             $table->string('warna');
             $table->string('karakter');
             $table->string('ciri');
+            $table->string('klasifikasi');
             $table->timestamps();
         });
     }

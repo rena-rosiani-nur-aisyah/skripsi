@@ -20,7 +20,7 @@ class MateriController extends Controller
         $data = [
             'items' => $items
         ];
-        return view('category.materi', $data);
+        return view('category.admin.basis.materi', $data);
     }
 
     /**
@@ -61,7 +61,7 @@ class MateriController extends Controller
     public function show($id)
     {
         $post = materi::find($id);
-        return view('partials.edit.emateri', compact('post'));
+        return view('category.admin.basis.edit.emateri', compact('post'));
     }
 
     /**
