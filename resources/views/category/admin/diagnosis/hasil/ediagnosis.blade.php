@@ -8,8 +8,12 @@
             <form action="/updatediagnosis/{{ $post->id }}" method="POST">
                 @csrf
                 <div class="form-group row mb-3">
-                    <label class="col-form-label  col-12 col-md-3 col-lg-3" name="gejala">Edit Gejala</label>
-                    <input type="text" class="form-control" name="gejala" value="{{ $post->gejala }}">
+                    <label class="col-form-label  col-12 col-md-3 col-lg-3" name="kode">Edit Kode</label>
+                    <input type="text" class="form-control" name="kode" value="{{ $post->kode }}">
+                </div>
+                <div class="form-group row mb-3">
+                    <label class="col-form-label  col-12 col-md-3 col-lg-3" name="kode_gejala">Edit kode_gejala</label>
+                    <input type="text" class="form-control" name="kode_gejala" value="{{ $post->kode_gejala }}">
                 </div>
                 <div class="form-group
                         row mb-3">

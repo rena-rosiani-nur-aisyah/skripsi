@@ -44,13 +44,11 @@ class GejalaController extends Controller
     {
         $validateData = $request->validate([
             'kode_gejala' => 'required',
-            'gejala' => 'required',
-            'value' => 'required'
+            'gejala' => 'required'
         ]);
         $insert = gejala::create([
             'kode_gejala' => $request->kode_gejala,
-            'gejala' => $request->gejala,
-            'value' => $request->value
+            'gejala' => $request->gejala
         ]);
         return redirect(url('/gejala'));
     }
@@ -97,8 +95,7 @@ class GejalaController extends Controller
         $post = gejala::where('id', $request->id);
         $post->update([
             'kode_gejala' => $request->kode_gejala,
-            'gejala' => $request->gejala,
-            'value' => $request->value
+            'gejala' => $request->gejala
         ]);
         return redirect(url('/gejala'))->with('Berhasil!', 'Data telah diubah.');
     }

@@ -13,7 +13,6 @@
                     <tr>
                         <th scope="col">Kode</th>
                         <th scope="col">Gejala</th>
-                        <th scope="col">Value</th>
                         <th scope="col">Action</th>
                     </tr>
                 </thead>
@@ -23,7 +22,6 @@
                         <tr>
                             <td>{{ $post->kode_gejala }}</td>
                             <td>{{ $post->gejala }}</td>
-                            <td>{{ $post->value }}</td>
                             <td>
                                 <a href="/tampilgejala/{{ $post->id }}"> <img src="/images/icon/edit.png" alt="edit"
                                         width="30"> </a>

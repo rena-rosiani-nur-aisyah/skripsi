@@ -26,7 +26,7 @@
                                 <div class="table">
                                     <table class="table table-bordered table-md col-lg-12">
                                         <tr>
-                                            <th>No.</th>
+                                            <th>Kode</th>
                                             <th>Nama</th>
                                             <th>Keterangan</th>
                                             <th>Action</th>

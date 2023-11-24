@@ -9,10 +9,20 @@
                 @csrf
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label for="text">Gejala</label>
-                        <input type="text" class="form-control @error('gejala') is-invalid @enderror" name="gejala"
+                        <label for="text">kode</label>
+                        <input type="text" class="form-control @error('kode') is-invalid @enderror" name="kode"
                             placeholder="gejala">
-                        @error('gejala')
+                        @error('kode')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="text">kode gejala</label>
+                        <input type="text" class="form-control @error('kode_gejala') is-invalid @enderror"
+                            name="kode_gejala" placeholder="kode_gejala">
+                        @error('kode_gejala')
                             <div class="invalid-feedback">
                                 {{ $message }}
                             </div>

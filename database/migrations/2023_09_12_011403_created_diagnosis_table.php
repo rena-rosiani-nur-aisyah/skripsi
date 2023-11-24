@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDiagnosesTable extends Migration
+class CreatedDiagnosisTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateDiagnosesTable extends Migration
      */
     public function up()
     {
-        Schema::create('diagnoses', function (Blueprint $table) {
+        Schema::create('diagnosis', function (Blueprint $table) {
             $table->id();
-            $table->string('kode');
-            $table->string('hasil');
+            $table->foreignId('posts_id');
+            $table->json('jawaban');
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ class CreateDiagnosesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('diagnoses');
+        //
     }
 }

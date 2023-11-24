@@ -15,8 +15,6 @@
     <!-- CSS Libraries -->
 
     <!-- Template CSS -->
-    <!-- <link rel="stylesheet" href="../assets/css/style.css"> -->
-    <!-- <link rel="stylesheet" href="../assets/css/components.css"> -->
     <link rel="stylesheet" href="{{ asset('backend/assets/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('backend/assets/css/components.css') }}">
 </head>
@@ -63,15 +61,6 @@
                     @yield('content')
                 </section>
             </div>
-            {{-- <footer class="main-footer">
-                <div class="footer-left">
-                    Copyright &copy; 2018 <div class="bullet"></div> Design By <a href="#">Rena Rosiani Nur
-                        Aisyah</a>
-                </div>
-                <div class="footer-right">
-                    2.3.0
-                </div>
-            </footer> --}}
         </div>
     </div>
 
@@ -91,8 +80,6 @@
     <!-- JS Libraies -->
 
     <!-- Template JS File -->
-    <!-- <script src="../assets/js/scripts.js"></script> -->
-    <!-- <script src="../assets/js/custom.js"></script> -->
     <script src="{{ asset('backend/assets/js/scripts.js') }}"></script>
     <script src="{{ asset('backend/assets/js/custom.js') }}"></script>
     <!-- Page Specific JS File -->

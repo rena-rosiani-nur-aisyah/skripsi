@@ -15,7 +15,12 @@ class CreateRiwayatsTable extends Migration
     {
         Schema::create('riwayats', function (Blueprint $table) {
             $table->id();
+            $table->string('nama_user');
+            $table->string('hasil_diagnosis');
+            $table->string('lama_haid');
+            $table->string('lama_nifas');
             $table->timestamps();
+            $table->string('status');
         });
     }
 

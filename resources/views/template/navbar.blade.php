@@ -26,22 +26,39 @@
     <div class="main-content-center">
         <section class="section">
 
-            <div class="section-header  mb-6">
+            @auth
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        Welcome back, {{ auth()->user()->name }}</a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="dashboard"> Dashboard</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="#"> <i class="bi bi-box-arrow-right"></i> Logout</a></li>
+                    </ul>
+                </li>
+            @else
+                <li class="nav-item"></li>
+            @endauth
+            <div class="section-header  mb-6 style="background-color: #e3f2fd;"">
                 <h1>Period Tracker</h1>
                 <div class="section-header-breadcrumb">
-                    <div class="breadcrumb-item active"><a href="/landing">Home</a></div>
-                    <div class="breadcrumb-item"><a href="/login">Sign In</a></div>
+                    <div class="breadcrumb-item active"><a href="/dashboard">Home</a></div>
+                    <div class="breadcrumb-item"><a href="/login"><i class="bi bi-box-arrow-in-right"></i>Sign
+                            In</a>
+                    </div>
                     <div class="breadcrumb-item"> <a href="/register"> Sign Up </a></div>
                 </div>
             </div>
-
             @yield('navbar')
 
         </section>
     </div>
     <footer class="main-footer">
         <div class="footer-left">
-            Copyright &copy; 2018 <div class="bullet"></div> Design By <a href="https://nauval.in/">Rena Rosiani Nur
+            Copyright &copy; 2018 <div class="bullet"></div> Design By <a href="">Rena Rosiani Nur
                 Aisyah</a>
         </div>
         <div class="footer-right">
@@ -69,8 +86,6 @@
     <!-- Page Specific JS File -->
 
     <!-- Template JS File -->
-    {{-- <script src="../assets/js/scripts.js"></script>
-    <script src="../assets/js/custom.js"></script> --}}
     <script src="{{ asset('backend/assets/js/scripts.js') }}"></script>
     <script src="{{ asset('backend/assets/js/custom.js') }}"></script>
 </body>

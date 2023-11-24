@@ -19,12 +19,21 @@ class DiagnosisController extends Controller
      */
     public function index()
     {
-        $items = DB::table('diagnoses')->get();
+        $items = DB::table('diagnosis')->get();
         // dd($items);
         $data = [
             'items' => $items
         ];
         return view('category.admin.diagnosis.hasil.diagnos', $data);
+    }
+
+    public function diagnosis()
+    {
+        $items = DB::table('diagnosis')->get();
+        $data = [
+            'items' => $items
+        ];
+        return view('users.diagnosis-user');
     }
 
     /**
@@ -46,11 +55,13 @@ class DiagnosisController extends Controller
     public function store(Request $request)
     {
         $validateData = $request->validate([
-            'gejala' => 'required',
+            'kode' => 'required',
+            'kode_gejala' => 'required',
             'hasil' => 'required'
         ]);
         $insert = diagnosis::create([
-            'gejala' => $request->gejala,
+            'kode' => $request->kode,
+            'kode_gejala' => $request->kode_gejala,
             'hasil' => $request->hasil
         ]);
         return redirect('/diagnosa');

@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\IbdhController;
 use App\Http\Controllers\MateriController;
+use App\Http\Controllers\PertanyaanController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\RuleController;
 use App\Http\Controllers\SifatController;
@@ -22,6 +23,7 @@ use App\Http\Controllers\WarnaController;
 use App\Models\warna;
 use Database\Factories\SyaratIstihadhahFactory;
 use GuzzleHttp\Psr7\Request;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 use Symfony\Component\HttpKernel\Profiler\Profile;
 
 /*
@@ -36,12 +38,14 @@ use Symfony\Component\HttpKernel\Profiler\Profile;
 */
 
 Route::get('/', function () {
-    return view('category.index');
+    return view('users.landing');
 });
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/dashboardAdmin', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/login', [LoginController::class, 'index'])->middleware('guest');
+Route::post('/login', [LoginController::class, 'authenticate']);
 
 // route untuk menu jenis
 Route::get('/jenis', [PostController::class, 'index']);
@@ -65,7 +69,7 @@ Route::post('/snkhaidupdate/{id}', [SyaratHaidController::class, 'update'])->nam
 Route::get('/snkhaiddelete/{id}', [SyaratHaidController::class, 'destroy'])->name('snkhaiddelete');
 Route::post('/tsyaratHaid', [SyaratHaidController::class, 'store']);
 Route::get('/tsyaratHaid', function () {
-    return view('partials.tambah.tsyaratHaid');
+    return view('category.admin.basis.tambah.tsyaratHaid');
 });
 
 //route Syarat dan Ketentuan Istihadhah
@@ -75,7 +79,7 @@ Route::post('/snkisthdhupdate/{id}', [SyaratIstihadhahController::class, 'update
 Route::get('/snkisthdhdelete/{id}', [SyaratIstihadhahController::class, 'destroy'])->name('snkisthdhdelete');
 Route::post('/tsnkisthdh', [SyaratIstihadhahController::class, 'store']);
 Route::get('/tsnkisthdh', function () {
-    return view('partials.tambah.tsyaratIstihdh');
+    return view('category.admin.basis.tambah.tsyaratIstihdh');
 });
 
 
@@ -86,7 +90,7 @@ Route::post('/snktamupdate/{id}', [SyaratamyizController::class, 'update'])->nam
 Route::get('/snktamdelete/{id}', [SyaratamyizController::class, 'destroy'])->name('snktamdelete');
 Route::post('/tsyaratamyiz', [SyaratamyizController::class, 'store']);
 Route::get('/tsyaratamyiz', function () {
-    return view('partials.tambah.tsyaratamyiz');
+    return view('category.admin.basis.tambah.tsyaratamyiz');
 });
 
 
@@ -104,7 +108,7 @@ Route::post('updatesifat', [SifatController::class, 'update'])->name('updatesifa
 Route::get('/deletesifat/{id}', [SifatController::class, 'destroy'])->name('deletesifat');
 
 Route::get('/sifats', function () {
-    return view('partials.tambah.tsifat');
+    return view('category.admin.basis.tambah.tsifat');
 });
 
 
@@ -116,7 +120,7 @@ Route::get('/editsyaratn/{id}', [SyaratNifasController::class, 'edit'])->name('e
 Route::post('/updatesyaratn/{id}', [SyaratNifasController::class, 'update'])->name('updatesyaratn');
 Route::get('/deletesyaratn/{id}', [SyaratNifasController::class, 'destroy'])->name('deletesyaratn');
 Route::get('/tsyaratnifas', function () {
-    return view('partials.tambah.tsyaratNifas');
+    return view('category.admin.basis.tambah.tsyaratNifas');
 });
 
 
@@ -133,8 +137,9 @@ Route::get('/editw', function () {
 });
 
 Route::get('/twarna', function () {
-    return view('partials.tambah.twarna');
+    return view('category.admin.basis.tambah.twarna');
 });
+
 
 
 
@@ -143,21 +148,21 @@ Route::get('/gejala', [GejalaController::class, 'index']);
 Route::post('/gejala-store', [GejalaController::class, 'store'])->name('gejala.store');
 Route::get('/tampilgejala/{id}', [GejalaController::class, 'show'])->name('tampilgejala');
 Route::post('/updategejala/{id}', [GejalaController::class, 'update'])->name('updategejala');
-// Route::get('/editgejala/{id}', [GejalaController::class, 'edit'])->name('editgejala');
+Route::get('/editgejala/{id}', [GejalaController::class, 'edit'])->name('editgejala');
 Route::get('/deletegejala/{id}', [GejalaController::class, 'destroy'])->name('deletegejala');
 
 Route::get('/tgejala', function () {
-    return view('partials.tambah.tgejala');
+    return view('category.admin.gejala.tgejala');
 });
 
 Route::get('/editgejala', function () {
-    return view('partials.edit.editgejala');
+    return view('category.admin.gejala.editgejala');
 });
 
 
 
 
-// semua route untuk diagnosis
+// semua route untuk hasil diagnosis
 Route::get('/diagnosa', [DiagnosisController::class, 'index']);
 
 Route::post('/tdiagnosis-store', [DiagnosisController::class, 'store'])->name('tdiagnosis.store');
@@ -169,13 +174,15 @@ Route::post('/updatediagnosis/{id}', [DiagnosisController::class, 'update'])->na
 
 Route::get('/editdiagnosis/{id}', [DiagnosisController::class, 'edit'])->name('editdiagnosis');
 
-Route::get('deletediagnosis/{id}', [DiagnosisController::class, 'destroy'])->name('deletediagnosis');
+Route::get('/deletediagnosis/{id}', [DiagnosisController::class, 'destroy'])->name('deletediagnosis');
+
+Route::get('/diagnosisuser', [DiagnosisController::class, 'diagnosis']);
 
 Route::get('/editdiagnos', function () {
-    return view('partials.edit.ediagnosis');
+    return view('category.admin.diagnosis.hasil.ediagnosis');
 });
 Route::get('/tambahdiagnosis', function () {
-    return view('partials.tambah.tdiagnosis');
+    return view('category.admin.diagnosis.hasil.tdiagnosis');
 });
 
 
@@ -190,10 +197,10 @@ Route::post('/updateibadah/{id}', [IbdhController::class, 'update'])->name('upda
 Route::get('/editibadah/{id}', [IbdhController::class, 'edit'])->name('editibadah');
 Route::get('/deleteibadah/{id}', [IbdhController::class, 'destroy'])->name('deleteibadah');
 Route::get('/editibdh', function () {
-    return view('partials.edit.eibadah');
+    return view('category.admin.basis.edit.eibadah');
 });
 Route::get('/tambahibadah', function () {
-    return view('partials.tambah.tibdh');
+    return view('category.admin.basis.tambah.tibdh');
 });
 
 
@@ -207,15 +214,14 @@ Route::get('/tampilkanmateri/{id}', [MateriController::class, 'show'])->name('ta
 Route::post('updatemateri', [MateriController::class, 'update'])->name('updatemateri');
 Route::get('/deletemateri/{id}', [MateriController::class, 'destroy'])->name('deletemateri');
 Route::get('tmateri', function () {
-    return view('partials.tambah.tmateri');
+    return view('category.admin.basis.tambah.tmateri');
 });
 
 Route::get('/emateri', function () {
-    return view('partials.edit.emateri');
+    return view('category.admin.basis.edit.emateri');
 });
 
-//route untuk rule
-Route::get('/rule', [RuleController::class, 'index']);
+
 
 
 
@@ -223,10 +229,6 @@ Route::get('/rule', [RuleController::class, 'index']);
 Route::get('/Puser', function () {
     return view('category.profilUser');
 });
-Route::get('/admin', function () {
-    return view('category.profiladmin');
-});
-// Route::get('');
 
 
 // Profile user dari sisi user
@@ -235,18 +237,9 @@ Route::get('/profile', function () {
 });
 
 
-// semua route untuk sisi user
-Route::get('/landing', function () {
-    return view('users.landing');
-});
+Route::get('/dashboardUser', [DashboardController::class, 'index'])->middleware('guest');
 
-Route::get('/main', function () {
-    return view('users.main');
-});
 
-Route::get('/diagnosisuser', function () {
-    return view('users.diagnosis-user');
-});
 
 Route::get('/riwayat', function () {
     return view('users.riwayat');
@@ -255,5 +248,3 @@ Route::get('/riwayat', function () {
 Route::get('/pengetahuan', function () {
     return view('users.pengetahuan');
 });
-
-// Route::get('/profile');

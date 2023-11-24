@@ -14,15 +14,19 @@
                         <thead>
                             <tr>
                                 <th>No.</th>
-                                <th>Kode</th>
+                                <th>kode</th>
+                                <th>kode gejala</th>
                                 <th>Hasil</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
+                            <?php $no = 1; ?>
                             @foreach ($items as $diagnosis)
                                 <tr>
-                                    <td>{{ $diagnosis->gejala }}</td>
+                                    <td>{{ $no++ }}</td>
+                                    <td>{{ $diagnosis->kode }}</td>
+                                    <td>{{ $diagnosis->kode_gejala }}</td>
                                     <td>{{ $diagnosis->hasil }}</td>
                                     <td>
                                         <a href="/showdiagnosis/{{ $diagnosis->id }}"> <img src="/images/icon/edit.png"

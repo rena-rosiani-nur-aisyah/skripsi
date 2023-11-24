@@ -15,10 +15,11 @@
     <!-- CSS Libraries -->
 
     <!-- Template CSS -->
-    <!-- <link rel="stylesheet" href="../assets/css/style.css"> -->
-    <!-- <link rel="stylesheet" href="../assets/css/components.css"> -->
     <link rel="stylesheet" href="{{ asset('backend/assets/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('backend/assets/css/components.css') }}">
+
+    {{-- bootstrap icons --}}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 </head>
 
 <body>
@@ -91,8 +92,6 @@
     <!-- JS Libraies -->
 
     <!-- Template JS File -->
-    <!-- <script src="../assets/js/scripts.js"></script> -->
-    <!-- <script src="../assets/js/custom.js"></script> -->
     <script src="{{ asset('backend/assets/js/scripts.js') }}"></script>
     <script src="{{ asset('backend/assets/js/custom.js') }}"></script>
     <!-- Page Specific JS File -->

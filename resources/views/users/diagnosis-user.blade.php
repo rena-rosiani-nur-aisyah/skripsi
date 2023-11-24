@@ -1,6 +1,32 @@
 @extends('template.navbar-main')
 @section('content')
-    <div class="section-body">
+
+    <body>
+
+        @foreach ($gejala as $gejalas)
+            <h1>{{ $gejalas->id }}</h1>
+        @endforeach
+
+    </body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    {{-- <div class="section-body">
         <div class="card">
             <div class="row">
                 <div class="card-header">
@@ -42,5 +68,5 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 @endsection

@@ -15,9 +15,9 @@ class CreateRulesTable extends Migration
     {
         Schema::create('rules', function (Blueprint $table) {
             $table->id();
-            $table->string('kode')->unique()->default('D001');
-            $table->text('kondisi');
-            $table->text('result');
+            $table->foreignId('posts_id');
+            $table->foreignId('gejala_id');
+            // $table->foreignId('next_frist_gejala');
             $table->timestamps();
         });
     }

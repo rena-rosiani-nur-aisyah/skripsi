@@ -15,6 +15,7 @@ class CreateSyaratHaidsTable extends Migration
     {
         Schema::create('syarat_haids', function (Blueprint $table) {
             $table->id();
+            $table->char('no');
             $table->string('syaratHaid');
             $table->timestamps();
         });

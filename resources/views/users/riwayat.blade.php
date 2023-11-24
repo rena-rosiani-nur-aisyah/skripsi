@@ -5,16 +5,7 @@
             <div class="card">
                 <div class="card-header">
                     <h4>Riwayat</h4>
-                    {{-- <div class="card-header-form">
-                        <form>
-                            <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Search">
-                                <div class="input-group-btn">
-                                    <button class="btn btn-primary"><i class="fas fa-search"></i></button>
-                                </div>
-                            </div>
-                        </form>
-                    </div> --}}
+
                 </div>
                 <div class="card-body p-0">
                     <div class="table-responsive">
@@ -22,12 +13,13 @@
                             <tr>
                                 <th>Name</th>
                                 <th>Hasil Diagnosis</th>
-                                <th>Lama Haid/Nifas</th>
-                                <th>Due Date</th>
+                                <th>Lama Haid</th>
+                                <th>Lama Nifas</th>
+                                <th>Waktu Diagnosis</th>
                                 <th>Status</th>
-                                <th>Action</th>
                             </tr>
                             <tr>
+                                <td>rena</td>
                                 <td>Create a mobile app</td>
                                 <td class="align-middle">
                                     <div class="progress" data-height="4" data-toggle="tooltip" title="100%">
@@ -40,10 +32,10 @@
                                         class="rounded-circle" width="35" data-toggle="tooltip" title="Wildan Ahdian"> --}}
                                 </td>
                                 <td>2018-01-20</td>
+
                                 <td>
                                     <div class="badge badge-success">Completed</div>
                                 </td>
-                                <td><a href="#" class="btn btn-secondary">Detail</a></td>
                             </tr>
                         </table>
                     </div>
