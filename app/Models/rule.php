@@ -7,14 +7,22 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use App\Models\gejala;
 
+
+$post = post::find(1);
+$gejala = $post->gejala;
+$gejala = gejala::find(1);
+$post = $gejala->post;
 class rule extends Model
 {
     use HasFactory;
     protected $table = 'rules';
 
+
     protected $fillable = [
         'posts_id',
-        'gejala_id'
+        'gejala_id',
+        'operator',
+        'value'
     ];
 
     public function post()
@@ -23,10 +31,9 @@ class rule extends Model
     }
     public function gejala()
     {
-        return $this->belongsTo(gejala::class, 'gejala_id');
-    }
-    public function nextGejala()
-    {
-        return $this->belongsTo(gejala::class, 'next_first_gejala_id');
+        return $this->belongsToMany(gejala::class, 'gejala_id');
     }
 }
+
+$rule = rule::find(1);
+$post = $rule->post;

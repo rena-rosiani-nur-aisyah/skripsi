@@ -5,7 +5,7 @@
         </div>
         <ul class="sidebar-menu">
             <li class="menu-header">Beranda</li>
-            <a href="/main" class="nav-link has-dropdown"> <i class="fas fa-fire"></i></a>
+            <a href="/dashboard" class="nav-link has-dropdown"> <i class="fas fa-fire"></i></a>
 
             <li class="menu-header">Starter</li>
             <li class="active"><a class="nav-link" href="/diagnosisuser"><i class="far fa-square"></i>

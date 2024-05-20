@@ -9,19 +9,10 @@ use App\Models\post;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\IbdhController;
-use App\Http\Controllers\MateriController;
-use App\Http\Controllers\PertanyaanController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\RuleController;
-use App\Http\Controllers\SifatController;
-use App\Http\Controllers\SyaratamyizController;
-use App\Http\Controllers\SyaratHaidController;
-use App\Http\Controllers\SyaratIstihadhahController;
-use App\Http\Controllers\SyaratNifasController;
 use App\Http\Controllers\WarnaController;
 use App\Models\warna;
-use Database\Factories\SyaratIstihadhahFactory;
 use GuzzleHttp\Psr7\Request;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 use Symfony\Component\HttpKernel\Profiler\Profile;
@@ -43,9 +34,24 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/dashboardAdmin', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//Route::get('admin/home', [App\Http\Controllers\HomeController::class, 'adminHome'])->name('admin.home')->middleware('is_admmin');
 Route::get('/login', [LoginController::class, 'index'])->middleware('guest');
 Route::post('/login', [LoginController::class, 'authenticate']);
+Route::get('/Admin', function () {
+    return view('category.index');
+});
+
+Route::get('/dashboard', function () {
+    return view('users.dashborad');
+});
+
+Route::get('/diagnosisUser', function () {
+    return view('users.diagnosis-user');
+});
+
+Route::get('artikel', function () {
+    return view('artikel.artikel');
+});
 
 // route untuk menu jenis
 Route::get('/jenis', [PostController::class, 'index']);
@@ -62,66 +68,6 @@ Route::get('/tjenis', function () {
     return view('category.admin.penyakit.tjenis');
 });
 
-//Syarat dan Ketentuan HAID
-Route::get('/syaratHaid', [SyaratHaidController::class, 'index']);
-Route::get('/snkhaidshow/{id}', [SyaratHaidController::class, 'show'])->name('snkhaidshow');
-Route::post('/snkhaidupdate/{id}', [SyaratHaidController::class, 'update'])->name('snkhaidupdate');
-Route::get('/snkhaiddelete/{id}', [SyaratHaidController::class, 'destroy'])->name('snkhaiddelete');
-Route::post('/tsyaratHaid', [SyaratHaidController::class, 'store']);
-Route::get('/tsyaratHaid', function () {
-    return view('category.admin.basis.tambah.tsyaratHaid');
-});
-
-//route Syarat dan Ketentuan Istihadhah
-Route::get('/syaratIstihadhah', [SyaratIstihadhahController::class, 'index']);
-Route::get('/snkisthdhshow/{id}', [SyaratIstihadhahController::class, 'show'])->name('snkisthdhshow');
-Route::post('/snkisthdhupdate/{id}', [SyaratIstihadhahController::class, 'update'])->name('snkisthdhupdate');
-Route::get('/snkisthdhdelete/{id}', [SyaratIstihadhahController::class, 'destroy'])->name('snkisthdhdelete');
-Route::post('/tsnkisthdh', [SyaratIstihadhahController::class, 'store']);
-Route::get('/tsnkisthdh', function () {
-    return view('category.admin.basis.tambah.tsyaratIstihdh');
-});
-
-
-//route snk tamyiz
-Route::get('/syaratamyiz', [SyaratamyizController::class, 'index']);
-Route::get('/snktamshow/{id}', [SyaratamyizController::class, 'show'])->name('snktamshow');
-Route::post('/snktamupdate/{id}', [SyaratamyizController::class, 'update'])->name('snktamupdate');
-Route::get('/snktamdelete/{id}', [SyaratamyizController::class, 'destroy'])->name('snktamdelete');
-Route::post('/tsyaratamyiz', [SyaratamyizController::class, 'store']);
-Route::get('/tsyaratamyiz', function () {
-    return view('category.admin.basis.tambah.tsyaratamyiz');
-});
-
-
-// semua route untuk sifat
-Route::get('/sifat', [SifatController::class, 'index']);
-
-Route::post('/sifat-store', [SifatController::class, 'store'])->name('sifat.store');
-
-Route::get('/showsifat/{id}', [SifatController::class, 'show'])->name('showsifat');
-
-Route::get('/editsifat/{id}', [SifatController::class, 'edit'])->name('editsifat');
-
-Route::post('updatesifat', [SifatController::class, 'update'])->name('updatesifat');
-
-Route::get('/deletesifat/{id}', [SifatController::class, 'destroy'])->name('deletesifat');
-
-Route::get('/sifats', function () {
-    return view('category.admin.basis.tambah.tsifat');
-});
-
-
-// syarat nifas
-Route::get('/syaratNifas', [SyaratNifasController::class, 'index']);
-Route::post('/syaratn-store', [SyaratNifasController::class, 'store'])->name('syaratn.store');
-Route::get('/showsyaratn/{id}', [SyaratNifasController::class, 'show'])->name('showsyaratn');
-Route::get('/editsyaratn/{id}', [SyaratNifasController::class, 'edit'])->name('editsyaratn');
-Route::post('/updatesyaratn/{id}', [SyaratNifasController::class, 'update'])->name('updatesyaratn');
-Route::get('/deletesyaratn/{id}', [SyaratNifasController::class, 'destroy'])->name('deletesyaratn');
-Route::get('/tsyaratnifas', function () {
-    return view('category.admin.basis.tambah.tsyaratNifas');
-});
 
 
 
@@ -188,41 +134,6 @@ Route::get('/tambahdiagnosis', function () {
 
 
 
-// semua route untuk ibadah
-Route::get('/ibdh', [IbdhController::class, 'index']);
-Route::post('/ibdh-store', [IbdhController::class, 'store'])->name('ibdh.store');
-// Route::get('tibadah', [IbdhController::class, 'create']);
-Route::get('/tampilkanibadah/{id}', [IbdhController::class, 'show'])->name('tampilkanibadah');
-Route::post('/updateibadah/{id}', [IbdhController::class, 'update'])->name('updateibadah');
-Route::get('/editibadah/{id}', [IbdhController::class, 'edit'])->name('editibadah');
-Route::get('/deleteibadah/{id}', [IbdhController::class, 'destroy'])->name('deleteibadah');
-Route::get('/editibdh', function () {
-    return view('category.admin.basis.edit.eibadah');
-});
-Route::get('/tambahibadah', function () {
-    return view('category.admin.basis.tambah.tibdh');
-});
-
-
-
-
-// semua route untuk materi
-Route::get('/materi', [MateriController::class, 'index']);
-Route::post('/materi-store', [MateriController::class, 'store'])->name('materi.store');
-// Route::get('/editmateri/{id}', [MateriController::class, 'edit'])->name('editmateri');
-Route::get('/tampilkanmateri/{id}', [MateriController::class, 'show'])->name('tampilkanmateri');
-Route::post('updatemateri', [MateriController::class, 'update'])->name('updatemateri');
-Route::get('/deletemateri/{id}', [MateriController::class, 'destroy'])->name('deletemateri');
-Route::get('tmateri', function () {
-    return view('category.admin.basis.tambah.tmateri');
-});
-
-Route::get('/emateri', function () {
-    return view('category.admin.basis.edit.emateri');
-});
-
-
-
 
 
 //rout profil dari sisi admin
@@ -237,7 +148,7 @@ Route::get('/profile', function () {
 });
 
 
-Route::get('/dashboardUser', [DashboardController::class, 'index'])->middleware('guest');
+//Route::get('/dashboardUser', [DashboardController::class, 'index'])->middleware('guest');
 
 
 
@@ -248,3 +159,5 @@ Route::get('/riwayat', function () {
 Route::get('/pengetahuan', function () {
     return view('users.pengetahuan');
 });
+
+Route::get('/diagnosis/{userId}', [DiagnosisController::class, 'getGejala']);

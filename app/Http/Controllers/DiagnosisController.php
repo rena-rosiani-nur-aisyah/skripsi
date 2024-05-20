@@ -8,7 +8,15 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\StorediagnosisRequest;
 use App\Http\Requests\UpdatediagnosisRequest;
+use App\Models\gejala;
 use App\Models\post;
+use App\Models\rule;
+use App\Models\User;
+use forwardChaining;
+use App\Http\Models\FactCollection;
+use App\Models\Fact;
+
+
 
 class DiagnosisController extends Controller
 {
@@ -19,12 +27,15 @@ class DiagnosisController extends Controller
      */
     public function index()
     {
-        $items = DB::table('diagnosis')->get();
-        // dd($items);
-        $data = [
-            'items' => $items
-        ];
-        return view('category.admin.diagnosis.hasil.diagnos', $data);
+        // $items = DB::table('diagnosis')->get();
+        // // dd($items);
+        // $data = [
+        //     'items' => $items
+        // ];
+        // return view('category.admin.diagnosis.hasil.diagnos', $data);
+
+        $gejala = gejala::all();
+        return view('users.diagnosis-user', compact('gejala'));
     }
 
     public function diagnosis()
@@ -86,14 +97,7 @@ class DiagnosisController extends Controller
      * @param  \App\Models\diagnosis  $diagnosis
      * @return \Illuminate\Http\Response
      */
-    // public function edit($id)
-    // {
-    //     $post = diagnosis::find($id);
-    //     $data = [
-    //         'post' => $post
-    //     ];
-    //     return view('partials.edit.ediagnosis', $data);
-    // }
+
 
     /**
      * Update the specified resource in storage.
@@ -120,5 +124,32 @@ class DiagnosisController extends Controller
         $post = diagnosis::find($id);
         $post->delete();
         return redirect(url('/diagnosa'))->with('Berhasil,', 'Data telah dihapus');
+    }
+
+
+    //menghubungkan dengan algoritma forward chaining dalam kelas forwardChaining
+    public function diagnosa(Request $request)
+    {
+        $gejala = gejala::find($request->gejala_id);
+        $rule = $gejala->rule;
+
+        $jawaban = [];
+
+        foreach ($rule as $rules) {
+            $jawab = $request->input($rules->gejala->gejala);
+            $jawab[$rules->gejala->id] = $jawab;
+        }
+
+        $fact = new Fact($gejala->toArrray(), $gejala->id);
+        $forwardChaining = new forwardChaining($rule, $jawaban, $fact);
+        $post = $forwardChaining->diagnosa();
+
+        return view('category.admin.diagnosis.hasil.diagnos', compact('post'));
+    }
+
+    public function getGejala($userId)
+    {
+        $gejala = diagnosis::where('user_foreignId', $userId)->pluck('gejala_foreignId');
+        return view('users.diagnosis-user', compact('gejala'));
     }
 }

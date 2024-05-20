@@ -11,16 +11,17 @@
             <table class="table table-bordered table-md col-lg-12">
                 <thead>
                     <tr>
-                        <th scope="col">Kode</th>
+                        <th scope="col">id</th>
                         <th scope="col">Gejala</th>
                         <th scope="col">Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     {{-- {{ dd($__data) }} --}}
+                    <?php $no = 1; ?>
                     @foreach ($items as $post)
                         <tr>
-                            <td>{{ $post->kode_gejala }}</td>
+                            <td>{{ $no++ }}</td>
                             <td>{{ $post->gejala }}</td>
                             <td>
                                 <a href="/tampilgejala/{{ $post->id }}"> <img src="/images/icon/edit.png" alt="edit"

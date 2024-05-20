@@ -43,11 +43,11 @@ class GejalaController extends Controller
     public function store(Request $request)
     {
         $validateData = $request->validate([
-            'kode_gejala' => 'required',
+            // 'kode_gejala' => 'required',
             'gejala' => 'required'
         ]);
         $insert = gejala::create([
-            'kode_gejala' => $request->kode_gejala,
+            // 'kode_gejala' => $request->kode_gejala,
             'gejala' => $request->gejala
         ]);
         return redirect(url('/gejala'));
@@ -94,7 +94,7 @@ class GejalaController extends Controller
         ]);
         $post = gejala::where('id', $request->id);
         $post->update([
-            'kode_gejala' => $request->kode_gejala,
+            // 'kode_gejala' => $request->kode_gejala,
             'gejala' => $request->gejala
         ]);
         return redirect(url('/gejala'))->with('Berhasil!', 'Data telah diubah.');

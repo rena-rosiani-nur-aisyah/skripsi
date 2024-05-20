@@ -12,12 +12,14 @@ class gejala extends Model
     protected $table = 'gejalas';
 
     protected $fillable = [
-        'kode_gejala',
         'gejala'
     ];
-    protected $primaryKey = 'id';
-    public function post()
+
+    public function rule()
     {
-        return $this->belongsToMany(post::class, 'rule', 'gejala_id', 'posts_id');
+        return $this->belongsToMany(rule::class);
     }
 }
+
+$gejala = gejala::find(1);
+$rule = $gejala->rule;

@@ -25,7 +25,7 @@
                             @foreach ($items as $diagnosis)
                                 <tr>
                                     <td>{{ $no++ }}</td>
-                                    <td>{{ $diagnosis->kode }}</td>
+                                    {{-- <td>{{ $diagnosis->kode }}</td> --}}
                                     <td>{{ $diagnosis->kode_gejala }}</td>
                                     <td>{{ $diagnosis->hasil }}</td>
                                     <td>

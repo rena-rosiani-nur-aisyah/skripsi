@@ -14,19 +14,10 @@ class post extends Model
     protected $fillable = [
         'name',
         'keterangan',
+        'published_at'
     ];
-    public function gejala()
-    {
-        return $this->belongsToMany(gejala::class, 'rule', 'posts_id', 'gejala_id');
-    }
-
     public function rule()
     {
         return $this->hasMany(rule::class);
-    }
-
-    public function diagnosis()
-    {
-        return $this->hasMany(diagnosis::class);
     }
 }

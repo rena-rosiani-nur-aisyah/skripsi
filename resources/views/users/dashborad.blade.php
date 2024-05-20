@@ -33,9 +33,7 @@
                         <hr class="my-5">
                         {{-- sesi body --}}
                         <div class="card">
-                            {{-- <div class="card-header">
-                                <h4>Selamat Datang! Terima Kasih telah melakukan Login</h4>
-                            </div> --}}
+
                             <div class="card-body">
                                 <h5 class="text-center">Selamat menikmati fitur unggulan kami!</h5>
                                 <br>

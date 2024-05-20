@@ -8,7 +8,7 @@
         </div>
         <ul class="sidebar-menu">
             <li class="menu-header">Dashboard Admin</li>
-            <a href="/" class="nav-link has-dropdown"> <i class="fas fa-fire"></i> <span>Dashboard</span></a>
+            <a href="/Admin" class="nav-link has-dropdown"> <i class="fas fa-fire"></i> <span>Dashboard</span></a>
 
             <li class="menu-header">Starter</li>
             <li class="nav-item"><a class="nav-link" href="/jenis"><i class="fas fa-clipboard"></i>

@@ -17,10 +17,8 @@ class CreatePostsTable extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->text('keterangan');
-            // $table->text('Ibadah_wajib');
-            // $table->text('Ibadah_boleh');
-            // $table->text('Ibadah_hrm');
+            $table->text('Penyebab');
+            $table->text('Solusi');
             $table->timestamp('published_at')->nullable();
             $table->timestamps();
         });

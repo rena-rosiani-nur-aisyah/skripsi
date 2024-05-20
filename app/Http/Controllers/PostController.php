@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\gejala;
 use App\Models\post;
+use App\Models\rule;
 use Illuminate\Http\Request;
 use DB;
+use forwardChaining;
 use Illuminate\Support\Facades\DB as FacadesDB;
 
 class PostController extends Controller
@@ -57,5 +60,15 @@ class PostController extends Controller
         $post->update($request->all());
 
         return redirect(url('/jenis'))->with('Berhasil!', 'Data telah diubah.');
+    }
+
+    public function diagnosis(Request $request)
+    {
+        $gejala = $request->gejala;
+
+        $forwardChaining = new forwardChaining(new rule, new gejala());
+        $matchRules = $forwardChaining->forwardThis($gejala);
+
+        // Do something with the matched rules, such as returning the most likely disease.
     }
 }

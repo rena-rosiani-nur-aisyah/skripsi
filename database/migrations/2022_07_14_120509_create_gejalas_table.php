@@ -14,9 +14,8 @@ class CreateGejalasTable extends Migration
     public function up()
     {
         Schema::create('gejalas', function (Blueprint $table) {
-            $table->id('id', true, true);
-            $table->char('kode_gejala');
-            $table->string('gejala');
+            $table->id('id');
+            $table->text('gejala');
             $table->timestamps();
         });
     }
