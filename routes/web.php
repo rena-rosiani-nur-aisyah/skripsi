@@ -108,11 +108,13 @@ Route::get('/editgejala', function () {
 
 
 
-// semua route untuk hasil diagnosis
+// semua route untuk tabel hasil diagnosis user
 Route::get('/diagnosa', [DiagnosisController::class, 'index']);
+Route::get('/hasilDiagnosis', [DiagnosisController::class, 'showHasilDiagnosis'])->name('hasilDiagnosis');
 
-Route::post('/tdiagnosis-store', [DiagnosisController::class, 'store'])->name('tdiagnosis.store');
-// Route::get('/tdiagnosis', [DiagnosisController::class, 'create']);
+// Route::post('/tdiagnosis-store', [DiagnosisController::class, 'store'])->name('tdiagnosis.store');
+// // Route::get('/tdiagnosis', [DiagnosisController::class, 'create']);
+Route::post('/diagnosis-store', [DiagnosisController::class, 'store'])->name('diagnosis.store');
 
 Route::get('/showdiagnosis/{id}', [DiagnosisController::class, 'show'])->name('showdiagnosis');
 
@@ -122,7 +124,7 @@ Route::get('/editdiagnosis/{id}', [DiagnosisController::class, 'edit'])->name('e
 
 Route::get('/deletediagnosis/{id}', [DiagnosisController::class, 'destroy'])->name('deletediagnosis');
 
-Route::get('/diagnosisuser', [DiagnosisController::class, 'diagnosis']);
+Route::get('/diagnosisuser', [DiagnosisController::class, 'diagnosis'])->name('diagnosisuser');
 
 Route::get('/editdiagnos', function () {
     return view('category.admin.diagnosis.hasil.ediagnosis');
@@ -131,9 +133,10 @@ Route::get('/tambahdiagnosis', function () {
     return view('category.admin.diagnosis.hasil.tdiagnosis');
 });
 
+Route::get('/hasilDiagnosis', [DiagnosisController::class, 'showHasilDiagnosis'])->name('hasilDiganosis');
 
 
-
+Route::get('/rules', [RuleController::class, 'index']);
 
 
 //rout profil dari sisi admin

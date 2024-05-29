@@ -29,15 +29,7 @@
                 <a href="#" class="nav-link has-dropdown"><i class="fas fa-th-large"></i>
                     <span>Basis Pengetahuan</span></a>
                 <ul class="dropdown-menu">
-
                     <li class="active"><a class="nav-link" href="/materi">Penjelasan</a></li>
-                    <li><a class="nav-link" href="/warna">Ketentuan Warna</a></li>
-                    <li><a class="nav-link" href="/sifat">Sifat Darah</a></li>
-                    <li class="active"><a class="nav-link" href="/ibdh">Ketentuan Ibadah</a></li>
-                    <li><a class="nav-link beep beep-sidebar" href="/syaratHaid">Syarat Haid</a></li>
-                    <li><a class="nav-link" href="/syaratNifas">Syarat Nifas</a></li>
-                    <li><a class="nav-link" href="/syaratIstihadhah">Syarat Istihadhah</a></li>
-                    <li><a class="nav-link beep beep-sidebar" href="/syaratamyiz">Syarat Tamyiz</a></li>
                 </ul>
             </li>
             <li class="menu-header">Data</li>

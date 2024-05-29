@@ -19,6 +19,10 @@ class gejala extends Model
     {
         return $this->belongsToMany(rule::class);
     }
+    public function diagnosis()
+    {
+        return $this->belongsToMany(diagnosis::class, 'diagnosisGejala');
+    }
 }
 
 $gejala = gejala::find(1);

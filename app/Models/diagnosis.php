@@ -11,26 +11,21 @@ class diagnosis extends Model
     protected $table = 'diagnosis';
 
     protected $fillable = [
-        'posts_id',
+        'user_id',
+        'post_id',
         'jawaban'
     ];
 
-    protected $casts = [
-        'jawaban' => 'json',
-    ];
-
+    public function user()
+    {
+        return $this->belongsTo(user::class);
+    }
     public function post()
     {
         return $this->belongsTo(post::class);
     }
-
-    public function getAnswerLogAttribute($value)
+    public function gejala()
     {
-        return json_decode($value);
-    }
-
-    public function setAnswerLogAttribute($value)
-    {
-        $this->attributes['jawaban'] = json_encode($value);
+        return $this->belongsToMany(gejala::class, 'diagnosisGejala');
     }
 }

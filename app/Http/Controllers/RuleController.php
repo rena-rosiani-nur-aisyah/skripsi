@@ -43,22 +43,6 @@ class RuleController extends Controller
      */
     public function store(StoreruleRequest $request)
     {
-        $rule = new Rule;
-        $rule->kondisi = 'kondisi';
-        $rule->result = 'result';
-        $rule = $request->validate([
-            'kondisi' => 'required',
-            'result' => 'required',
-        ]);
-
-        // dd($request->all());
-        $insert =  rule::create([
-            'kondisi' => $request->kondisi,
-            'result' => $request->result,
-        ]);
-
-        $rules->save();
-        return redirect(url('/rule'));
     }
 
     /**

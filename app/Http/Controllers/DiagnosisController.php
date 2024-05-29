@@ -15,6 +15,7 @@ use App\Models\User;
 use forwardChaining;
 use App\Http\Models\FactCollection;
 use App\Models\Fact;
+use Laravel\Prompts\ConfirmPrompt;
 
 
 
@@ -27,98 +28,73 @@ class DiagnosisController extends Controller
      */
     public function index()
     {
-        // $items = DB::table('diagnosis')->get();
-        // // dd($items);
-        // $data = [
-        //     'items' => $items
-        // ];
-        // return view('category.admin.diagnosis.hasil.diagnos', $data);
-
-        $gejala = gejala::all();
-        return view('users.diagnosis-user', compact('gejala'));
-    }
-
-    public function diagnosis()
-    {
         $items = DB::table('diagnosis')->get();
+        // dd($items);
         $data = [
             'items' => $items
         ];
-        return view('users.diagnosis-user');
+        return view('category.admin.diagnosis.diagnos', $data);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StorediagnosisRequest  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request)
     {
-        $validateData = $request->validate([
-            'kode' => 'required',
-            'kode_gejala' => 'required',
-            'hasil' => 'required'
+        // ngambil dulu data dari db kan
+        $rule = rule::all();
+
+        //inisiasi array kosong untuk nyimpen jawaban dari user dulu
+        $jawaban = [];
+
+        foreach ($request->input('jawaban') as $gejalaId => $jawaban) {
+            $jawaban[$gejalaId] = $jawaban;
+        }
+
+        $diagnosis = $this->forwardChaning($rule, $jawaban);
+
+        //kode untuk menyimpan jawaban user
+        $diagnosis = diagnosis::create([
+            'user_id' => auth()->id(),
+            'jawaban' => json_encode($jawaban),
+            'diagnosis' => $diagnosis
         ]);
-        $insert = diagnosis::create([
-            'kode' => $request->kode,
-            'kode_gejala' => $request->kode_gejala,
-            'hasil' => $request->hasil
-        ]);
-        return redirect('/diagnosa');
+        return redirect()->route('admin.diagnosis.diagnos', ['diagnosis' => $diagnosis]);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\diagnosis  $diagnosis
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+
+    public function show(Diagnosis $diagnosis, $id)
     {
         $post = diagnosis::find($id);
         // dd($post);
-        return view('category.admin.diagnosis.hasil.ediagnosis', compact('post'));
+        $gejala = $diagnosis->gejala;
+        $user = $diagnosis->user;
+        $jawaban = $diagnosis->jawaban;
+        return view('category.admin.diagnosis.diagnos', compact('diagnosis', 'gejala', 'user', 'jawaban'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\diagnosis  $diagnosis
-     * @return \Illuminate\Http\Response
-     */
-
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdatediagnosisRequest  $request
-     * @param  \App\Models\diagnosis  $diagnosis
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function showHasilDiagnosis(diagnosis $diagnosis)
     {
-        $post = diagnosis::find($id);
-        $post->update($request->all());
-        return redirect(url('/diagnosa'))->with('Berhasil', 'Data telah dihapus.');
+        $penyakit = post::find($diagnosis->post_id);
+        $name = $penyakit->name;
+        $Penyebab = $penyakit->Penyebab;
+        $solusi = $penyakit->Solusi;
+        return view('category.admin.hasilDiagnosis', compact('penyakit', 'Penyebab', 'Solusi'));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\diagnosis  $diagnosis
-     * @return \Illuminate\Http\Response
-     */
+    // public function update(Request $request, $id)
+    // {
+    //     $post = diagnosis::find($id);
+    //     $post->update($request->all());
+    //     return redirect(url('/diagnosa'))->with('Berhasil', 'Data telah dihapus.');
+    // }
+
+
     public function destroy($id)
     {
         $post = diagnosis::find($id);
@@ -126,6 +102,12 @@ class DiagnosisController extends Controller
         return redirect(url('/diagnosa'))->with('Berhasil,', 'Data telah dihapus');
     }
 
+    // tampilan untuk di diagnosis user nya
+    public function askDiagnosis(Request $request)
+    {
+        $gejala = gejala::all();
+        return view('users.diagnosis-user', compact('gejala'));
+    }
 
     //menghubungkan dengan algoritma forward chaining dalam kelas forwardChaining
     public function diagnosa(Request $request)
@@ -144,12 +126,17 @@ class DiagnosisController extends Controller
         $forwardChaining = new forwardChaining($rule, $jawaban, $fact);
         $post = $forwardChaining->diagnosa();
 
-        return view('category.admin.diagnosis.hasil.diagnos', compact('post'));
+        return view('category.admin.diagnosis.diagnos', compact('post'));
     }
 
-    public function getGejala($userId)
+
+    public function jawaban(Request $request)
     {
-        $gejala = diagnosis::where('user_foreignId', $userId)->pluck('gejala_foreignId');
-        return view('users.diagnosis-user', compact('gejala'));
+        $gejala_id = $request->input('gejala_id');
+        $jawaban = $request->input('jawaban');
+
+        // Update the diagnosis data based on the symptom ID and answer
+
+        return redirect()->route('diagnosis');
     }
 }

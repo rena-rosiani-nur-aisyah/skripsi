@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSyaratHaidsTable extends Migration
+class CreateDiagnosisGejalaTables extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateSyaratHaidsTable extends Migration
      */
     public function up()
     {
-        Schema::create('syarat_haids', function (Blueprint $table) {
+        Schema::create('diagnosisGejala_tables', function (Blueprint $table) {
             $table->id();
-            $table->char('no');
-            $table->string('syaratHaid');
+            $table->integer('gejala_id');
+            $table->integer('diagnosis_id');
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ class CreateSyaratHaidsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('syarat_haids');
+        Schema::dropIfExists('diagnosisGejala_tables');
     }
 }

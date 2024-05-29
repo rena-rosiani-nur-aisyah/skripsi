@@ -15,6 +15,7 @@ class CreatedDiagnosisTable extends Migration
     {
         Schema::create('diagnosis', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('post_id');
             $table->foreignId('user_id');
             $table->unsignedBigInteger('gejala_id');
             $table->enum('jawaban', ['ya', 'tidak'])->default('ya');

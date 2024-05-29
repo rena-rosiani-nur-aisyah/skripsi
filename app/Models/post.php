@@ -20,4 +20,8 @@ class post extends Model
     {
         return $this->hasMany(rule::class);
     }
+    public function diagnosis()
+    {
+        return $this->hasMany(diagnosis::class);
+    }
 }
