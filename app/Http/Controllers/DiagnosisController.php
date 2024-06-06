@@ -6,6 +6,7 @@ use App\Models\diagnosis;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\DB as FacadesDB;
 use App\Http\Requests\StorediagnosisRequest;
 use App\Http\Requests\UpdatediagnosisRequest;
 use App\Models\gejala;
@@ -21,19 +22,15 @@ use Laravel\Prompts\ConfirmPrompt;
 
 class DiagnosisController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    //untuk melihat semua isi tabel dari diagnosis secara keseluruhan, seperti user, jenis darah, gejala, dan jawaban
     public function index()
     {
-        $items = DB::table('diagnosis')->get();
+        $items = diagnosis::with('post', 'gejala', 'user')->get();
         // dd($items);
         $data = [
             'items' => $items
         ];
-        return view('category.admin.diagnosis.diagnos', $data);
+        return view('category.admin.diagnosis.detail', $data);
     }
 
 
@@ -58,34 +55,32 @@ class DiagnosisController extends Controller
 
         $diagnosis = $this->forwardChaning($rule, $jawaban);
 
-        //kode untuk menyimpan jawaban user
+        //kode untuk menyimpan jawaban user dan disimpan ke halaman detail
         $diagnosis = diagnosis::create([
             'user_id' => auth()->id(),
+            'gejala_id' => json_encode($request->input('gejala')),
             'jawaban' => json_encode($jawaban),
             'diagnosis' => $diagnosis
         ]);
-        return redirect()->route('admin.diagnosis.diagnos', ['diagnosis' => $diagnosis]);
+        return redirect()->route('category.admin.diagnosis.detail', ['diagnosis' => $diagnosis]);
     }
 
 
-    public function show(Diagnosis $diagnosis, $id)
+    // untuk menampilkan halaman diagnos yang beriisi user dan hasil diagnosis untuk sisi ADMIN
+    public function show($id)
     {
         $post = diagnosis::find($id);
-        // dd($post);
-        $gejala = $diagnosis->gejala;
-        $user = $diagnosis->user;
-        $jawaban = $diagnosis->jawaban;
-        return view('category.admin.diagnosis.diagnos', compact('diagnosis', 'gejala', 'user', 'jawaban'));
+        return view('category.admin.diagnosis.tabelHasil', compact('post'));
     }
 
-    public function showHasilDiagnosis(diagnosis $diagnosis)
-    {
-        $penyakit = post::find($diagnosis->post_id);
-        $name = $penyakit->name;
-        $Penyebab = $penyakit->Penyebab;
-        $solusi = $penyakit->Solusi;
-        return view('category.admin.hasilDiagnosis', compact('penyakit', 'Penyebab', 'Solusi'));
-    }
+    // public function showHasilDiagnosis(diagnosis $diagnosis)
+    // {
+    //     $penyakit = post::find($diagnosis->post_id);
+    //     $name = $penyakit->name;
+    //     $Penyebab = $penyakit->Penyebab;
+    //     $solusi = $penyakit->Solusi;
+    //     return view('category.admin.hasilDiagnosis', compact('penyakit', 'Penyebab', 'Solusi'));
+    // }
 
     // public function update(Request $request, $id)
     // {
@@ -103,11 +98,11 @@ class DiagnosisController extends Controller
     }
 
     // tampilan untuk di diagnosis user nya
-    public function askDiagnosis(Request $request)
-    {
-        $gejala = gejala::all();
-        return view('users.diagnosis-user', compact('gejala'));
-    }
+    // public function askDiagnosis(Request $request)
+    // {
+    //     $gejala = gejala::all();
+    //     return view('users.diagnosis-user', compact('gejala'));
+    // }
 
     //menghubungkan dengan algoritma forward chaining dalam kelas forwardChaining
     public function diagnosa(Request $request)
@@ -126,7 +121,7 @@ class DiagnosisController extends Controller
         $forwardChaining = new forwardChaining($rule, $jawaban, $fact);
         $post = $forwardChaining->diagnosa();
 
-        return view('category.admin.diagnosis.diagnos', compact('post'));
+        return view('category.admin.diagnosis.detail', compact('post'));
     }
 
 
@@ -137,6 +132,9 @@ class DiagnosisController extends Controller
 
         // Update the diagnosis data based on the symptom ID and answer
 
+        $diagnosis = diagnosis::where('gejala_id', 'gejala_id')->first();
+        $diagnosis->jawaban = $jawaban;
+        $diagnosis->save();
         return redirect()->route('diagnosis');
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDiagnosisGejalaTables extends Migration
+class CreateDiagnosisPostsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class CreateDiagnosisGejalaTables extends Migration
      */
     public function up()
     {
-        Schema::create('diagnosisGejala_tables', function (Blueprint $table) {
+        Schema::create('diagnosis_posts', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('gejala_id');
+            $table->foreignId('posts_id');
             $table->foreignId('diagnosis_id');
+            // $table->primary(['posts_id', 'diagnosis_id']);
             $table->timestamps();
         });
     }
@@ -28,6 +29,6 @@ class CreateDiagnosisGejalaTables extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('diagnosisGejala_tables');
+        Schema::dropIfExists('diagnosis_posts');
     }
 }

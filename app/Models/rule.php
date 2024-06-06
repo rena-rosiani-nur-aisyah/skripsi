@@ -27,7 +27,7 @@ class rule extends Model
 
     public function post()
     {
-        return $this->belongsTo(post::class, 'posts_id');
+        return $this->belongsToMany(post::class, 'rules_posts');
     }
     public function gejala()
     {

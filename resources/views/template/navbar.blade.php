@@ -42,7 +42,7 @@
             @else
                 <li class="nav-item"></li>
             @endauth
-            <div class="section-header  mb-6 style="background-color: #e3f2fd;"">
+            <div class="section-header  mb-6" style="background-color: #e3f2fd;">
                 <h1>Period Tracker</h1>
                 <div class="section-header-breadcrumb">
                     <div class="breadcrumb-item active"><a href="/dashboard">Home</a></div>

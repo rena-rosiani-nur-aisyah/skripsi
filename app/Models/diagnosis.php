@@ -22,7 +22,7 @@ class diagnosis extends Model
     }
     public function post()
     {
-        return $this->belongsTo(post::class);
+        return $this->belongsToMany(post::class, 'diagnosis_posts');
     }
     public function gejala()
     {

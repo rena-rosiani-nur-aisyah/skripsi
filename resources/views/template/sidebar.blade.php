@@ -17,11 +17,8 @@
             </li>
             <li class="nav-item"><a class="nav-link" href="/gejala"><i class="fas fa-list"></i>
                     <span>Gejala</span></a></li>
-            {{-- <li class="nav-item">
-                <a href="/pertanyaan"> <i class="fas fa-list"></i> <span>Data Pertanyaan</span></a>
-            </li> --}}
             <li class="nav-item">
-                <a href="/diagnosa" class="nav-link">
+                <a href="/diagnosis" class="nav-link">
                     <i class="fas fa-stethoscope"></i>
                     <span>Diagnosis</span></a>
             </li>

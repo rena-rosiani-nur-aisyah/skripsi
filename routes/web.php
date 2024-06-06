@@ -109,34 +109,33 @@ Route::get('/editgejala', function () {
 
 
 // semua route untuk tabel hasil diagnosis user
-Route::get('/diagnosa', [DiagnosisController::class, 'index']);
+Route::get('/hasil/show', [DiagnosisController::class, 'show']);
+Route::get('/detail', [DiagnosisController::class, 'index']);
 Route::get('/hasilDiagnosis', [DiagnosisController::class, 'showHasilDiagnosis'])->name('hasilDiagnosis');
 
-// Route::post('/tdiagnosis-store', [DiagnosisController::class, 'store'])->name('tdiagnosis.store');
-// // Route::get('/tdiagnosis', [DiagnosisController::class, 'create']);
 Route::post('/diagnosis-store', [DiagnosisController::class, 'store'])->name('diagnosis.store');
-
-Route::get('/showdiagnosis/{id}', [DiagnosisController::class, 'show'])->name('showdiagnosis');
-
-Route::post('/updatediagnosis/{id}', [DiagnosisController::class, 'update'])->name('updatediagnosis');
-
-Route::get('/editdiagnosis/{id}', [DiagnosisController::class, 'edit'])->name('editdiagnosis');
 
 Route::get('/deletediagnosis/{id}', [DiagnosisController::class, 'destroy'])->name('deletediagnosis');
 
 Route::get('/diagnosisuser', [DiagnosisController::class, 'diagnosis'])->name('diagnosisuser');
 
-Route::get('/editdiagnos', function () {
-    return view('category.admin.diagnosis.hasil.ediagnosis');
-});
-Route::get('/tambahdiagnosis', function () {
-    return view('category.admin.diagnosis.hasil.tdiagnosis');
-});
 
+// Route::get('/diagnosis', function () {
+//     return view('category.admin.diagnosis.diagnos');
+// });
+
+// Route::view('/{paths}', 'diagnosis.show');
 Route::get('/hasilDiagnosis', [DiagnosisController::class, 'showHasilDiagnosis'])->name('hasilDiganosis');
 
 
 Route::get('/rules', [RuleController::class, 'index']);
+
+Route::get('/tambahRules', function () {
+    return view('category.admin.diagnosis.rule.tambahRules');
+});
+Route::get('/editRules', function () {
+    return view('category.admin.diagnosis.rule.editRules');
+});
 
 
 //rout profil dari sisi admin
@@ -144,6 +143,9 @@ Route::get('/Puser', function () {
     return view('category.profilUser');
 });
 
+Route::get('/detail', function () {
+    return view('category.admin.diagnosis.detail');
+});
 
 // Profile user dari sisi user
 Route::get('/profile', function () {

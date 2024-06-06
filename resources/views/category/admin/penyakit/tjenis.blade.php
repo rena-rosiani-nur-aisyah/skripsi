@@ -8,14 +8,6 @@
             <form method="POST" action="{{ url('tjenis') }}">
                 @csrf
                 <div class="form-row">
-                    {{-- <div class="form-group col-md-6">
-                        <label for="No">No</label>
-                        <?php $no = 1; ?>
-                        @foreach ($items as $value)
-                            <td>{{ $no++ }}</td>
-                        @endforeach
-
-                    </div> --}}
                     <div class="form-group col-md-6">
                         <label for="inputName">Nama</label>
                         <input type="username" class="form-control @error('name') is-invalid @enderror" name="name"

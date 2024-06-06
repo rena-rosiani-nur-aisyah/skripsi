@@ -23,6 +23,14 @@ class gejala extends Model
     {
         return $this->belongsToMany(diagnosis::class, 'diagnosisGejala');
     }
+    public function post()
+    {
+        return $this->belongsToMany(post::class, 'post_gejalas');
+    }
+    public function question()
+    {
+        return $this->belongsToMany(question::class, 'questions__gejalas');
+    }
 }
 
 $gejala = gejala::find(1);

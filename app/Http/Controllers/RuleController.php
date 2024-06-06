@@ -3,10 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\rule;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreruleRequest;
 use App\Http\Requests\UpdateruleRequest;
+use App\Models\diagnosis;
+use App\Models\gejala;
+use App\Models\post;
+use PHPUnit\Framework\Constraint\Operator;
 
 class RuleController extends Controller
 {
@@ -25,55 +30,46 @@ class RuleController extends Controller
         return view('category.admin.diagnosis.rule.rule', $data);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+        $jenisDarah = post::all();
+        $gejala = gejala::all();
+        return view('category.admin.diagnosis.rule.tambahRules', compact('jenisDarah', 'gejala'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreruleRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreruleRequest $request)
+    public function store(Request $request)
     {
+        $validate = $request->validate([
+            'post_id' => 'required',
+            'gejala_id' => 'required|exists:gejala_id',
+            'operator' => 'required',
+            'value' => 'required'
+        ]);
+        $insert = diagnosis::created([
+            'post_id' => $request->post_id,
+            'gejala_id' => $request->gejala_id,
+            'operator' => $request->operator,
+            'value' => $request->value
+        ]);
+        $post = post::created($request->all());
+        $post->gejala()->sync($request->gejala);
+        return redirect(url('/rules'));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\rule  $rule
-     * @return \Illuminate\Http\Response
-     */
+
     public function show(rule $rule)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\rule  $rule
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(rule $rule)
+    public function edit(rule $rule, $id)
     {
-        //
+        $rules = rule::findOrFail($id);
+        $jenisDarah = post::all();
+        $gejala = gejala::all();
+        return view('category.admin.diagnosis.rule.editRules', compact('rules', 'jenisDarah', 'gejala'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateruleRequest  $request
-     * @param  \App\Models\rule  $rule
-     * @return \Illuminate\Http\Response
-     */
     public function update(UpdateruleRequest $request, rule $rule)
     {
         //
