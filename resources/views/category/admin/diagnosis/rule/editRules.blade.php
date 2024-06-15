@@ -10,7 +10,7 @@
                     {{-- <div class="section-title mt-0">Text</div> --}}
                     <div class="form-group col-md-4">
                         <div class="form-group">
-                            <label>Jenis Darah</label>
+                            <label>Gejala</label>
                             <select class="form-control form-control-sm">
                                 <option>Option 1</option>
                                 <option>Option 2</option>
@@ -18,7 +18,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="form-group col-6 col-md-2">
+                    <div class="form-group col-6 ">
                         <label class="d-block">Operator</label>
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" checked>
@@ -35,7 +35,7 @@
                     </div>
                     <div class="form-group col-md-4">
                         <div class="form-group">
-                            <label>Gejala</label>
+                            <label>Related_Question</label>
                             <select class="form-control">
                                 <option>Option 1</option>
                                 <option>Option 2</option>
@@ -43,7 +43,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="form-group col-2">
+                    <div class="form-group col-6">
                         <label class="d-block">Value</label>
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" checked>
@@ -56,6 +56,16 @@
                             <label class="form-check-label" for="exampleRadios2">
                                 Tidak
                             </label>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <div class="form-group">
+                            <label>Jenis Darah</label>
+                            <select class="form-control form-control-sm">
+                                <option>Option 1</option>
+                                <option>Option 2</option>
+                                <option>Option 3</option>
+                            </select>
                         </div>
                     </div>
                 </div>

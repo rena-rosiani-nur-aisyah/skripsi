@@ -26,7 +26,8 @@
                 <a href="#" class="nav-link has-dropdown"><i class="fas fa-th-large"></i>
                     <span>Basis Pengetahuan</span></a>
                 <ul class="dropdown-menu">
-                    <li class="active"><a class="nav-link" href="/materi">Penjelasan</a></li>
+                    <li class="active"><a class="nav-link" href="/versiAdmin">
+                            Artikel</a></li>
                 </ul>
             </li>
             <li class="menu-header">Data</li>

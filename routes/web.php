@@ -35,12 +35,15 @@ Route::get('/', function () {
 Auth::routes();
 
 //Route::get('admin/home', [App\Http\Controllers\HomeController::class, 'adminHome'])->name('admin.home')->middleware('is_admmin');
-Route::get('/login', [LoginController::class, 'index'])->middleware('guest');
-Route::post('/login', [LoginController::class, 'authenticate']);
+// Route::get('/login', [LoginController::class, 'index'])->middleware('guest');
+// Route::post('/login', [LoginController::class, 'authenticate']);
 Route::get('/Admin', function () {
     return view('category.index');
 });
 
+Route::get('/masuk', function () {
+    return view('auth.login');
+});
 Route::get('/dashboard', function () {
     return view('users.dashborad');
 });
@@ -49,8 +52,20 @@ Route::get('/diagnosisUser', function () {
     return view('users.diagnosis-user');
 });
 
-Route::get('artikel', function () {
+Route::get('/artikel', function () {
     return view('artikel.artikel');
+});
+
+Route::get('/tambahArtikel', function () {
+    return view('artikel.tambahArtikel');
+});
+
+Route::get('/editArtikel', function () {
+    return view('artikel.editArtikel');
+});
+
+Route::get('/versiAdmin', function () {
+    return view('artikel.artikelAdmin');
 });
 
 // route untuk menu jenis

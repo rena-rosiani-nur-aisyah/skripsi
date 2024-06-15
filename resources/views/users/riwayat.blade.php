@@ -11,25 +11,15 @@
                     <div class="table-responsive">
                         <table class="table table-striped">
                             <tr>
+                                <th>No.</th>
                                 <th>Name</th>
                                 <th>Hasil Diagnosis</th>
-                                <th>Lama Haid</th>
-                                <th>Lama Nifas</th>
-                                <th>Waktu Diagnosis</th>
-                                <th>Status</th>
-                            </tr>
+                                <th>Tanggal</th>
+                                <th>Detail</th>
                             <tr>
+                                <td>1.</td>
                                 <td>rena</td>
                                 <td>Create a mobile app</td>
-                                <td class="align-middle">
-                                    <div class="progress" data-height="4" data-toggle="tooltip" title="100%">
-                                        <div class="progress-bar bg-success" data-width="100"></div>
-                                    </div>
-                                </td>
-                                <td>
-                                    14 hari
-                                    {{-- <img alt="image" src="../backend/assets/img/avatar/avatar-5.png"
-                                        class="rounded-circle" width="35" data-toggle="tooltip" title="Wildan Ahdian"> --}}
                                 </td>
                                 <td>2018-01-20</td>
 

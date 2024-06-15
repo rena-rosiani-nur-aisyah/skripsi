@@ -12,7 +12,7 @@
                     <span>Diagnosis</span></a></li>
             <li class="active"><a class="nav-link" href="/riwayat"><i class="far fa-square"></i>
                     <span>Riwayat</span></a></li>
-            <li class="active"><a class="nav-link" href="/pengetahuan"><i class="far fa-square"></i>
+            <li class="active"><a class="nav-link" href="/artikel"><i class="far fa-square"></i>
                     <span> Basis Pengetahuan</span></a></li>
             <li class="menu-header">Profil</li>
             <li class="active"><a class="nav-link" href="/profile"><i class="far fa-square"></i>

@@ -81,6 +81,29 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="col-lg-3 col-sm-6">
+                            <div class="card card-plain">
+                                <div class="card-header p-0 position-relative">
+                                    <a class="d-block blur-shadow-image">
+                                        <img src="../assets/img/examples/blog-9-4.jpg" alt="img-blur-shadow"
+                                            class="img-fluid shadow border-radius-lg" loading="lazy">
+                                    </a>
+                                </div>
+                                <div class="card-body px-0">
+                                    <h5>
+                                        <a href="javascript:;" class="text-dark font-weight-bold">MateLabs machine
+                                            learning</a>
+                                    </h5>
+                                    <p>
+                                        If you’ve ever wanted to train a machine learning model
+                                        and integrate it with IFTTT, you now can with ...
+                                    </p>
+                                    <a href="javascript:;" class="text-info text-sm icon-move-right">Read More
+                                        <i class="fas fa-arrow-right text-xs ms-1"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
                         <div class="col-lg-3 col-md-12 col-12">
                             <div class="card card-blog card-background cursor-pointer">
                                 <div class="full-background"
@@ -99,18 +122,8 @@
                         </div>
                     </div>
                 </div>
+
             </section>
-        </div>
-        {{-- <div class=" card card-body">
-            <div class="card" style="width: 18rem;">
-                <img src="..." class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-            </div> --}}
         </div>
 
     </body>

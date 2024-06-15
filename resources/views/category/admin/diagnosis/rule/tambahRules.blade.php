@@ -9,23 +9,56 @@
                 <form action="post" action="{{ url('tambahRules') }}">
                     @csrf
                     <div class="card-body">
-                        <div class="section-title">Select</div>
+                        {{-- <div class="section-title">Select</div> --}}
                         <div class="form-group col-md-4">
-                            <label>Select <code>.form-control-sm</code></label>
+                            <label>Pilih gejala </label>
                             <select class="form-control form-control-sm">
                                 <option>Option 1</option>
                                 <option>Option 2</option>
                                 <option>Option 3</option>
                             </select>
                         </div>
-
+                        <div class="form-group col-6">
+                            <label class="d-block">Operator</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1"
+                                    checked>
+                                <label class="form-check-label" for="exampleRadios1">
+                                    AND
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2"
+                                    checked>
+                                <label class="form-check-label" for="exampleRadios2">
+                                    OR
+                                </label>
+                            </div>
+                        </div>
                         <div class="form-group col-md-4">
-                            <label>Select <code>.form-control-lg</code></label>
+                            <label>Gejala terkait</label>
                             <select class="form-control form-control-lg">
                                 <option>Option 1</option>
                                 <option>Option 2</option>
                                 <option>Option 3</option>
                             </select>
+                        </div>
+                        <div class="form-group col-6">
+                            <label class="d-block">Value</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1"
+                                    checked>
+                                <label class="form-check-label" for="exampleRadios1">
+                                    Ya
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2"
+                                    checked>
+                                <label class="form-check-label" for="exampleRadios2">
+                                    Tidak
+                                </label>
+                            </div>
                         </div>
                     </div>
                     <div class="card-footer">
