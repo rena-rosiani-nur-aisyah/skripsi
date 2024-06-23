@@ -21,24 +21,16 @@ class LoginController extends Controller
     |
     */
 
-    use AuthenticatesUsers;
+    // use AuthenticatesUsers;
 
-    /**
-     * Where to redirect users after login.
-     *
-     * @var string
-     */
-    protected $redirectTo = RouteServiceProvider::HOME;
 
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('guest')->except('logout');
-    }
+    // protected $redirectTo = RouteServiceProvider::HOME;
+
+
+    // public function __construct()
+    // {
+    //     $this->middleware('guest')->except('logout');
+    // }
 
     // public function logout(Request $request)
     // {
@@ -52,21 +44,21 @@ class LoginController extends Controller
     //     return redirect('/');
     // }
 
-    public function authenticate(Request $request)
-    {
-        $credentials = $request->validate([
-            'username' => 'required',
-            'password' => 'required'
-        ]);
-        if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
-            return redirect()->intended('/dashboard');
-        }
-        return back()->with('LoginError', 'Login tidak berhasil');
-    }
+    // public function authenticate(Request $request)
+    // {
+    //     $credentials = $request->validate([
+    //         'username' => 'required',
+    //         'password' => 'required'
+    //     ]);
+    //     if (Auth::attempt($credentials)) {
+    //         $request->session()->regenerate();
+    //         return redirect()->intended('/login');
+    //     }
+    //     return back()->with('LoginError', 'Login tidak berhasil');
+    // }
 
-    public function index()
-    {
-        return view('auth.login');
-    }
+    // public function index()
+    // {
+    //     return view('auth.login');
+    // }
 }

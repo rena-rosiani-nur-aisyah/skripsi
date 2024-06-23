@@ -17,6 +17,9 @@
     <!-- Template CSS -->
     <link rel="stylesheet" href="{{ asset('backend/assets/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('backend/assets/css/components.css') }}">
+
+    {{-- bootstrap icons --}}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 </head>
 
 <body>
@@ -47,9 +50,11 @@
                                 <i class="fas fa-bolt"></i> Activities
                             </a>
                             <div class="dropdown-divider"></div>
-                            <a href="/login" class="dropdown-item has-icon text-danger">
-                                <i class="fas fa-sign-out-alt"></i> Logout
-                            </a>
+                            <form action="/logout" method="POST">
+                                @csrf
+                                <button type="submit" class="dropdown-item has-icon text-danger border-0"><i
+                                        class="fas fa-sign-out-alt"></i>Logout</button>
+                            </form>
                         </div>
                     </li>
                 </ul>
@@ -61,6 +66,15 @@
                     @yield('content')
                 </section>
             </div>
+            <footer class="main-footer">
+                <div class="footer-left">
+                    Copyright &copy; 2018 <div class="bullet"></div> Design By <a href="#">Rena Rosiani Nur
+                        Aisyah</a>
+                </div>
+                <div class="footer-right">
+                    2.3.0
+                </div>
+            </footer>
         </div>
     </div>
 

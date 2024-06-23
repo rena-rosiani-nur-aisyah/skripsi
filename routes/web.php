@@ -1,21 +1,24 @@
 <?php
 
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\DashboardAdmin;
-use App\Http\Controllers\DiagnosisController;
-use App\Http\Controllers\GejalaController;
 use App\Models\post;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\PostController;
-use App\Http\Controllers\RuleController;
-use App\Http\Controllers\WarnaController;
 use App\Models\warna;
 use GuzzleHttp\Psr7\Request;
-use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+// use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\RuleController;
+use App\Http\Controllers\SiginController;
+use App\Http\Controllers\WarnaController;
+use App\Http\Controllers\GejalaController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DiagnosisController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\SignupController;
+use GuzzleHttp\Middleware;
 use Symfony\Component\HttpKernel\Profiler\Profile;
+// use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,19 +37,20 @@ Route::get('/', function () {
 
 Auth::routes();
 
-//Route::get('admin/home', [App\Http\Controllers\HomeController::class, 'adminHome'])->name('admin.home')->middleware('is_admmin');
-// Route::get('/login', [LoginController::class, 'index'])->middleware('guest');
-// Route::post('/login', [LoginController::class, 'authenticate']);
 Route::get('/Admin', function () {
     return view('category.index');
 });
 
-Route::get('/masuk', function () {
-    return view('auth.login');
-});
-Route::get('/dashboard', function () {
-    return view('users.dashborad');
-});
+Route::get('/sigin', [SiginController::class, 'index'])->name('sigin')->middleware('guest');
+Route::post('/sigin', [SiginController::class, 'authenticate']);
+Route::post('/logout', [SiginController::class, 'logout'])->name('logout');
+
+
+Route::get('/registrasi', [SignupController::class, 'index'])->middleware('guest');
+Route::post('/registrasi', [SignupController::class, 'store']);
+
+
+Route::get('/dashboard', [DashboardController::class, 'index'])->Middleware('auth');
 
 Route::get('/diagnosisUser', function () {
     return view('users.diagnosis-user');
@@ -83,23 +87,6 @@ Route::get('/tjenis', function () {
     return view('category.admin.penyakit.tjenis');
 });
 
-
-
-
-// semua route untuk warna
-Route::get('/warna', [WarnaController::class, 'index'])->name('warna');
-
-Route::post('/twarna-store', [WarnaController::class, 'store'])->name('twarna.store');
-Route::get('/tampilinwarna/{id}', [WarnaController::class, 'show'])->name('tampilinwarna');
-Route::get('/deletewarna/{id}', [WarnaController::class, 'destroy'])->name('deletewarna');
-Route::post('/updatewarna/{id}', [WarnaController::class, 'update'])->name('updatewarna');
-Route::get('/editw', function () {
-    return view('partials.edit.editwarna');
-});
-
-Route::get('/twarna', function () {
-    return view('category.admin.basis.tambah.twarna');
-});
 
 
 
@@ -166,10 +153,6 @@ Route::get('/detail', function () {
 Route::get('/profile', function () {
     return view('users.profile');
 });
-
-
-//Route::get('/dashboardUser', [DashboardController::class, 'index'])->middleware('guest');
-
 
 
 Route::get('/riwayat', function () {

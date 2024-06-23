@@ -12,9 +12,9 @@
                             <br>
 
                             <div class="d-flex justify-content-center justify-content-lg-start ">
-                                <a href="/login" class="btn-get-started scrollto btn btn-primary">Sign In</a>
+                                <a href="/sigin" class="btn-get-started scrollto btn btn-primary">Sign In</a>
                                 &nbsp; &nbsp;
-                                <a href="/register" class="btn btn-outline-secondary text-right"><span>Sign
+                                <a href="/registrasi" class="btn btn-outline-secondary text-right"><span>Sign
                                         Up</span></a>
                             </div>
                         </div>

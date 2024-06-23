@@ -11,8 +11,16 @@
     <!-- Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
 
-    <!-- Scripts -->
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    {{-- link css --}}
+
+    <link rel="stylesheet" href="{{ asset('backend/assets/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('backend/assets/css/components.css') }}">
+    <link rel="stylesheet" href="{{ asset('resources/css/app.css') }}">
+
+    {{-- script js  --}}
+    <script src="{{ asset('backend/assets/js/scripts.js') }}"></script>
+    <script src="{{ asset('backend/assets/js/custom.js') }}"></script>
+    <script src="{{ asset('resources/js/app.js') }}"></script>
 
 <body class="font-sans antialiased">
     <div class="min-h-screen bg-gray-100">
