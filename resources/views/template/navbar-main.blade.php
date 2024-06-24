@@ -37,9 +37,10 @@
                 <ul class="navbar-nav navbar-right">
                     <li class="dropdown"><a href="#" data-toggle="dropdown"
                             class="nav-link dropdown-toggle nav-link-lg nav-link-user">
-                            <img alt="image" src="../backend/assets/img/avatar/avatar-1.png"
-                                class="rounded-circle mr-1">
-                            {{-- <div class="d-sm-none d-lg-inline-block">{{ auth()->user()->$name }}</div> --}}
+                            <div class="d-sm-none d-lg-inline-block" role="button">Welcome back,
+                                {{ auth()->user()->username }} </div>
+                            {{-- <img alt="image" src="../backend/assets/img/avatar/avatar-1.png"
+                                class="rounded-circle mr-1"> --}}
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">
                             <div class="dropdown-title">Logged in 5 min ago</div>
@@ -52,8 +53,9 @@
                             <div class="dropdown-divider"></div>
                             <form action="/logout" method="POST">
                                 @csrf
-                                <button type="submit" class="dropdown-item has-icon text-danger border-0"><i
-                                        class="fas fa-sign-out-alt"></i>Logout</button>
+                                <button type="submit" class="dropdown-item has-icon text-danger border-0">
+                                    Logout <i class="bi bi-box-arrow-right"></i> </i>
+                                </button>
                             </form>
                         </div>
                     </li>

@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class artikel extends Model
 {
     use HasFactory;
+
+    protected $table = 'artikel';
+
+    protected $fillable = [
+        'judul',
+        'body',
+        'image'
+    ];
 }

@@ -4,6 +4,10 @@
     <div class="card">
         <div class="card-header">
             <h4>Data Artikel</h4>
+            <div class="card-header-action">
+                <a href="{{ url('tambahArtikel') }}" class="btn active">+ Tambah
+                    Artikel</a>
+            </div>
         </div>
         <div class="card-body p-0 md-4">
             <div class="table-responsive">

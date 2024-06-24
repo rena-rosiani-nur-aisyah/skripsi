@@ -17,7 +17,7 @@ class Artikel extends Migration
             $table->id();
             $table->timestamps();
             $table->string('judul');
-            $table->string('keterangan');
+            $table->string('body');
             $table->string('image')->nullable();
         });
     }

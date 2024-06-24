@@ -10,12 +10,13 @@
                     @csrf
                     <div class="card-body">
                         {{-- <div class="section-title">Select</div> --}}
-                        <div class="form-group col-md-4">
-                            <label>Pilih gejala </label>
-                            <select class="form-control form-control-sm">
-                                <option>Option 1</option>
-                                <option>Option 2</option>
-                                <option>Option 3</option>
+                        {{ dd($categories) }}
+                        <div class="mb-3">
+                            <label class="form-label" for="gejala">Pilih gejala </label>
+                            <select class="form-select" name="gejala_id">
+                                @foreach ($categories as $gejala)
+                                    <option value="{{ $gejala->id }}">{{ $gejala->gejala }}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="form-group col-6">

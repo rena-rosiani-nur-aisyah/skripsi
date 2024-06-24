@@ -30,6 +30,8 @@
                             Artikel</a></li>
                 </ul>
             </li>
+            <li class="nav-item"><a class="nav-link" href="/rules"><i
+                        class="bi bi-diagram-3"></i><span>Rules</span></a></li>
             <li class="menu-header">Data</li>
             <li class="nav-item dropdown">
                 <a href="#" class="nav-link has-dropdown"><i class="far fa-user"></i> <span>Profile</span></a>

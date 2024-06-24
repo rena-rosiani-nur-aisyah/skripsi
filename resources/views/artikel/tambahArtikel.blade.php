@@ -27,12 +27,17 @@
                         </div>
 
                         <div class="form-group row mb-4">
-                            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">
+                            <label class="col-form-label text-md-right  col-md-3 col-lg-3" for="body">
                                 <h6>Isi Konten</h6>
                             </label>
                             <div class="col-sm-12 col-md-7">
-                                <textarea class="summernote"></textarea>
+                                <input id="body" type="hidden" name="body">
+                                <trix-editor input="body"></trix-editor>
                             </div>
+
+                            {{-- <div class="col-sm-12 col-md-7">
+                                <textarea class="summernote"></textarea>
+                            </div> --}}
                         </div>
                         <div class="form-group row mb-4">
                             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
@@ -44,5 +49,10 @@
             </div>
         </div>
     </div>
-    </div>
+
+    <script>
+        document.addEventListener('trix-file-accept', function(e) {
+            e.preventDefault();
+        })
+    </script>
 @endsection

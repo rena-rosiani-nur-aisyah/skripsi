@@ -32,10 +32,10 @@ class RuleController extends Controller
 
     public function create()
     {
-        $jenisDarah = post::all();
-        $gejala = gejala::all();
-        return view('category.admin.diagnosis.rule.tambahRules', compact('jenisDarah', 'gejala'));
+        $categories = gejala::all();
+        return view('category.admin.diagnosis.rule.tambahRules', compact('categories'));
     }
+    // $jenisDarah = post::all();
 
     public function store(Request $request)
     {

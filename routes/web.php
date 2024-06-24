@@ -9,16 +9,14 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\RuleController;
 use App\Http\Controllers\SiginController;
-use App\Http\Controllers\WarnaController;
 use App\Http\Controllers\GejalaController;
-use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DiagnosisController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\SignupController;
 use GuzzleHttp\Middleware;
 use Symfony\Component\HttpKernel\Profiler\Profile;
-// use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -49,16 +47,30 @@ Route::post('/logout', [SiginController::class, 'logout'])->name('logout');
 Route::get('/registrasi', [SignupController::class, 'index'])->middleware('guest');
 Route::post('/registrasi', [SignupController::class, 'store']);
 
-
-Route::get('/dashboard', [DashboardController::class, 'index'])->Middleware('auth');
-
-Route::get('/diagnosisUser', function () {
-    return view('users.diagnosis-user');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('users.dashborad');
+    });
+    Route::get('/diagnosisUser', function () {
+        return view('users.diagnosis-user');
+    });
+    Route::get('/artikel', function () {
+        return view('artikel.artikel');
+    });
+    Route::get('/riwayat', function () {
+        return view('users.riwayat');
+    });
 });
 
-Route::get('/artikel', function () {
-    return view('artikel.artikel');
-});
+// Route::get('/dashboard', function () {
+//     return view('users.dashborad');
+// })->middleware('auth');
+
+// Route::get('/diagnosisUser', function () {
+//     return view('users.diagnosis-user');
+// });
+
+
 
 Route::get('/tambahArtikel', function () {
     return view('artikel.tambahArtikel');
@@ -155,12 +167,6 @@ Route::get('/profile', function () {
 });
 
 
-Route::get('/riwayat', function () {
-    return view('users.riwayat');
-});
 
-Route::get('/pengetahuan', function () {
-    return view('users.pengetahuan');
-});
 
-Route::get('/diagnosis/{userId}', [DiagnosisController::class, 'getGejala']);
+// Route::get('/diagnosis/{userId}', [DiagnosisController::class, 'getGejala']);
