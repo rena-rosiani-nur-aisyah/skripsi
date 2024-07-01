@@ -19,7 +19,9 @@
                                         <tr>
                                             <th>Id</th>
                                             <th>Nama</th>
-                                            <th>Keterangan</th>
+                                            <th>Deskripsi</th>
+                                            <th>Penyebab</th>
+                                            <th>Solusi</th>
                                             <th>Action</th>
                                         </tr>
                                         <?php $no = 1; ?>
@@ -27,7 +29,9 @@
                                             <tr>
                                                 <td>{{ $no++ }}</td>
                                                 <td>{{ $value->name }}</td>
-                                                <td>{{ $value->keterangan }}</td>
+                                                <td>{{ $value->deskripsi }}</td>
+                                                <td>{{ $value->Penyebab }}</td>
+                                                <td>{{ $value->Solusi }}</td>
                                                 <td> <a href="/show/{{ $value->id }}"> <img src="/images/icon/edit.png"
                                                             alt="edit" width="30"> </a>
                                                     <a href="/delete/{{ $value->id }}"><img src="/images/icon/delete.png"

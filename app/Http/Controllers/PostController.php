@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\gejala;
+// use App\Models\gejala;
 use App\Models\post;
-use App\Models\rule;
+// use App\Models\rule;
 use Illuminate\Http\Request;
-use DB;
-use forwardChaining;
+
 use Illuminate\Support\Facades\DB as FacadesDB;
 
 class PostController extends Controller
@@ -21,28 +20,30 @@ class PostController extends Controller
         return view('category.admin.penyakit.jenis-darah', $data);
     }
 
-    // public function create()
-    // {
-    //     return view('partials.tjenis');
-    // }
+
 
     public function store(Request $request)
     {
+        // dd($request->all());
+
         $validateData = $request->validate([
             'name' => 'required',
-            'keterangan' => 'required',
+            'deskripsi' => 'required',
+            'Penyebab' => 'required',
+            'Solusi' => 'required'
         ]);
-        // dd($request->all());
         $insert =  post::create([
             'name' => $request->name,
-            'keterangan' => $request->keterangan,
+            'deskripsi' => $request->deskripsi,
+            'Penyebab' => $request->Penyebab,
+            'Solusi' => $request->Solusi,
         ]);
         return redirect(url('/jenis'));
     }
 
     public function destroy(Request $request, $id)
     {
-        $post = Post::find($id);
+        $post = post::find($id);
         $post->delete($request->filled($id));
         return redirect(url('/jenis'))->with('Berhasil', 'Data telah dihapus.');
     }
@@ -50,13 +51,13 @@ class PostController extends Controller
     public function show($id)
     {
 
-        $post = Post::find($id);
+        $post = post::find($id);
         return view('category.admin.penyakit.create', compact('post'));
     }
 
     public function update(Request $request,  $id)
     {
-        $post = Post::find($id);
+        $post = post::find($id);
         $post->update($request->all());
 
         return redirect(url('/jenis'))->with('Berhasil!', 'Data telah diubah.');

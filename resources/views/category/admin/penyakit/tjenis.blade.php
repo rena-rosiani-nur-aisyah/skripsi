@@ -4,36 +4,75 @@
         <div class="card-header">
             <h4>Tambah Jenis</h4>
         </div>
-        <div class="card-body">
-            <form method="POST" action="{{ url('tjenis') }}">
+
+
+        <div class="card-body offset-sm-1">
+            <form method="POST" action="{{ route('prosesinputjenis') }}">
                 @csrf
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="inputName">Nama</label>
-                        <input type="username" class="form-control @error('name') is-invalid @enderror" name="name"
-                            placeholder="Nama">
-                        @error('name')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
+                <div class="form-group">
+                    <div class="form-group row ">
+                        <label for="name" class="col-md-2">
+                            <h6>Jenis Darah :</h6>
+                        </label>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control  @error('name') is-invalid @enderror" name="name"
+                                for="name" placeholder="Jenis Darah" required>
+                            @error('name')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
 
                     </div>
-                    <div class="form-group col-md-6">
-                        <label for="inputText">Keterangan</label>
-                        <input type="text" class="form-control @error('keterangan') is-invalid @enderror"
-                            name="keterangan" placeholder="Masa keterangan">
-                        @error('keterangan')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
+                    <br>
+                    <div class="form-group row ">
+                        <label for="deskripsi" class="col-md-2">
+                            <h6>Deskripsi :</h6>
+                        </label>
+                        <div class="col-md-8">
+                            <textarea name="deskripsi" class="form-control  @error('deskripsi') is-invalid @enderror" placeholder="Deskripsi"
+                                style="width: 100%; height: 200px;" for="deskripsi" required></textarea>
+                            @error('deskripsi')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
                     </div>
-
+                    <div class=" form-group row">
+                        <label for="Penyebab" class="col-md-2">
+                            <h6>Penyebab:</h6>
+                        </label>
+                        <div class="col-md-8">
+                            <textarea class="form-control  @error('Penyebab') is-invalid @enderror" name="Penyebab" placeholder="Penyebab" required
+                                style="width: 100%; height: 200px;" for="Penyebab"></textarea>
+                            @error('Penyebab ')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class=" form-group row">
+                        <label for="Solusi" class="col-md-2">
+                            <h6>Solusi :</h6>
+                        </label>
+                        <div class="col-md-8">
+                            <textarea class="form-control  @error('Solusi ') is-invalid @enderror" name="Solusi" placeholder="Solusi " required
+                                style="width: 100%; height: 200px;" for="Solusi"></textarea>
+                            @error('Solusi ')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+                    </div>
                 </div>
+
                 <div class="card-footer">
                     <a href="/jenis" class="btn btn-primary">Kembali</a>
-                    <button class="btn btn-primary">Submit</button>
+                    <button class="btn btn-primary" type="submit">Submit</button>
                 </div>
             </form>
         </div>

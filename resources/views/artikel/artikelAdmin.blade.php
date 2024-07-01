@@ -15,7 +15,7 @@
                     <tr>
                         <th>No.</th>
                         <th>Judul</th>
-                        <th>Slug</th>
+                        <th>Gambar</th>
                         <th>Tanggal Pembuatan</th>
                         <th>Action</th>
                     </tr>

@@ -12,12 +12,11 @@ class post extends Model
     protected $table = 'posts';
 
     protected $fillable = [
-        'kode_penyakit',
+        // 'kode_penyakit',
         'name',
         'deskripsi',
         'Penyebab',
-        'Solusi',
-        'published_at'
+        'Solusi'
     ];
     public function rule()
     {

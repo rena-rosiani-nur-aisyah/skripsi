@@ -12,14 +12,13 @@ class gejala extends Model
     protected $table = 'gejalas';
 
     protected $fillable = [
-        'kode_gejala',
         'gejala',
         'image'
     ];
 
     public function rule()
     {
-        return $this->belongsToMany(rule::class);
+        return $this->belongsToMany(rule::class, 'rules__gejalas');
     }
     public function diagnosis()
     {
@@ -34,6 +33,3 @@ class gejala extends Model
         return $this->belongsToMany(question::class, 'questions__gejalas');
     }
 }
-
-$gejala = gejala::find(1);
-$rule = $gejala->rule;

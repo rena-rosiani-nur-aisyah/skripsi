@@ -31,7 +31,7 @@ class rule extends Model
     }
     public function gejala()
     {
-        return $this->belongsToMany(gejala::class, 'gejala_id');
+        return $this->belongsToMany(gejala::class, 'rules__gejalas');
     }
 }
 

@@ -26,6 +26,14 @@
         trix-toolbar [data-trix-button-group="file-tools"] {
             display: none;
         }
+
+        .form-control {
+            background-color: #f2f2f2;
+        }
+
+        .custom-file {
+            background-color: #f2f2f2;
+        }
     </style>
 
     {{-- bootstrap icons --}}
@@ -49,7 +57,7 @@
                             class="nav-link dropdown-toggle nav-link-lg nav-link-user">
                             <img alt="image" src="../backend/assets/img/avatar/avatar-1.png"
                                 class="rounded-circle mr-1">
-                            {{-- <div class="d-sm-none d-lg-inline-block">{{ auth()->user()->$name }}</div> --}}
+                            {{-- <div class="d-sm-none d-lg-inline-block"> {{ auth()->user()->username }}</div> --}}
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">
                             <div class="dropdown-title">Logged in 5 min ago</div>

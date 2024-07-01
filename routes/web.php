@@ -93,7 +93,7 @@ Route::post('/edit/{id}', [PostController::class, 'update'])->name('edit');
 
 Route::get('/delete/{id}', [PostController::class, 'destroy'])->name('delete');
 
-Route::post('/tjenis', [PostController::class, 'store']);
+Route::post('/tjenis', [PostController::class, 'store'])->name('prosesinputjenis');
 
 Route::get('/tjenis', function () {
     return view('category.admin.penyakit.tjenis');

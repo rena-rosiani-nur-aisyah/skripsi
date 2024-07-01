@@ -12,7 +12,9 @@
                 <thead>
                     <tr>
                         <th scope="col">id</th>
+                        <th scope="col">Kode</th>
                         <th scope="col">Gejala</th>
+                        <th scope="col">Gambar</th>
                         <th scope="col">Action</th>
                     </tr>
                 </thead>
@@ -22,7 +24,18 @@
                     @foreach ($items as $post)
                         <tr>
                             <td>{{ $no++ }}</td>
+                            <td>kode</td>
                             <td>{{ $post->gejala }}</td>
+                            <td>
+                                @if ($post->image)
+                                    <div>
+                                        <img src="{{ asset('storage/' . $post->image) }}" alt="" width="50"
+                                            height="auto">
+                                    </div>
+                                @else
+                                    - -
+                                @endif
+                            </td>
                             <td>
                                 <a href="/tampilgejala/{{ $post->id }}"> <img src="/images/icon/edit.png" alt="edit"
                                         width="30"> </a>
