@@ -18,15 +18,15 @@
     <link rel="stylesheet" href="{{ asset('backend/assets/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('backend/assets/css/components.css') }}">
 
-    {{-- Trix Editor --}}
-    <link rel="stylesheet" type="text/css" href="backend/assets/css/trix.css">
-    <script type="text/javascript" src="backend/assets/js/trix.js"></script>
+    {{-- Text Editor --}}
+    <link rel="stylesheet" type="text/css" href="{{ asset('backend/assets/summernote/summernote.min.css') }}">
+    </link>
+    {{-- <link rel="stylesheet" href="css/font-awesome.min.css"> --}}
+    <link href="{{ asset('backend/assets/summernote/summernote.css') }}" rel="stylesheet">
+
+    <script type="text/javascript" src="{{ asset('backend/assets/summernote/summernote.min.js') }}"></script>
 
     <style>
-        trix-toolbar [data-trix-button-group="file-tools"] {
-            display: none;
-        }
-
         .form-control {
             background-color: #f2f2f2;
         }
@@ -113,6 +113,7 @@
     <script src="{{ asset('backend/assets/js/scripts.js') }}"></script>
     <script src="{{ asset('backend/assets/js/custom.js') }}"></script>
     <!-- Page Specific JS File -->
+    <script src="{{ asset('backend/assets/summernote/summernote.min.js') }}"></script>
 </body>
 
 </html>

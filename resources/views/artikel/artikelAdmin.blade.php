@@ -5,10 +5,22 @@
         <div class="card-header">
             <h4>Data Artikel</h4>
             <div class="card-header-action">
-                <a href="{{ url('tambahArtikel') }}" class="btn active">+ Tambah
+                <a href="/Dashboard/Artikel/create" class="btn active">+ Tambah
                     Artikel</a>
             </div>
         </div>
+
+        @if (session()->has('success'))
+            <div class="alert alert-success alert-dismissible fade show col-md-4 col-lg-4 col-4" role="alert"
+                style="margin-left: 20px">
+                {{ session('success') }}
+                <button type="button" class="close border-0" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        @endif
+
+
         <div class="card-body p-0 md-4">
             <div class="table-responsive">
                 <table class="table table-striped table-md">
@@ -20,16 +32,28 @@
                         <th>Action</th>
                     </tr>
 
-
-                    <tr>
-                        <td>4</td>
-                        <td>Rizal Fakhri</td>
-                        <td>2017-01-11</td>
-                        <td>
-                            <div class="badge badge-success">Active</div>
-                        </td>
-                        <td><a href="#" class="btn btn-secondary">Detail</a></td>
-                    </tr>
+                    @foreach ($items as $item)
+                        <tr>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $item->judul }}</td>
+                            <td>ini gambar </td>
+                            <td>
+                                <div class="badge badge-success">Active</div>
+                            </td>
+                            <td><a href="/Dashboard/Artikel/{{ $item->id }}" class="btn btn-primary"><i
+                                        class="bi bi-eye"></i></a>
+                                <a href="/Dashboard/Artikel/{{ $item->id }}/edit" class="btn btn-success"> <i
+                                        class="bi bi-pencil-square"></i></a>
+                                <form action="/Dashboard/Artikel/{{ $item->id }}" method="POST" class="d-inline">
+                                    @method('delete')
+                                    @csrf
+                                    <button class="btn btn-danger border-0"
+                                        onclick="return confirm('Apakah data ini ingin dihapus?')"><i
+                                            class="bi bi-trash3"></i></button>
+                                </form>
+                            </td>
+                        </tr>
+                    @endforeach
                 </table>
             </div>
         </div>

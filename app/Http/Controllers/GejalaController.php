@@ -114,12 +114,6 @@ class GejalaController extends Controller
             Storage::delete($post->image);
         }
         $post->update($validateData);
-        // $post = gejala::where('id', $request->id);
-        // $post->update([
-        //     // 'gejala' => $request->gejala
-        //     'gejala' => $request['gejala'],
-        //     'image' => $request['image'] ?? null
-        // ]);
         return redirect(url('/gejala'))->with('Berhasil!', 'Data telah diubah.');
     }
 

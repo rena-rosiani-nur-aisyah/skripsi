@@ -37,10 +37,10 @@
                                 @endif
                             </td>
                             <td>
-                                <a href="/tampilgejala/{{ $post->id }}"> <img src="/images/icon/edit.png" alt="edit"
-                                        width="30"> </a>
-                                <a href="/deletegejala/{{ $post->id }}"> <img src="/images/icon/delete.png"
-                                        alt="delete" width="30">
+                                <a href="/tampilgejala/{{ $post->id }}" class="btn btn-success"> <i
+                                        class="bi bi-pencil-square"></i> </a>
+                                <a href="/deletegejala/{{ $post->id }}" class="btn -btn-danger"><i
+                                        class="bi bi-trash"></i>
                                 </a>
                             </td>
                         </tr>

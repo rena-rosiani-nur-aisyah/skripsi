@@ -32,10 +32,10 @@
                                                 <td>{{ $value->deskripsi }}</td>
                                                 <td>{{ $value->Penyebab }}</td>
                                                 <td>{{ $value->Solusi }}</td>
-                                                <td> <a href="/show/{{ $value->id }}"> <img src="/images/icon/edit.png"
-                                                            alt="edit" width="30"> </a>
-                                                    <a href="/delete/{{ $value->id }}"><img src="/images/icon/delete.png"
-                                                            alt="delete" width="30"></a>
+                                                <td> <a href="/show/{{ $value->id }}" class="btn btn-success"><i
+                                                            class="bi bi-pencil-square"> </i></a>
+                                                    <a href="/delete/{{ $value->id }}" class="btn btn-danger"><i
+                                                            class="bi bi-trash"></i></a>
                                                     </form>
                                                 </td>
                                             </tr>

@@ -11,8 +11,9 @@ use App\Http\Controllers\RuleController;
 use App\Http\Controllers\SiginController;
 use App\Http\Controllers\GejalaController;
 use App\Http\Controllers\DiagnosisController;
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\ArtikelController;
+// use App\Http\Controllers\Auth\LoginController;
+// use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\SignupController;
 use GuzzleHttp\Middleware;
 use Symfony\Component\HttpKernel\Profiler\Profile;
@@ -71,6 +72,9 @@ Route::middleware(['auth'])->group(function () {
 // });
 
 
+//route untuk artikel kita coba pake resource
+
+Route::resource('/Dashboard/Artikel', ArtikelController::class);
 
 Route::get('/tambahArtikel', function () {
     return view('artikel.tambahArtikel');
@@ -83,6 +87,8 @@ Route::get('/editArtikel', function () {
 Route::get('/versiAdmin', function () {
     return view('artikel.artikelAdmin');
 });
+
+
 
 // route untuk menu jenis
 Route::get('/jenis', [PostController::class, 'index']);
