@@ -27,7 +27,12 @@
                                 <h6>Tambah Image</h6>
                             </label>
                             <div class="col-sm-12 col-md-7">
-                                <input type="file" class="form-control">
+                                <input type="file" class="form-control @error('image') is-invalid @enderror"
+                                    id="image" name="image" onchange="previewImage()">
+                                @error('image')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                                <img src="" alt="" class="img-preview img-fluid mb-2 mt-3 col-sm-5">
                             </div>
                         </div>
 
@@ -61,5 +66,18 @@
                 styleWithSpan: false
             });
         });
+
+        function previewImage() {
+            const image = document.querySelector('#image');
+            const imgPreview = document.querySelector('.img-preview');
+            imgPreview.style.display = 'block';
+
+            const oFReader = new FileReader();
+            oFReader.readAsDataURL(image.files[0]);
+
+            oFReader.onload = function(oFREvent) {
+                imgPreview.src = oFREvent.target.result;
+            }
+        }
     </script>
 @endsection

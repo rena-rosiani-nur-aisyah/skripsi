@@ -25,6 +25,7 @@
                         <label class="custom-file-label" for="image">Edit Gambar</label>
                         <input type="file" class="custom-file-input @error('image') is-invalid @enderror" id="image"
                             name="image" onchange="previewImage()">
+                        <input type="hidden" name="oldImage" value="{{ $post->image }}">
                         @if ($post->image)
                             <img src="{{ asset('storage/' . $post->image) }}"
                                 class="img-preview img-fluid mt-3 col-sm-2 mb-3 d-block">

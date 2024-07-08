@@ -5,8 +5,10 @@
             <div class="card-header">
                 <h2>{{ $items->judul }}</h2>
             </div>
-            <div data-crop-image="285">
-                <img alt="image" src="images/vektor/cycle.png" class="img-fluid">
+            <div class="col-lg-10 justify-content-center" style="max-height: 350px; overflow:hidden;">
+                @if ($items->image)
+                    <img alt="image" src="{{ asset('storage/' . $items->image) }}">
+                @endif
             </div>
             <div class="card-body">
                 <div class="mb-2">

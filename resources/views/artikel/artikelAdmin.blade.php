@@ -36,7 +36,14 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $item->judul }}</td>
-                            <td>ini gambar </td>
+                            <td>
+                                @if ($item->image)
+                                    <img src="{{ asset('storage/' . $item->image) }}" alt="Gambar" width="50"
+                                        height="auto">
+                                @else
+                                    Tidak ada gambar yang di posting
+                                @endif
+                            </td>
                             <td>
                                 <div class="badge badge-success">Active</div>
                             </td>

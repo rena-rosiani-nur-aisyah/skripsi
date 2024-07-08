@@ -39,7 +39,7 @@
                             <td>
                                 <a href="/tampilgejala/{{ $post->id }}" class="btn btn-success"> <i
                                         class="bi bi-pencil-square"></i> </a>
-                                <a href="/deletegejala/{{ $post->id }}" class="btn -btn-danger"><i
+                                <a href="/deletegejala/{{ $post->id }}" class="btn btn-danger"><i
                                         class="bi bi-trash"></i>
                                 </a>
                             </td>

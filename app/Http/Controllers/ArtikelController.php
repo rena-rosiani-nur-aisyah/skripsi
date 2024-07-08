@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\artikel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 use function PHPUnit\Framework\directoryExists;
 
@@ -42,10 +43,16 @@ class ArtikelController extends Controller
      */
     public function store(Request $request)
     {
+        // return $request->file('image')->store('image-Artikel');
         $validatedData = $request->validate([
             'judul' => 'required|max:255',
             'body' => 'required',
+            'image' => 'image|file|max:1024'
         ]);
+
+        if ($request->file('image')) {
+            $validatedData['image'] = $request->file('image')->store('image-Artikel');
+        }
 
         artikel::create($validatedData);
 
@@ -88,8 +95,15 @@ class ArtikelController extends Controller
         $validatedData = $request->validate([
             'judul' => 'required|max:255',
             'body' => 'required',
+            'image' => 'image|file|max:1024'
         ]);
 
+        if ($request->file('image')) {
+            if ($request->oldImage) {
+                Storage::delete($request->oldImage);
+            }
+            $validatedData['image'] = $request->file('image')->store('image-Artikel');
+        }
         artikel::where('id', $id)
             ->update($validatedData);
         return redirect('/Dashboard/Artikel')->with('success', 'Data telah di edit!');
@@ -101,8 +115,12 @@ class ArtikelController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
+        $request = artikel::findOrFail($id);
+        if ($request->image) {
+            Storage::delete($request->image);
+        }
         artikel::destroy($id);
         return redirect('/Dashboard/Artikel')->with('success', 'Data telah dihapus');
     }

@@ -81,14 +81,7 @@ class GejalaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    // public function edit($id)
-    // {
-    //     $post = gejala::find($id);
-    //     $data = [
-    //         'post' => $post
-    //     ];
-    //     return view('partials.edit.editgejala', $data);
-    // }
+
 
     /**
      * Update the specified resource in storage.
@@ -99,21 +92,34 @@ class GejalaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
+        $validatedData = $request->validate([
             'gejala' => 'required',
             'image' => 'image|file|max:1024'
         ]);
 
-        $validateData = $request->only(['gejala']);
         if ($request->file('image')) {
-            $validateData['image'] = $request->file('image')->store('gejala-images');
+            if ($request->oldImage) {
+                Storage::delete($request->oldImage);
+            }
+            $validatedData['image'] = $request->file('image')->store('gejala-images');
         }
+        gejala::where('id', $id)
+            ->update($validatedData);
+        // $request->validate([
+        //     'gejala' => 'required',
+        //     'image' => 'image|file|max:1024'
+        // ]);
 
-        $post = gejala::findOrFail($id);
-        if (isset($validateData['image']) && $post->image) {
-            Storage::delete($post->image);
-        }
-        $post->update($validateData);
+        // $validateData = $request->only(['gejala']);
+        // if ($request->file('image')) {
+        //     $validateData['image'] = $request->file('image')->store('gejala-images');
+        // }
+
+        // $post = gejala::findOrFail($id);
+        // if (isset($validateData['image']) && $post->image) {
+        //     Storage::delete($post->image);
+        // }
+        // $post->update($validateData);
         return redirect(url('/gejala'))->with('Berhasil!', 'Data telah diubah.');
     }
 
@@ -128,6 +134,9 @@ class GejalaController extends Controller
     {
         // gejala::destroy($gejala->kode_gejala);
         $post = gejala::find($id);
+        if ($post->image) {
+            Storage::delete($post->image);
+        }
         $post->delete();
         return redirect(url('/gejala'))->with('Berhasil,', 'Data telah dihapus');
     }
