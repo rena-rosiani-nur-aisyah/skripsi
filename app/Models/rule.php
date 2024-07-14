@@ -8,10 +8,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\gejala;
 
 
-$post = post::find(1);
-$gejala = $post->gejala;
-$gejala = gejala::find(1);
-$post = $gejala->post;
+
 class rule extends Model
 {
     use HasFactory;
@@ -19,21 +16,28 @@ class rule extends Model
 
 
     protected $fillable = [
-        'posts_id',
         'gejala_id',
+        'signs_id',
+        'post_id',
         'operator',
         'value'
+    ];
+    protected $with = [
+        'post',
+        'gejala',
+        'signs'
     ];
 
     public function post()
     {
-        return $this->belongsToMany(post::class, 'rules_posts');
+        return $this->belongsTo(post::class, 'post_id');
     }
     public function gejala()
     {
-        return $this->belongsToMany(gejala::class, 'rules__gejalas');
+        return $this->belongsTo(gejala::class, 'gejala_id');
+    }
+    public function signs()
+    {
+        return $this->belongsTo(gejala::class, 'signs_id');
     }
 }
-
-$rule = rule::find(1);
-$post = $rule->post;

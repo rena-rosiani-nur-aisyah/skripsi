@@ -13,23 +13,16 @@ class gejala extends Model
 
     protected $fillable = [
         'gejala',
-        'image'
+        'image',
+        'signs'
     ];
 
     public function rule()
     {
-        return $this->belongsToMany(rule::class, 'rules__gejalas');
+        return $this->hasMany(rule::class, 'gejala_id');
     }
-    public function diagnosis()
+    public function signs()
     {
-        return $this->belongsToMany(diagnosis::class, 'diagnosisGejala');
-    }
-    public function post()
-    {
-        return $this->belongsToMany(post::class, 'post_gejalas');
-    }
-    public function question()
-    {
-        return $this->belongsToMany(question::class, 'questions__gejalas');
+        return $this->hasMany(rule::class, 'signs_id');
     }
 }

@@ -18,6 +18,7 @@ class CreateGejalasTable extends Migration
             // $table->string('kode_gejala')->unique();
             $table->text('gejala');
             $table->string('image')->nullable();
+            $table->string('signs');
             $table->timestamps();
         });
     }

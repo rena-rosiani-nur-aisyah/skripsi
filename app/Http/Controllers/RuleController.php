@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreruleRequest;
 use App\Http\Requests\UpdateruleRequest;
-use App\Models\diagnosis;
 use App\Models\gejala;
 use App\Models\post;
 use PHPUnit\Framework\Constraint\Operator;
@@ -22,8 +21,8 @@ class RuleController extends Controller
      */
     public function index()
     {
-        $items = DB::table('rules')->get();
-        // dd($items);
+        $items = rule::all();
+
         $data = [
             'items' => $items
         ];
@@ -32,28 +31,27 @@ class RuleController extends Controller
 
     public function create()
     {
-        $categories = gejala::all();
-        return view('category.admin.diagnosis.rule.tambahRules', compact('categories'));
+        return view('category.admin.diagnosis.rule.tambahRules', [
+            'gejalas' => gejala::all(),
+            'signs' => gejala::all(),
+            'penyakit' => post::all()
+        ]);
     }
     // $jenisDarah = post::all();
 
     public function store(Request $request)
     {
-        $validate = $request->validate([
+        // dd($request->all());
+        $validatedData = $request->validate([
             'post_id' => 'required',
-            'gejala_id' => 'required|exists:gejala_id',
-            'operator' => 'required',
-            'value' => 'required'
+            'gejala_id' => 'required',
+            'signs_id' => 'required',
+            'operator' => 'required|in:AND,OR',
+            'value' => 'required|in:ya,tidak'
         ]);
-        $insert = diagnosis::created([
-            'post_id' => $request->post_id,
-            'gejala_id' => $request->gejala_id,
-            'operator' => $request->operator,
-            'value' => $request->value
-        ]);
-        $post = post::created($request->all());
-        $post->gejala()->sync($request->gejala);
-        return redirect(url('/rules'));
+
+        rule::create($validatedData);
+        return redirect('/rules')->with('success', 'Aturan baru sudah ditambahkan!');
     }
 
 
@@ -62,12 +60,14 @@ class RuleController extends Controller
         //
     }
 
-    public function edit(rule $rule, $id)
+    public function edit(rule $rule)
     {
-        $rules = rule::findOrFail($id);
-        $jenisDarah = post::all();
-        $gejala = gejala::all();
-        return view('category.admin.diagnosis.rule.editRules', compact('rules', 'jenisDarah', 'gejala'));
+        return view('category.admin.diagnosis.rule.editRules', [
+            'rule' => $rule,
+            'gejalas' => gejala::all(),
+            'signs' => gejala::all(),
+            'penyakit' => post::all()
+        ]);
     }
 
     public function update(UpdateruleRequest $request, rule $rule)
@@ -83,6 +83,7 @@ class RuleController extends Controller
      */
     public function destroy(rule $rule)
     {
-        //
+        rule::destroy($rule->id);
+        return redirect('/rules')->with('success', 'Data aturan terhapus!');
     }
 }

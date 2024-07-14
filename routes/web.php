@@ -75,18 +75,17 @@ Route::middleware(['auth'])->group(function () {
 //route untuk artikel kita coba pake resource
 
 Route::resource('/Dashboard/Artikel', ArtikelController::class);
+Route::resource('/rules', RuleController::class);
 
-Route::get('/tambahArtikel', function () {
-    return view('artikel.tambahArtikel');
+Route::get('/rules', [RuleController::class, 'index']);
+
+Route::get('/tambahRules', function () {
+    return view('category.admin.diagnosis.rule.tambahRules');
+});
+Route::get('/editRules', function () {
+    return view('category.admin.diagnosis.rule.editRules');
 });
 
-Route::get('/editArtikel', function () {
-    return view('artikel.editArtikel');
-});
-
-Route::get('/versiAdmin', function () {
-    return view('artikel.artikelAdmin');
-});
 
 
 
@@ -148,14 +147,6 @@ Route::get('/diagnosisuser', [DiagnosisController::class, 'diagnosis'])->name('d
 Route::get('/hasilDiagnosis', [DiagnosisController::class, 'showHasilDiagnosis'])->name('hasilDiganosis');
 
 
-Route::get('/rules', [RuleController::class, 'index']);
-
-Route::get('/tambahRules', function () {
-    return view('category.admin.diagnosis.rule.tambahRules');
-});
-Route::get('/editRules', function () {
-    return view('category.admin.diagnosis.rule.editRules');
-});
 
 
 //rout profil dari sisi admin

@@ -18,6 +18,11 @@
                         <input type="text" class="form-control" name="gejala" placeholder="Masukan gejala"
                             value="{{ $post->gejala }}">
                     </div>
+                    <div class="form-group col-md-6">
+                        <label for="signs">Gejala Terkait</label>
+                        <input type="text" class="form-control" name="signs" placeholder="Masukan gejala terkait"
+                            value="{{ $post->signs }}">
+                    </div>
                 </div>
                 <div class="form-group col-md-6">
                     <label for="image">Pilih Gambar</label>
@@ -26,13 +31,14 @@
                         <input type="file" class="custom-file-input @error('image') is-invalid @enderror" id="image"
                             name="image" onchange="previewImage()">
                         <input type="hidden" name="oldImage" value="{{ $post->image }}">
-                        @if ($post->image)
-                            <img src="{{ asset('storage/' . $post->image) }}"
-                                class="img-preview img-fluid mt-3 col-sm-2 mb-3 d-block">
-                        @else
-                            <img class="img-preview img-fluid mt-3 col-sm-2 mb-3">
-                        @endif
-
+                        <div class="col-lg-10 mt-4 mb-0" style="max-height: 250px; overflow:hidden;">
+                            @if ($post->image)
+                                <img src="{{ asset('storage/' . $post->image) }}"
+                                    class="img-preview img-fluid col-lg-12 col-md-12 d-block">
+                            @else
+                                <img class="img-preview img-fluid col-lg-12 col-md-12">
+                            @endif
+                        </div>
 
 
                         @error('image')

@@ -47,7 +47,8 @@ class GejalaController extends Controller
         $validateData =  $request->validate([
             // 'kode_gejala' => 'required',
             'gejala' => 'required',
-            'image' => 'image|file|max:1024'
+            'image' => 'image|file|max:1024',
+            'signs' => 'required'
         ]);
 
 
@@ -58,6 +59,7 @@ class GejalaController extends Controller
         $insert = gejala::create([
             // 'kode_gejala' => $request->kode_gejala,
             'gejala' => $validateData['gejala'],
+            'signs' => $validateData['signs'],
             'image' => $validateData['image'] ?? null
         ]);
         return redirect(url('/gejala'));
@@ -94,7 +96,8 @@ class GejalaController extends Controller
     {
         $validatedData = $request->validate([
             'gejala' => 'required',
-            'image' => 'image|file|max:1024'
+            'image' => 'image|file|max:1024',
+            'signs' => 'required'
         ]);
 
         if ($request->file('image')) {
@@ -105,21 +108,7 @@ class GejalaController extends Controller
         }
         gejala::where('id', $id)
             ->update($validatedData);
-        // $request->validate([
-        //     'gejala' => 'required',
-        //     'image' => 'image|file|max:1024'
-        // ]);
 
-        // $validateData = $request->only(['gejala']);
-        // if ($request->file('image')) {
-        //     $validateData['image'] = $request->file('image')->store('gejala-images');
-        // }
-
-        // $post = gejala::findOrFail($id);
-        // if (isset($validateData['image']) && $post->image) {
-        //     Storage::delete($post->image);
-        // }
-        // $post->update($validateData);
         return redirect(url('/gejala'))->with('Berhasil!', 'Data telah diubah.');
     }
 
