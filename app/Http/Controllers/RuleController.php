@@ -70,9 +70,17 @@ class RuleController extends Controller
         ]);
     }
 
-    public function update(UpdateruleRequest $request, rule $rule)
+    public function update(Request $request, $id)
     {
-        //
+        $validatedData = $request->validate([
+            'post_id' => 'required',
+            'gejala_id' => 'required',
+            'signs_id' => 'required',
+            'operator' => 'required|in:AND,OR',
+            'value' => 'required|in:ya,tidak'
+        ]);
+        rule::where('id', $id)->update($validatedData);
+        return redirect('/rules')->with('success', 'Data berhasil dirubah');
     }
 
     /**

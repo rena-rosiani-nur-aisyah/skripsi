@@ -12,20 +12,25 @@ class diagnosis extends Model
 
     protected $fillable = [
         'user_id',
-        'post_id',
-        'jawaban'
+        'gejala_id',
+        'jawabanUser'
     ];
+    protected $with = [
+        'user',
+        'gejala'
+    ];
+
 
     public function user()
     {
-        return $this->belongsTo(user::class);
-    }
-    public function post()
-    {
-        return $this->belongsToMany(post::class, 'diagnosis_posts');
+        return $this->belongsTo(user::class, 'user_id');
     }
     public function gejala()
     {
-        return $this->belongsToMany(gejala::class, 'diagnosisGejala');
+        return $this->belongsTo(gejala::class, 'gejala_id');
+    }
+    public function hasil()
+    {
+        return $this->hasMany(hasil::class, 'diagnosis_id');
     }
 }

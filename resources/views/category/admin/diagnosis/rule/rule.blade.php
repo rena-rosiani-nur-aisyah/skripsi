@@ -28,7 +28,7 @@
                                 <th>No</th>
                                 <th>Gejala</th>
                                 <th>Operator</th>
-                                <th>Gejala terkait</th>
+                                <th>Indikasi Gejala</th>
                                 <th>Value</th>
                                 <th>Jenis Darah</th>
                                 <th>Action</th>
@@ -37,9 +37,9 @@
                             @foreach ($items as $value)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $value->gejala->gejala }}</td>
+                                    <td>{{ $value->gejala->keterangan }}</td>
                                     <td>{{ $value->operator }}</td>
-                                    <td>{{ $value->signs->gejala }}</td>
+                                    <td>{{ $value->signs->keterangan }}</td>
                                     <td>{{ $value->value }}</td>
                                     <td>{{ $value->post->name }}</td>
                                     <td><a href="/rules/{{ $value->id }}/edit" class="btn btn-success"><i

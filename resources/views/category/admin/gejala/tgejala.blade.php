@@ -19,23 +19,24 @@
                         @enderror
                     </div> --}}
                     <div class="form-group col-md-6">
-                        <label for="gejala">Gejala</label>
-                        <input type="text" class="form-control @error('gejala') is-invalid @enderror" name="gejala"
-                            placeholder="Masukan gejala">
-                        @error('gejala')
+                        <label for="keterangan">Keterangan</label>
+                        <input type="text" class="form-control @error('keterangan') is-invalid @enderror"
+                            name="keterangan" placeholder="Masukan keterangan">
+                        @error('keterangan')
                             <div class="invalid-feedback">
                                 {{ $message }}
                             </div>
                         @enderror
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="signs">Gejala Terkait</label>
-                        <input type="text" class="form-control @error('signs') is-invalid @enderror" name="signs"
-                            placeholder="Masukan gejala terkait">
-                        @error('signs')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
+                        <label for="type">Kategori</label>
+                        <select class="custom-select ml-0 @error('type') is-invalid @enderror" name="type">
+                            <option value="" disabled selected>pilih satu kategori</option>
+                            <option value="gejala" id="type_gejala">Gejala</option>
+                            <option value="signs" id="type_signs">Tanda-tanda terkait</option>
+                        </select>
+                        @error('type')
+                            <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
                     <div class="form-group col-md-6">

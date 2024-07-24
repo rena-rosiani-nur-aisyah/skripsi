@@ -12,9 +12,9 @@ class gejala extends Model
     protected $table = 'gejalas';
 
     protected $fillable = [
-        'gejala',
+        'keterangan',
         'image',
-        'signs'
+        'type'
     ];
 
     public function rule()

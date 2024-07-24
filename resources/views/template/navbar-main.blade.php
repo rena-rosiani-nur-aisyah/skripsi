@@ -39,8 +39,7 @@
                             class="nav-link dropdown-toggle nav-link-lg nav-link-user">
                             <div class="d-sm-none d-lg-inline-block" role="button">Hai,
                                 {{ auth()->user()->username }} </div>
-                            {{-- <img alt="image" src="../backend/assets/img/avatar/avatar-1.png"
-                                class="rounded-circle mr-1"> --}}
+
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">
                             <div class="dropdown-title">Logged in 5 min ago</div>

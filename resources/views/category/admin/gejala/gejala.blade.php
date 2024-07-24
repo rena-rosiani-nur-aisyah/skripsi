@@ -13,8 +13,8 @@
                     <tr>
                         <th scope="col">id</th>
                         <th scope="col">Kode</th>
-                        <th scope="col">Gejala</th>
-                        <th scope="col">Gejala terkait</th>
+                        <th scope="col">Keterangan</th>
+                        <th scope="col">Kategori</th>
                         <th scope="col">Gambar</th>
                         <th scope="col">Action</th>
                     </tr>
@@ -26,8 +26,8 @@
                         <tr>
                             <td>{{ $no++ }}</td>
                             <td>kode</td>
-                            <td>{{ $post->gejala }}</td>
-                            <td>{{ $post->signs }}</td>
+                            <td>{{ $post->keterangan }}</td>
+                            <td>{{ $post->type }}</td>
                             <td>
                                 @if ($post->image)
                                     <div>

@@ -10,16 +10,16 @@
                     @method('put')
                     @csrf
                     <div class="card-body">
-                        {{-- Ini option untuk gejala pertama --}}
 
+                        {{-- Ini option untuk gejala pertama --}}
                         <div class="section-title mt-0"><label for="gejala"></label>Pilih Gejala</div>
                         <div class="form-group col-lg-8">
                             <select class="custom-select @error('gejala_id') is-invalid @enderror" name="gejala_id">
                                 @foreach ($gejalas as $gejala)
                                     @if (old('gejala_id', $rule->gejala_id) == $gejala->id)
-                                        <option value="{{ $gejala->id }}" selected>{{ $gejala->gejala }}</option>
+                                        <option value="{{ $gejala->id }}" selected>{{ $gejala->keterangan }}</option>
                                     @else
-                                        <option value="{{ $gejala->id }}">{{ $gejala->gejala }}</option>
+                                        <option value="{{ $gejala->id }}">{{ $gejala->keterangan }}</option>
                                     @endif
                                 @endforeach
                             </select>
@@ -51,16 +51,15 @@
 
 
                         {{-- ini untuk gejala kedua atau gejlaa selanjutnya yang related dengan gejala sebelumnya --}}
-
-                        <div class="section-title mt-4"><label for="signs">Pilih gejala yang berelasi dengan gejala
-                                sebelumnya</label></div>
+                        <div class="section-title mt-4"><label for="signs">Pilih indikasi gejala sebelumnya </label>
+                        </div>
                         <div class="form-group col-lg-8">
                             <select class="custom-select  @error('signs_id') is-invalid @enderror" name="signs_id">
                                 @foreach ($signs as $sign)
                                     @if (old('signs_id', $rule->signs_id) == $sign->id)
-                                        <option value="{{ $sign->id }}" selected>{{ $sign->signs }}</option>
+                                        <option value="{{ $sign->id }}" selected>{{ $sign->keterangan }}</option>
                                     @else
-                                        <option value="{{ $sign->id }}">{{ $sign->signs }}</option>
+                                        <option value="{{ $sign->id }}">{{ $sign->keterangan }}</option>
                                     @endif
                                 @endforeach
                             </select>

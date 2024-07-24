@@ -15,8 +15,23 @@
                             <th>Hasil Diagnosis</th>
                             <th>Aksi</th>
                         </tr>
-                        <?php $no = 1; ?>
-                        @foreach ($items as $diagnosis)
+                        @foreach ($items as $item)
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $item->user->username }}</td>
+                                <td>{{ $item->post->name }}</td>
+                                <td><a href="/jejak/Diagnosis/{{ $item->id }}/show" class="btn btn-primary"><i
+                                            class="bi bi-eye"></i></a>
+                                    <form action="/diagnosis" method="POST" class="d-inline">
+                                        @method('delete')
+                                        @csrf
+                                        <button class="btn btn-danger border-0"
+                                            onclick="return confirm('Apakah data ini ingin dihapus?')"><i
+                                                class="bi bi-trash3"></i></button>
+                                </td>
+                            </tr>
+                        @endforeach
+                        {{-- @foreach ($items as $diagnosis)
                             <tr>
                                 <td>{{ $no++ }}</td>
                                 <td>{{ $diagnosi->user->name }}</td>
@@ -24,7 +39,7 @@
                                 <td>{{ $diagnosis->jawaban }}</td>
                                 <td><a href="/detail" class="btn btn-secondary">Detail</a></td>
                             </tr>
-                        @endforeach
+                        @endforeach --}}
 
                     </table>
                 </div>

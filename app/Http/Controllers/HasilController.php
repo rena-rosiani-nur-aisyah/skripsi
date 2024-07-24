@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\jawaban;
-use App\Http\Requests\StorejawabanRequest;
-use App\Http\Requests\UpdatejawabanRequest;
+use App\Models\diagnosis;
+use App\Models\hasil;
+use Illuminate\Http\Request;
 
-class JawabanController extends Controller
+class HasilController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +15,11 @@ class JawabanController extends Controller
      */
     public function index()
     {
-        //
+        $items = hasil::all();
+        $data = [
+            'items' => $items
+        ];
+        return view('category.admin.diagnosis.HasilDiagnosis', compact('data'));
     }
 
     /**
@@ -34,7 +38,7 @@ class JawabanController extends Controller
      * @param  \App\Http\Requests\StorejawabanRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StorejawabanRequest $request)
+    public function store(Request $request)
     {
         //
     }
@@ -45,9 +49,10 @@ class JawabanController extends Controller
      * @param  \App\Models\jawaban  $jawaban
      * @return \Illuminate\Http\Response
      */
-    public function show(jawaban $jawaban)
+    public function show($id)
     {
-        //
+        $items = diagnosis::find($id);
+        return view('category.admin.diagnosis.detailDiagnosis', compact('items'));
     }
 
     /**
@@ -56,7 +61,7 @@ class JawabanController extends Controller
      * @param  \App\Models\jawaban  $jawaban
      * @return \Illuminate\Http\Response
      */
-    public function edit(jawaban $jawaban)
+    public function edit(hasil $jawaban)
     {
         //
     }
@@ -68,7 +73,7 @@ class JawabanController extends Controller
      * @param  \App\Models\jawaban  $jawaban
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdatejawabanRequest $request, jawaban $jawaban)
+    public function update(Request $request)
     {
         //
     }
@@ -79,8 +84,9 @@ class JawabanController extends Controller
      * @param  \App\Models\jawaban  $jawaban
      * @return \Illuminate\Http\Response
      */
-    public function destroy(jawaban $jawaban)
+    public function destroy(hasil $hasil)
     {
-        //
+        hasil::destroy($hasil->id);
+        return redirect('/diagnosis')->with('success', 'Data berhasil dihapus');
     }
 }

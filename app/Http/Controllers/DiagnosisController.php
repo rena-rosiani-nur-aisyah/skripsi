@@ -2,85 +2,86 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\diagnosis;
-use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\DB as FacadesDB;
-use App\Http\Requests\StorediagnosisRequest;
-use App\Http\Requests\UpdatediagnosisRequest;
-use App\Models\gejala;
+use Log;
+use App\Models\Fact;
 use App\Models\post;
 use App\Models\rule;
 use App\Models\User;
 use forwardChaining;
-use App\Http\Models\FactCollection;
-use App\Models\Fact;
+use App\Models\gejala;
+use App\Models\diagnosis;
+use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\DB;
 use Laravel\Prompts\ConfirmPrompt;
+use App\Http\Models\FactCollection;
+use App\Http\Requests\StorediagnosisRequest;
+use App\Http\Requests\UpdatediagnosisRequest;
+use Illuminate\Support\Facades\DB as FacadesDB;
 
 
 
 class DiagnosisController extends Controller
 {
-    //untuk melihat semua isi tabel dari diagnosis secara keseluruhan, seperti user, jenis darah, gejala, dan jawaban
     public function index()
     {
-        $items = diagnosis::with('post', 'gejala', 'user')->get();
-        // dd($items);
+        $items = diagnosis::all();
         $data = [
             'items' => $items
         ];
-        return view('category.admin.diagnosis.detail', $data);
+        return view('category.admin.diagnosis.detailDiagnosis', compact('data'));
     }
 
 
 
     public function create()
     {
-        //
+        $gejala = gejala::where('type', 'gejala')->first();
+        return view('users.diagnosis.diagnosis-user', compact('gejala'));
     }
 
 
     public function store(Request $request)
     {
-        // ngambil dulu data dari db kan
-        $rule = rule::all();
 
-        //inisiasi array kosong untuk nyimpen jawaban dari user dulu
-        $jawaban = [];
+        $diagnosis = new diagnosis();
+        $diagnosis->user_id = auth()->user()->id;
+        $diagnosis->gejala_id = $request->input('gejala_id');
+        $diagnosis->jawabanUser = $request->input('jawabanUser');
+        $diagnosis->save();
 
-        foreach ($request->input('jawaban') as $gejalaId => $jawaban) {
-            $jawaban[$gejalaId] = $jawaban;
+        //ambil dan tampilkan gejala atau signs selanjutnya
+        $next = $this->getNextQuestion($diagnosis->gejala_id, $diagnosis->jawabanUser);
+        if ($next) {
+            return redirect()->route('diagnosis.store', ['gejala_id' => $next->id]);
+        } else {
+            return redirect()->route('hasilUser');
         }
+    }
 
-        $diagnosis = $this->forwardChaning($rule, $jawaban);
+    private function getNextQuestion($gejala_id, $jawabanUser)
+    {
+        $currentGejala = gejala::find($gejala_id);
 
-        //kode untuk menyimpan jawaban user dan disimpan ke halaman detail
-        $diagnosis = diagnosis::create([
-            'user_id' => auth()->id(),
-            'gejala_id' => json_encode($request->input('gejala')),
-            'jawaban' => json_encode($jawaban),
-            'diagnosis' => $diagnosis
-        ]);
-        return redirect()->route('category.admin.diagnosis.detail', ['diagnosis' => $diagnosis]);
+        //menentukan tipe pertanyaan selanjutnya
+        $nextType = $currentGejala->type == 'gejala' ? 'signs' : 'gejala';
+
+        //ngambil pertayaan atau gejala berikutnya
+        $next = gejala::where('id', '>', $gejala_id)
+            ->where('type', $nextType)
+            ->first();
+
+        return $next;
     }
 
 
     // untuk menampilkan halaman diagnos yang beriisi user dan hasil diagnosis untuk sisi ADMIN
     public function show($id)
     {
-        $post = diagnosis::find($id);
-        return view('category.admin.diagnosis.tabelHasil', compact('post'));
+        //
     }
 
-    // public function showHasilDiagnosis(diagnosis $diagnosis)
-    // {
-    //     $penyakit = post::find($diagnosis->post_id);
-    //     $name = $penyakit->name;
-    //     $Penyebab = $penyakit->Penyebab;
-    //     $solusi = $penyakit->Solusi;
-    //     return view('category.admin.hasilDiagnosis', compact('penyakit', 'Penyebab', 'Solusi'));
-    // }
+
 
     // public function update(Request $request, $id)
     // {
@@ -97,44 +98,10 @@ class DiagnosisController extends Controller
         return redirect(url('/diagnosa'))->with('Berhasil,', 'Data telah dihapus');
     }
 
-    // tampilan untuk di diagnosis user nya
-    // public function askDiagnosis(Request $request)
-    // {
-    //     $gejala = gejala::all();
-    //     return view('users.diagnosis-user', compact('gejala'));
-    // }
 
     //menghubungkan dengan algoritma forward chaining dalam kelas forwardChaining
-    public function diagnosa(Request $request)
-    {
-        $gejala = gejala::find($request->gejala_id);
-        $rule = $gejala->rule;
-
-        $jawaban = [];
-
-        foreach ($rule as $rules) {
-            $jawab = $request->input($rules->gejala->gejala);
-            $jawab[$rules->gejala->id] = $jawab;
-        }
-
-        $fact = new Fact($gejala->toArrray(), $gejala->id);
-        $forwardChaining = new forwardChaining($rule, $jawaban, $fact);
-        $post = $forwardChaining->diagnosa();
-
-        return view('category.admin.diagnosis.detail', compact('post'));
-    }
 
 
-    public function jawaban(Request $request)
-    {
-        $gejala_id = $request->input('gejala_id');
-        $jawaban = $request->input('jawaban');
 
-        // Update the diagnosis data based on the symptom ID and answer
 
-        $diagnosis = diagnosis::where('gejala_id', 'gejala_id')->first();
-        $diagnosis->jawaban = $jawaban;
-        $diagnosis->save();
-        return redirect()->route('diagnosis');
-    }
 }

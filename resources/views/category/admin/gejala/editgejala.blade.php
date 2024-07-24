@@ -14,15 +14,28 @@
                             value="{{ $post->kode_gejala }}">
                     </div> --}}
                     <div class="form-group col-md-6">
-                        <label for="gejala">Gejala</label>
-                        <input type="text" class="form-control" name="gejala" placeholder="Masukan gejala"
-                            value="{{ $post->gejala }}">
+                        <label for="keterangan">Keterangan</label>
+                        <input type="text" class="form-control" name="keterangan" placeholder="Masukan keterangan"
+                            value="{{ $post->keterangan }}">
                     </div>
                     <div class="form-group col-md-6">
+                        <label for="type">Kategori</label>
+                        <select class="custom-select ml-0 @error('type') is-invalid @enderror" name="type">
+                            <option value="gejala" id="type_gejala" {{ old('type') == 'gejala' ? 'selected' : '' }}>Gejala
+                            </option>
+                            <option value="signs" id="type_signs" {{ old('type') == 'signs' ? 'selected' : '' }}>
+                                Tanda-tanda terkait</option>
+                        </select>
+                        @error('type')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    {{-- <div class="form-group col-md-6">
                         <label for="signs">Gejala Terkait</label>
+
                         <input type="text" class="form-control" name="signs" placeholder="Masukan gejala terkait"
                             value="{{ $post->signs }}">
-                    </div>
+                    </div> --}}
                 </div>
                 <div class="form-group col-md-6">
                     <label for="image">Pilih Gambar</label>

@@ -47,4 +47,8 @@ class User extends Authenticatable
     {
         return $this->hasMany(diagnosis::class);
     }
+    public function hasil()
+    {
+        return $this->hasMany(hasil::class);
+    }
 }

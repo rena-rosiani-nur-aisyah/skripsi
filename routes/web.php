@@ -12,6 +12,7 @@ use App\Http\Controllers\SiginController;
 use App\Http\Controllers\GejalaController;
 use App\Http\Controllers\DiagnosisController;
 use App\Http\Controllers\ArtikelController;
+use App\Http\Controllers\HasilController;
 // use App\Http\Controllers\Auth\LoginController;
 // use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\SignupController;
@@ -63,13 +64,7 @@ Route::middleware(['auth'])->group(function () {
     });
 });
 
-// Route::get('/dashboard', function () {
-//     return view('users.dashborad');
-// })->middleware('auth');
 
-// Route::get('/diagnosisUser', function () {
-//     return view('users.diagnosis-user');
-// });
 
 
 //route untuk artikel kita coba pake resource
@@ -77,15 +72,16 @@ Route::middleware(['auth'])->group(function () {
 Route::resource('/Dashboard/Artikel', ArtikelController::class);
 Route::resource('/rules', RuleController::class);
 
-Route::get('/rules', [RuleController::class, 'index']);
+// semua route untuk diagnosis user
+Route::resource('/diagnosis', HasilController::class);
 
-Route::get('/tambahRules', function () {
-    return view('category.admin.diagnosis.rule.tambahRules');
-});
-Route::get('/editRules', function () {
-    return view('category.admin.diagnosis.rule.editRules');
-});
 
+Route::get('/diagnosisUser', [DiagnosisController::class, 'create'])->name('diagnosisUser');
+Route::get('/detaiDiagnosis', [DiagnosisController::class, 'show'])->name('detailDiagnosis');
+Route::get('/hasilUser', function () {
+    return view('users.diagnosis.HasilDiagnosisUser');
+})->name('hasilUser');
+Route::post('/diagnosis/store', [DiagnosisController::class, 'store'])->name('diagnosis.store');
 
 
 
@@ -127,24 +123,7 @@ Route::get('/editgejala', function () {
 
 
 
-// semua route untuk tabel hasil diagnosis user
-Route::get('/hasil/show', [DiagnosisController::class, 'show']);
-Route::get('/detail', [DiagnosisController::class, 'index']);
-Route::get('/hasilDiagnosis', [DiagnosisController::class, 'showHasilDiagnosis'])->name('hasilDiagnosis');
 
-Route::post('/diagnosis-store', [DiagnosisController::class, 'store'])->name('diagnosis.store');
-
-Route::get('/deletediagnosis/{id}', [DiagnosisController::class, 'destroy'])->name('deletediagnosis');
-
-Route::get('/diagnosisuser', [DiagnosisController::class, 'diagnosis'])->name('diagnosisuser');
-
-
-// Route::get('/diagnosis', function () {
-//     return view('category.admin.diagnosis.diagnos');
-// });
-
-// Route::view('/{paths}', 'diagnosis.show');
-Route::get('/hasilDiagnosis', [DiagnosisController::class, 'showHasilDiagnosis'])->name('hasilDiganosis');
 
 
 
@@ -154,16 +133,9 @@ Route::get('/Puser', function () {
     return view('category.profilUser');
 });
 
-Route::get('/detail', function () {
-    return view('category.admin.diagnosis.detail');
-});
+
 
 // Profile user dari sisi user
 Route::get('/profile', function () {
     return view('users.profile');
 });
-
-
-
-
-// Route::get('/diagnosis/{userId}', [DiagnosisController::class, 'getGejala']);

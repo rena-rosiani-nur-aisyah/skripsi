@@ -17,7 +17,7 @@ class CreateRulesTable extends Migration
         Schema::create('rules', function (Blueprint $table) {
             $table->id();
             $table->foreignId('post_id');
-            $table->foreignId('gejala_id');
+            $table->foreignId('gejala_id')->references('id')->on('gejalas')->onDelete('cascade');
             $table->enum('operator', ['AND', 'OR'])->default('AND');
             $table->foreignId('signs_id')->references('id')->on('gejalas')->onDelete('cascade');
             $table->enum('value', ['ya', 'tidak'])->default('ya');

@@ -16,7 +16,7 @@
                             <select class="custom-select @error('gejala_id') is-invalid @enderror" name="gejala_id">
                                 <option value="" disabled selected>pilih satu gejala</option>
                                 @foreach ($gejalas as $gejala)
-                                    <option value="{{ $gejala->id }}">{{ $gejala->gejala }}</option>
+                                    <option value="{{ $gejala->id }}">{{ $gejala->keterangan }}</option>
                                 @endforeach
                             </select>
                             @error('gejala_id')
@@ -48,13 +48,13 @@
 
                         {{-- ini untuk gejala kedua atau gejlaa selanjutnya yang related dengan gejala sebelumnya --}}
 
-                        <div class="section-title mt-4"><label for="signs">Pilih gejala yang berelasi dengan gejala
+                        <div class="section-title mt-4"><label for="signs">Pilih indikasi gejala
                                 sebelumnya</label></div>
                         <div class="form-group col-lg-8">
                             <select class="custom-select  @error('signs_id') is-invalid @enderror" name="signs_id">
-                                <option value="" disabled selected>pilih satu gejala terkait</option>
+                                <option value="" disabled selected>Pilih Indikasi</option>
                                 @foreach ($signs as $sign)
-                                    <option value="{{ $sign->id }}">{{ $sign->signs }}</option>
+                                    <option value="{{ $sign->id }}">{{ $sign->keterangan }}</option>
                                 @endforeach
                             </select>
                             @error('signs_id')

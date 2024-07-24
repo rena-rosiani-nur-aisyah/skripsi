@@ -22,4 +22,8 @@ class post extends Model
     {
         return $this->hasMany(rule::class, 'post_id');
     }
+    public function hasil()
+    {
+        return $this->hasMany(hasil::class);
+    }
 }

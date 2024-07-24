@@ -9,7 +9,7 @@
             </li>
 
             <li class="menu-header">Menu</li>
-            <li class="active"><a class="nav-link" href="/diagnosisuser"><i class="fas fa-stethoscope"></i></i>
+            <li class="active"><a class="nav-link" href="/diagnosisUser"><i class="fas fa-stethoscope"></i></i>
                     <span>Diagnosis</span></a></li>
             <li class="active"><a class="nav-link" href="/riwayat"><i class="fas fa-clipboard"></i>
                     <span>Riwayat</span></a></li>
