@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Services;
+
 use App\Models\diagnosis;
 use App\Models\Fact;
 use App\Models\rule;
@@ -8,88 +10,119 @@ use App\Models\User;
 use App\Models\post;
 use App\Models\question;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Log;
 
-class forwardChaining
+class ForwardChaining
 {
+    private $currentFacts = [];
+    private $diagnosisResult = null;
 
-    public function run()
-    // step 1 inisialisassi sistem untuk menyimpan jawaban di array kosong
+    public function addFact(Gejala $symptom = null, Gejala $sign = null)
     {
-        $rules = rule::all();
-        $userAnswer = [];
 
+        if ($symptom) {
+            $this->currentFacts[] = $symptom;
+        }
+        if ($sign) {
+            $this->currentFacts[] = $sign;
+        }
+    }
 
-        //step 2 membuat logika untuk pertanyaan yang akan pertama kali ditampilkan
-        $firstRule = rule::where('prasyarat', null)->first();
-        $firstQuestion = question::find($firstRule->related_question);
+    // public function addFact(Gejala $fact)
+    // {
+    //     $this->currentFacts[] = $fact;
+    //     Log::info('Fact added', ['fact' => $fact]);
+    // }
 
-        //step 3 mengevaluasi jawaban dari user
-        diagnosis::create([
-            'user_id' => auth()->id(),
-            'post_id' => $firstRule->post_id,
-            'gejala_id' => $firstRule->gejala_id,
-            'jawaban' => $userAnswer,
-        ]);
+    public function getDiagnosisResult()
+    {
+        return $this->diagnosisResult;
+    }
 
-        //evaluasi rules nya
-        if ($firstRule->operator == 'AND') {
-            //periksa jika gejala sebelumnya adalah benar semua
-            $gejalaSebelumnya = diagnosis::where('user_id', auth()->id())->where(
-                'post_id',
-                $firstRule->post_id
-            )->where(
-                'gejala_id',
-                '<>',
-                $firstRule->gejala_id
-            )->get();
-            if (!$gejalaSebelumnya->every(function ($diagnosis) {
-                return $diagnosis->jawaban == 'yes';
-            })) {
-                // Backtrack to the previous symptom
-                $gejalaSebelumnya = $this->getgejalaSebelumnya($gejalaSekarang);
-                if ($gejalaSebelumnya) {
-                    // Reset the current symptom and rule
-                    $gejalaSekarang = $gejalaSebelumnya;
-                    $RuleSekarang = rule::where('gejala_id', $gejalaSebelumnya->id)->first();
-                    // Go back to Step 2 and continue with the next question
-                    $nextQuestion = question::find($RuleSekarang->related_question);
-                } else {
-                }
-            } elseif ($firstRule->operator == 'OR') {
-                # memeriksa jika ada gejala sebelumnya yang bernilai or juga
-                $gejalaSebelumnya = diagnosis::where('user_id', auth()->id())->where(
-                    'post_id',
-                    $firstRule->post_id
-                )->where('gejala_id', '<>', $firstRule->gejala_id)->get();
-                if (!$gejalaSebelumnya->any(function ($diagnosis) {
-                    return $diagnosis->jawaban == 'yes';
-                })) {
-                    $gejalaSebelumnya = $this->getgejalaSebelumnya($gejalaSekarang);
-                    if ($gejalaSebelumnya) {
-                        $gejalaSekarang = $gejalaSebelumnya;
-                        $RuleSekarang = rule::where('gejala_id', $gejalaSebelumnya->id)->first();
-                        $nextQuestion = question::find($RuleSekarang->related_questionn);
+    public function runForwardChaining($jawabanUser)
+    {
+        $rules = Rule::all();
+
+        foreach ($rules as $rule) {
+            $symptom = Gejala::find($rule->gejala_id);
+            $sign = Gejala::find($rule->signs_id);
+
+            if ($this->isFactExists($symptom) && $this->isFactExists($sign)) {
+                if ($rule->operator == 'AND') {
+                    if ($jawabanUser == $rule->value && $jawabanUser == $rule->signs_value) {
+                        $this->diagnosisResult = Post::find($rule->post_id);
+                        break;
+                    }
+                } elseif ($rule->operator == 'OR') {
+                    if ($jawabanUser == $rule->value || $jawabanUser == $rule->signs_value) {
+                        $this->diagnosisResult = Post::find($rule->post_id);
+                        break;
                     }
                 }
             }
         }
-        //step 4 code untuk menentukan gejala selanjutnya
-        $nextRule = rule::where('prasyarat', $firstRule->gejala_id)->first();
-        if ($nextRule) {
-            # kembali ke step dua dan lanjut ke pertanyaan selanjutnya
-            $nextQuestion = question::find($nextRule->related_question);
-            # update gejala dan rule saat ini
-            $gejalaSekarang = gejala::find($nextRule->gejala_id);
-            $gejalaSekarang = $nextRule;
-            // melanjutkan pertanyaan selanjutnya
-            return $this->$this->asknextQuestion($nextQuestion, $gejalaSekarang, $RuleSekarang);
-        } else {
-            if ($this->isdiagnosisSelesai($gejalaSekarang)) {
-                # menampilkan hasil diagnosis
-                return $this->show($gejalaSekarang);
-            } else {
-                return "Maaf, diagnosis yang dilakukan tidak menemukan hasil apa pun.";
+    }
+
+
+    // public function runForwardChaining($jawabanUser)
+    // {
+    //     $rules = Rule::all();
+    //     Log::info('Running Forward Chaining', ['rules' => $rules, 'jawabanUser' => $jawabanUser]);
+
+
+    //     foreach ($rules as $rule) {
+    //         $symptom = Gejala::find($rule->gejala_id);
+    //         $sign = Gejala::find($rule->signs_id);
+
+    //         Log::info('Checking rule', ['rule' => $rule, 'symptom' => $symptom, 'sign' => $sign]);
+
+
+    //         if ($jawabanUser == $rule->value && $this->isFactExists($symptom) && $this->isFactExists($sign)) {
+    //             $this->diagnosisResult = Post::find($rule->post_id);
+    //             Log::info('Diagnosis result found', ['diagnosisResult' => $this->diagnosisResult]);
+
+    //             break;
+    //         }
+    //     }
+    // }
+
+    private function isFactExists($fact)
+    {
+        if ($fact === null) {
+            Log::info('Fact is null');
+            return false;
+        }
+
+        foreach ($this->currentFacts as $currentFact) {
+            if ($currentFact->id == $fact->id) {
+                Log::info('Fact exists', ['fact' => $fact]);
+                return true;
             }
         }
+        Log::info('Fact does not exist', ['fact' => $fact]);
+        return false;
+    }
+
+
+    public function getNextQuestion()
+    {
+        $factIds = array_map(function ($fact) {
+            return $fact->id;
+        }, $this->currentFacts);
+        Log::info('Current facts', ['currentFacts' => $this->currentFacts]);
+
+        // Prioritize questions with type 'gejala'
+        $nextQuestion = Gejala::whereNotIn('id', $factIds)
+            ->where('type', 'gejala')
+            ->first();
+
+        if (!$nextQuestion) {
+            // If no 'gejala' questions left, get 'signs' type questions
+            $nextQuestion = Gejala::whereNotIn('id', $factIds)
+                ->where('type', 'signs')
+                ->first();
+        }
+        Log::info('Next question', ['nextQuestion' => $nextQuestion]);
+        return $nextQuestion;
     }
 }

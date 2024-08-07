@@ -31,15 +31,6 @@
                                 </td>
                             </tr>
                         @endforeach
-                        {{-- @foreach ($items as $diagnosis)
-                            <tr>
-                                <td>{{ $no++ }}</td>
-                                <td>{{ $diagnosi->user->name }}</td>
-                                <td>{{ $diagnosis->gejala->id }}</td>
-                                <td>{{ $diagnosis->jawaban }}</td>
-                                <td><a href="/detail" class="btn btn-secondary">Detail</a></td>
-                            </tr>
-                        @endforeach --}}
 
                     </table>
                 </div>

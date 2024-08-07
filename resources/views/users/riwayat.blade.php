@@ -4,7 +4,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h4>Riwayat</h4>
+                    <h4>Riwayat User</h4>
 
                 </div>
                 <div class="card-body p-0">
@@ -12,21 +12,25 @@
                         <table class="table table-striped">
                             <tr>
                                 <th>No.</th>
-                                <th>Name</th>
+                                <th>Username</th>
                                 <th>Hasil Diagnosis</th>
                                 <th>Tanggal</th>
-                                <th>Detail</th>
-                            <tr>
-                                <td>1.</td>
-                                <td>rena</td>
-                                <td>Create a mobile app</td>
-                                </td>
-                                <td>2018-01-20</td>
-
-                                <td>
-                                    <div class="badge badge-success">Completed</div>
-                                </td>
+                                <th>Aksi</th>
                             </tr>
+
+                            @foreach ($riwayat as $data)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $data->user->username }}</td>
+                                    <td>{{ $data->post->name }}</td>
+                                    </td>
+                                    <td>{{ $data->created_at->diffForHumans() }}</td>
+                                    <td>
+                                        <a href="/jejak/Diagnosis/{{ $item->id }}/show" class="btn btn-primary"><i
+                                                class="bi bi-eye"></i></a>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </table>
                     </div>
                 </div>

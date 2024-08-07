@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Log;
 use App\Models\Fact;
 use App\Models\post;
 use App\Models\rule;
 use App\Models\User;
-use forwardChaining;
+use App\Models\hasil;
+use App\Services\ForwardChaining;
 use App\Models\gejala;
 use App\Models\diagnosis;
 use Illuminate\Http\Request;
@@ -18,60 +18,88 @@ use App\Http\Models\FactCollection;
 use App\Http\Requests\StorediagnosisRequest;
 use App\Http\Requests\UpdatediagnosisRequest;
 use Illuminate\Support\Facades\DB as FacadesDB;
+use Illuminate\Support\Facades\Log;
 
 
 
 class DiagnosisController extends Controller
 {
-    public function index()
+
+    private $forwardChaining;
+
+    public function __construct(ForwardChaining $forwardChaining)
     {
-        $items = diagnosis::all();
-        $data = [
-            'items' => $items
-        ];
-        return view('category.admin.diagnosis.detailDiagnosis', compact('data'));
+        $this->forwardChaining = $forwardChaining;
     }
-
-
 
     public function create()
     {
-        $gejala = gejala::where('type', 'gejala')->first();
-        return view('users.diagnosis.diagnosis-user', compact('gejala'));
+        // Ambil fakta awal yang bertipe 'gejala'
+        $initialFact = Gejala::where('type', 'gejala')->first();
+
+        // Tambahkan fakta awal ke forward chaining
+        if ($initialFact) {
+            $this->forwardChaining->addFact($initialFact, null);
+        } else {
+            Log::error('No initial fact found');
+        }
+
+        // Kirim fakta awal ke view
+        return view('users.diagnosis.diagnosis-user', ['gejala' => $initialFact]);
     }
 
 
     public function store(Request $request)
     {
-
-        $diagnosis = new diagnosis();
+        $diagnosis = new Diagnosis();
         $diagnosis->user_id = auth()->user()->id;
         $diagnosis->gejala_id = $request->input('gejala_id');
         $diagnosis->jawabanUser = $request->input('jawabanUser');
         $diagnosis->save();
 
-        //ambil dan tampilkan gejala atau signs selanjutnya
-        $next = $this->getNextQuestion($diagnosis->gejala_id, $diagnosis->jawabanUser);
-        if ($next) {
-            return redirect()->route('diagnosis.store', ['gejala_id' => $next->id]);
-        } else {
-            return redirect()->route('hasilUser');
+        // Logging untuk debugging
+        Log::info('Diagnosis saved', ['diagnosis' => $diagnosis]);
+
+        // proses ke forward chaining nya
+        $forwardChaining = new ForwardChaining();
+
+        // nambahin current fact (gejala)
+        $currentGejala = Gejala::find($request->input('gejala_id'));
+        if ($currentGejala) {
+            $symptom = Gejala::find($request->input('symptoms_id'));
+            $sign = Gejala::find($request->input('signs_id'));
+
+            $this->forwardChaining->addFact($symptom, $sign);
+            // $forwardChaining->addFact($currentGejala);
         }
-    }
 
-    private function getNextQuestion($gejala_id, $jawabanUser)
-    {
-        $currentGejala = gejala::find($gejala_id);
+        // jalankan algoritma fc nya bersamaan dengan jawabanUser
+        $this->forwardChaining->runForwardChaining($request->input('jawabanUser'));
 
-        //menentukan tipe pertanyaan selanjutnya
-        $nextType = $currentGejala->type == 'gejala' ? 'signs' : 'gejala';
+        // ini hasil diagnosis
+        $result = $this->forwardChaining->getDiagnosisResult();
 
-        //ngambil pertayaan atau gejala berikutnya
-        $next = gejala::where('id', '>', $gejala_id)
-            ->where('type', $nextType)
-            ->first();
+        // Logging untuk debugging
+        Log::info('Forward Chaining result', ['result' => $result]);
 
-        return $next;
+        if ($result) {
+            // nyimpen hasil diagnosis ke tabel hasil
+            Hasil::create([
+                'user_id' => auth()->user()->id,
+                // 'diagnosis_id' => $diagnosis->id,
+                'post_id' => $result->id,
+            ]);
+
+
+            return view('users.diagnosis.HasilDiagnosisUser', ['result' => $result]);
+        } else {
+            // kalau gk nemuin, ambil pertanyaan selanjutnya
+            $nextQuestion = $this->forwardChaining->getNextQuestion();
+            Log::info('Next question', ['nextQuestion' => $nextQuestion]);
+            $allData = collect([$nextQuestion]);
+
+            return view('users.diagnosis.diagnosis-user', compact('allData'));
+        }
     }
 
 
@@ -97,11 +125,4 @@ class DiagnosisController extends Controller
         $post->delete();
         return redirect(url('/diagnosa'))->with('Berhasil,', 'Data telah dihapus');
     }
-
-
-    //menghubungkan dengan algoritma forward chaining dalam kelas forwardChaining
-
-
-
-
 }

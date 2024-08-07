@@ -20,6 +20,22 @@
 
     {{-- bootstrap icons --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+    <style>
+        /* CSS untuk menempatkan form di tengah */
+        .center-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .form-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
 </head>
 
 <body>
@@ -45,9 +61,6 @@
                             <div class="dropdown-title">Logged in 5 min ago</div>
                             <a href="features-profile.html" class="dropdown-item has-icon">
                                 <i class="far fa-user"></i> Profile
-                            </a>
-                            <a href="features-activities.html" class="dropdown-item has-icon">
-                                <i class="fas fa-bolt"></i> Activities
                             </a>
                             <div class="dropdown-divider"></div>
                             <form action="/logout" method="POST">

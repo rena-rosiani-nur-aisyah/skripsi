@@ -13,9 +13,11 @@ use App\Http\Controllers\GejalaController;
 use App\Http\Controllers\DiagnosisController;
 use App\Http\Controllers\ArtikelController;
 use App\Http\Controllers\HasilController;
+use App\Http\Controllers\RiwayatController;
 // use App\Http\Controllers\Auth\LoginController;
 // use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\SignupController;
+use App\Models\hasil;
 use GuzzleHttp\Middleware;
 use Symfony\Component\HttpKernel\Profiler\Profile;
 
@@ -53,15 +55,14 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', function () {
         return view('users.dashborad');
     });
-    Route::get('/diagnosisUser', function () {
-        return view('users.diagnosis-user');
-    });
+    // Route::get('/diagnosisUser', function () {
+    //     return view('users.diagnosis-user');
+    // });
+    Route::get('/diagnosisUser', [DiagnosisController::class, 'create']);
     Route::get('/artikel', function () {
         return view('artikel.artikel');
     });
-    Route::get('/riwayat', function () {
-        return view('users.riwayat');
-    });
+    Route::get('/riwayat', [RiwayatController::class, 'index'])->name('riwayat');
 });
 
 
@@ -77,7 +78,9 @@ Route::resource('/diagnosis', HasilController::class);
 
 
 Route::get('/diagnosisUser', [DiagnosisController::class, 'create'])->name('diagnosisUser');
-Route::get('/detaiDiagnosis', [DiagnosisController::class, 'show'])->name('detailDiagnosis');
+Route::get('/emptyState', function () {
+    return view('users.diagnosis.emptyView');
+});
 Route::get('/hasilUser', function () {
     return view('users.diagnosis.HasilDiagnosisUser');
 })->name('hasilUser');
@@ -100,6 +103,7 @@ Route::get('/tjenis', function () {
     return view('category.admin.penyakit.tjenis');
 });
 
+Route::delete('/penyakit/{id}', [PostController::class, 'deletePenyakit'])->name('penyakit.delete');
 
 
 
@@ -120,6 +124,7 @@ Route::get('/editgejala', function () {
     return view('category.admin.gejala.editgejala');
 });
 
+Route::delete('/gejala/{id}', [GejalaController::class, 'deleteGejala'])->name('gejala.delete');
 
 
 

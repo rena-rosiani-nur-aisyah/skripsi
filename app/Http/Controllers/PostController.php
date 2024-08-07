@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 // use App\Models\gejala;
 use App\Models\post;
-// use App\Models\rule;
+use App\Models\rule;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\DB as FacadesDB;
@@ -61,5 +61,17 @@ class PostController extends Controller
         $post->update($request->all());
 
         return redirect(url('/jenis'))->with('Berhasil!', 'Data telah diubah.');
+    }
+
+    public function deletePenyakit($id)
+    {
+        // Menghapus rules yang terkait
+        Rule::where('gejala_id', $id)->delete();
+        Rule::where('signs_id', $id)->delete();
+
+        // Menghapus penyakit
+        post::destroy($id);
+
+        return redirect()->back()->with('success', 'Gejala dan rules terkait berhasil dihapus.');
     }
 }

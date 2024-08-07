@@ -1,14 +1,15 @@
 @extends('template.navbar')
 @section('navbar')
-    <div class="card">
+    <div class="card mt-0">
         <div class="d-flex align-items-center">
             <div class="container mb-6">
                 <div class="row bg-white">
                     <div class="col-lg-6 d-flex flex-column  justify-content-center pt-4 pt-lg-0 order-2 order-lg-1"
                         data-aos="fade-up" data-aos-delay="200">
                         <div class="card-body text-left mt-5">
-                            <h1>Better Solutions For Your Business</h1>
-                            <h2>We are team of talented designers making websites with Bootstrap</h2>
+                            <h1>Solusi Untuk Perempuan</h1>
+                            <h2>Mentukan jenis darah haid, nifas, dan istihadhah untuk beribadah sesuai dengan agama Islam.
+                            </h2>
                             <br>
 
                             <div class="d-flex justify-content-center justify-content-lg-start ">
@@ -31,7 +32,7 @@
             <section id="best-features" class="text-center">
 
                 <!-- Heading -->
-                <h2 class="mb-5 font-weight-bold">Best Features</h2>
+                <h2 class="mb-5 font-weight-bold">Fitur Terbaik </h2>
 
                 <!--Grid row-->
                 <div class="row d-flex justify-content-center mb-4">
@@ -40,9 +41,12 @@
                     <div class="col-md-8">
 
                         <!-- Description -->
-                        <p class="grey-text">Sebagai platform untuk mendiagnosis darah wanita, kami menyediakan fitur-fitur
+                        <p class="grey-text">Sebagai platform untuk menentukan peribadahan wanita sesuai dengan jenis darah
+                            wanita baik itu Haid, Nifas, maupun Istihadhah sesuai dengan agama Islam, kami menyediakan
+                            fitur-fitur
                             dan
-                            menu-menu unggulan yang dapat memudahkan Anda untuk menentukan jenis darah yang sedang Anda
+                            menu-menu unggulan yang dapat memudahkan Anda untuk menentukan ketentuan ibadah sesuai yang
+                            sedang Anda
                             alami!
                         </p>
 

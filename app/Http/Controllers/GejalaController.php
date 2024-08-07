@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\gejala;
+use App\Models\rule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -128,5 +129,17 @@ class GejalaController extends Controller
         }
         $post->delete();
         return redirect(url('/gejala'))->with('Berhasil,', 'Data telah dihapus');
+    }
+
+    public function deleteGejala($id)
+    {
+        // Menghapus rules yang terkait
+        Rule::where('gejala_id', $id)->delete();
+        Rule::where('signs_id', $id)->delete();
+
+        // Menghapus gejala
+        Gejala::destroy($id);
+
+        return redirect()->back()->with('success', 'Gejala dan rules terkait berhasil dihapus.');
     }
 }

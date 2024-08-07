@@ -15,11 +15,8 @@ class HasilController extends Controller
      */
     public function index()
     {
-        $items = hasil::all();
-        $data = [
-            'items' => $items
-        ];
-        return view('category.admin.diagnosis.HasilDiagnosis', compact('data'));
+        $items = hasil::with(['user', 'post'])->get();
+        return view('category.admin.diagnosis.HasilDiagnosis', compact('items'));
     }
 
     /**
@@ -51,8 +48,8 @@ class HasilController extends Controller
      */
     public function show($id)
     {
-        $items = diagnosis::find($id);
-        return view('category.admin.diagnosis.detailDiagnosis', compact('items'));
+        // $items = hasil::find($id);
+        // return view('users.diagnosis.HasilDiagnosisUser', compact('items'));
     }
 
     /**

@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\riwayat;
-use App\Http\Requests\StoreriwayatRequest;
-use App\Http\Requests\UpdateriwayatRequest;
-use App\Models\hasil;
+use App\Models\Artikel;
+use Illuminate\Http\Request;
 
-class RiwayatController extends Controller
+class ArtikelUserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +14,8 @@ class RiwayatController extends Controller
      */
     public function index()
     {
-        return view('users.riwayat', [
-            'riwayat' => hasil::where('user_id', auth()->user()->id)->get()
+        return view('users.artikel', [
+            'posts' => Artikel::all()
         ]);
     }
 
@@ -34,10 +32,10 @@ class RiwayatController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreriwayatRequest  $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreriwayatRequest $request)
+    public function store(Request $request)
     {
         //
     }
@@ -45,10 +43,10 @@ class RiwayatController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\riwayat  $riwayat
+     * @param  \App\Models\ArtikelUser  $artikelUser
      * @return \Illuminate\Http\Response
      */
-    public function show(riwayat $riwayat)
+    public function show(Artikel $artikelUser)
     {
         //
     }
@@ -56,10 +54,10 @@ class RiwayatController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\riwayat  $riwayat
+     * @param  \App\Models\ArtikelUser  $artikelUser
      * @return \Illuminate\Http\Response
      */
-    public function edit(riwayat $riwayat)
+    public function edit(Artikel $artikelUser)
     {
         //
     }
@@ -67,11 +65,11 @@ class RiwayatController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateriwayatRequest  $request
-     * @param  \App\Models\riwayat  $riwayat
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\ArtikelUser  $artikelUser
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateriwayatRequest $request, riwayat $riwayat)
+    public function update(Request $request, Artikel $artikelUser)
     {
         //
     }
@@ -79,10 +77,10 @@ class RiwayatController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\riwayat  $riwayat
+     * @param  \App\Models\ArtikelUser  $artikelUser
      * @return \Illuminate\Http\Response
      */
-    public function destroy(riwayat $riwayat)
+    public function destroy(Artikel $artikelUser)
     {
         //
     }

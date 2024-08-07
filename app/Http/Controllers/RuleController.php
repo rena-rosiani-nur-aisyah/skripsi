@@ -21,7 +21,7 @@ class RuleController extends Controller
      */
     public function index()
     {
-        $items = rule::all();
+        $items = Rule::with(['gejala', 'signs', 'post'])->get();
 
         $data = [
             'items' => $items

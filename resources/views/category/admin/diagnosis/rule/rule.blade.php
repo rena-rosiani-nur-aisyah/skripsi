@@ -37,11 +37,11 @@
                             @foreach ($items as $value)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $value->gejala->keterangan }}</td>
+                                    <td>{{ optional($value->gejala)->keterangan }}</td>
                                     <td>{{ $value->operator }}</td>
-                                    <td>{{ $value->signs->keterangan }}</td>
+                                    <td>{{ optional($value->signs)->keterangan }}</td>
                                     <td>{{ $value->value }}</td>
-                                    <td>{{ $value->post->name }}</td>
+                                    <td>{{ optional($value->post)->name }}</td>
                                     <td><a href="/rules/{{ $value->id }}/edit" class="btn btn-success"><i
                                                 class="bi bi-pencil-square"> </i></a>
                                         <form action="/rules/{{ $value->id }}" method="POST" class="d-inline">

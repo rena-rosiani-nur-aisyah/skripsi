@@ -1,30 +1,46 @@
 @extends('template.navbar-main')
 @section('content')
-    <div class="card">
-        <div class="card-header text-center">
-            <h3 class="text-center" style="font-family:Arial, Helvetica, sans-serif; font-size:20px">
-                Jawablah pertanyaan berikut dengan benar</h3>
+    <div class="card mt-5">
+        <div class="card mt-3">
+            <div class="card-header">
+                {{-- <div class="col-lg-7 mx-auto d-flex justify-content-center flex-column">
+                    <h4 class="text-center mb-3" style="font-size: 24px">Jawablah pertanyaan dibawah ini dengan baik</h4>
+                </div> --}}
+            </div>
+            <div class="card-body">
+                <section>
+                    <div class="container py-4">
+                        <div class="row">
+                            <div class="col-lg-7 mx-auto d-flex justify-content-center flex-column">
+                                @if (isset($gejala))
+                                    <form action="{{ route('diagnosis.store') }}" method="POST" enctype="multipart/form-data">
+                                        @csrf
+                                        <h3 class="text-center"> {{ $gejala->keterangan }} </h3>
+                                        <div class="mt-3 ml-0">
+                                            @if ($gejala->image)
+                                                <img src="{{ asset('storage/' . $gejala->image) }}" alt=""
+                                                    width="200" height="auto">
+                                                {{-- @else --}}
+                                                {{-- <img src="/images/vektor/simple.jpg" alt="" width="200"
+                                                    height="auto"> --}}
+                                            @endif
+                                        </div>
+                                        <center>
+                                            <div class="buttons mt-5">
+                                                <input type="hidden" name="gejala_id" value="{{ $gejala->id }}">
+                                                <button class="btn btn-primary col-sm-2 mt-2" value="tidak"
+                                                    name="jawabanUser" type="submit">Tidak</button>
+                                                <button class="btn btn-primary col-sm-2 mt-2" value="ya"
+                                                    name="jawabanUser" type="submit">Ya</button>
+                                            </div>
+                                        </center>
+                                    </form>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
         </div>
-        <div class="card-body">
-            {{-- <p class="mb-5" style="font-size: 18px">
-                Apakah kamu {{ $gejala->gejala }}? </p> --}}
-            <form action="{{ route('diagnosis.store') }}" method="POST" enctype="multipart/form-data">
-                @csrf
-                <input type="hidden" name="gejala_id" value="{{ $gejala->id }}">
-                @if ($gejala->type == 'gejala')
-                    <p>{{ $gejala->gejala }}</p>
-                @else
-                    <p>{{ $gejala->signs }}</p>
-                    <input type="hidden" name="signs_id" value="{{ $gejala->id }}">
-                @endif
-                <div class="buttons">
-                    <button class="btn btn-primary col-sm-2 mt-2" id="jawabanUser_tidak" value="jawabanUser_tidak"
-                        name="jawabanUser">Tidak</button>
-                    <button class="btn btn-primary col-sm-2 mt-2" id="jawabanUser_ya" value="jawabanUser_ya"
-                        name="jawabanUser">Ya</button>
-                </div>
-        </div>
-
-        </form>
     </div>
 @endsection
