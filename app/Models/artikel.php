@@ -14,6 +14,9 @@ class artikel extends Model
     protected $fillable = [
         'judul',
         'body',
+        'excerpt',
         'image'
     ];
+    // In your Article model
+    protected $dates = ['created_at', 'updated_at'];
 }

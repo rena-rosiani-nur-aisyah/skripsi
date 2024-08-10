@@ -12,6 +12,7 @@ use App\Http\Controllers\SiginController;
 use App\Http\Controllers\GejalaController;
 use App\Http\Controllers\DiagnosisController;
 use App\Http\Controllers\ArtikelController;
+use App\Http\Controllers\ArtikelUserController;
 use App\Http\Controllers\HasilController;
 use App\Http\Controllers\RiwayatController;
 // use App\Http\Controllers\Auth\LoginController;
@@ -55,14 +56,13 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', function () {
         return view('users.dashborad');
     });
-    // Route::get('/diagnosisUser', function () {
-    //     return view('users.diagnosis-user');
-    // });
     Route::get('/diagnosisUser', [DiagnosisController::class, 'create']);
-    Route::get('/artikel', function () {
-        return view('artikel.artikel');
-    });
+    Route::get('/artikel', [ArtikelUserController::class, 'index'])->name('artikel');
     Route::get('/riwayat', [RiwayatController::class, 'index'])->name('riwayat');
+    Route::get('/tentang', function () {
+        return view('users.tentang');
+    });
+    Route::get('/showArtikel/{id}', [ArtikelUserController::class, 'show'])->name('showArtikel');
 });
 
 

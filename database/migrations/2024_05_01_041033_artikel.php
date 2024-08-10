@@ -18,8 +18,9 @@ class Artikel extends Migration
             $table->timestamps();
             $table->string('judul');
             $table->longText('body');
-            $table->string('excerpt');
+            $table->text('excerpt');
             $table->string('image')->nullable();
+            $table->timestamps();
         });
     }
 

@@ -6,6 +6,7 @@ use App\Models\artikel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 use function PHPUnit\Framework\directoryExists;
 
@@ -53,6 +54,8 @@ class ArtikelController extends Controller
         if ($request->file('image')) {
             $validatedData['image'] = $request->file('image')->store('image-Artikel');
         }
+
+        $validatedData['excerpt'] = Str::limit(strip_tags($request->body), 300);
 
         artikel::create($validatedData);
 

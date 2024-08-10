@@ -14,9 +14,8 @@ class ArtikelUserController extends Controller
      */
     public function index()
     {
-        return view('users.artikel', [
-            'posts' => Artikel::all()
-        ]);
+        $items = Artikel::latest()->select('id', 'judul', 'body', 'excerpt', 'image', 'created_at')->get();
+        return view('users.artikel', compact('items'));
     }
 
     /**
@@ -46,9 +45,10 @@ class ArtikelUserController extends Controller
      * @param  \App\Models\ArtikelUser  $artikelUser
      * @return \Illuminate\Http\Response
      */
-    public function show(Artikel $artikelUser)
+    public function show($id)
     {
-        //
+        $items = Artikel::find($id);
+        return view('users.showArtikel', compact('items'));
     }
 
     /**

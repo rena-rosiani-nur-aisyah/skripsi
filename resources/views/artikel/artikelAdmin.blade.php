@@ -45,7 +45,8 @@
                                 @endif
                             </td>
                             <td>
-                                <div class="badge badge-success">{{ $item->created_at->diffForHumans() }}</div>
+                                <div class="badge badge-success">
+                                    {{ Carbon\Carbon::parse($item->created_at)->diffForHumans() }}</div>
                             </td>
                             <td><a href="/Dashboard/Artikel/{{ $item->id }}" class="btn btn-primary"><i
                                         class="bi bi-eye"></i></a>
