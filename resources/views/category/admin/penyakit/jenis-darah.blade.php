@@ -7,7 +7,7 @@
                     <div class="col-12 col-md-6 col-lg-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4>Jenis-jenis Darah Wanita</h4>
+                                <h4>Data Diagnosis</h4>
                                 <div class="card-header-action">
                                     <a href="{{ url('tjenis') }}" class="btn active">+ Tambah
                                         Jenis</a>
@@ -18,10 +18,10 @@
                                     <table class="table table-bordered table-md col-lg-12">
                                         <tr>
                                             <th>Id</th>
-                                            <th>Nama</th>
+                                            <th>Diagnosis</th>
                                             <th>Deskripsi</th>
-                                            <th>Penyebab</th>
-                                            <th>Solusi</th>
+                                            {{-- <th>Penyebab</th> --}}
+                                            <th>Ketentuan Ibadah</th>
                                             <th>Action</th>
                                         </tr>
                                         <?php $no = 1; ?>
@@ -29,11 +29,10 @@
                                             <tr>
                                                 <td>{{ $no++ }}</td>
                                                 <td>{{ $value->name }}</td>
-                                                <td>{{ $value->deskripsi }}</td>
-                                                <td>{{ $value->Penyebab }}</td>
-                                                <td>{{ $value->Solusi }}</td>
-                                                <td> <a href="/show/{{ $value->id }}" class="btn btn-success"><i
-                                                            class="bi bi-pencil-square"> </i></a>
+                                                <td>{{ Str::limit($value->deskripsi, 100) }}</td>
+                                                <td>{{ Str::limit($value->Solusi, 100) }}</td>
+                                                <td style="white-space: nowrap;"> <a href="/show/{{ $value->id }}"
+                                                        class="btn btn-success"><i class="bi bi-pencil-square"> </i></a>
                                                     <a href="/delete/{{ $value->id }}" class="btn btn-danger"><i
                                                             class="bi bi-trash"></i></a>
                                                     </form>

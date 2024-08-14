@@ -17,16 +17,23 @@ class ForwardChaining
     private $currentFacts = [];
     private $diagnosisResult = null;
 
-    public function addFact(Gejala $symptom = null, Gejala $sign = null)
-    {
+    // public function addFact(Gejala $symptom = null, Gejala $sign = null)
+    // {
 
-        if ($symptom) {
-            $this->currentFacts[] = $symptom;
-        }
-        if ($sign) {
-            $this->currentFacts[] = $sign;
-        }
+    //     if ($symptom) {
+    //         $this->currentFacts[] = $symptom;
+    //     }
+    //     if ($sign) {
+    //         $this->currentFacts[] = $sign;
+    //     }
+    // }
+
+
+    public function addFact($gejalaId, $jawabanUser)
+    {
+        $this->currentFacts[$gejalaId] = $jawabanUser;
     }
+
 
     // public function addFact(Gejala $fact)
     // {
@@ -41,28 +48,46 @@ class ForwardChaining
 
     public function runForwardChaining($jawabanUser)
     {
-        $rules = Rule::all();
-
-        foreach ($rules as $rule) {
-            $symptom = Gejala::find($rule->gejala_id);
-            $sign = Gejala::find($rule->signs_id);
-
-            if ($this->isFactExists($symptom) && $this->isFactExists($sign)) {
-                if ($rule->operator == 'AND') {
-                    if ($jawabanUser == $rule->value && $jawabanUser == $rule->signs_value) {
-                        $this->diagnosisResult = Post::find($rule->post_id);
-                        break;
-                    }
-                } elseif ($rule->operator == 'OR') {
-                    if ($jawabanUser == $rule->value || $jawabanUser == $rule->signs_value) {
-                        $this->diagnosisResult = Post::find($rule->post_id);
-                        break;
-                    }
+        foreach ($this->currentFacts as $fact) {
+            $rules = Rule::where('gejala_id', $fact->id)->orWhere('signs_id', $fact->id)->get();
+            foreach ($rules as $rule) {
+                if ($this->checkRule($rule, $jawabanUser)) {
+                    $this->diagnosisResult = Post::find($rule->post_id);
+                    return;
                 }
             }
         }
+
+
+        // $rules = Rule::all();
+
+        // foreach ($rules as $rule) {
+        //     $symptom = Gejala::find($rule->gejala_id);
+        //     $sign = Gejala::find($rule->signs_id);
+
+        //     if ($this->isFactExists($symptom) && $this->isFactExists($sign)) {
+        //         if ($rule->operator == 'AND') {
+        //             if ($jawabanUser == $rule->value && $jawabanUser == $rule->signs_value) {
+        //                 $this->diagnosisResult = Post::find($rule->post_id);
+        //                 break;
+        //             }
+        //         } elseif ($rule->operator == 'OR') {
+        //             if ($jawabanUser == $rule->value || $jawabanUser == $rule->signs_value) {
+        //                 $this->diagnosisResult = Post::find($rule->post_id);
+        //                 break;
+        //             }
+        //         }
+        //     }
+        // }
     }
 
+    private function checkRule($rule, $jawabanUser)
+    {
+        $gejalaMatch = $rule->gejala_id && $this->isFactExists($rule->gejala) && $jawabanUser == $rule->value;
+        $signMatch = $rule->signs_id && $this->isFactExists($rule->signs) && $jawabanUser == $rule->value;
+
+        return $rule->operator == 'AND' ? ($gejalaMatch && $signMatch) : ($gejalaMatch || $signMatch);
+    }
 
     // public function runForwardChaining($jawabanUser)
     // {

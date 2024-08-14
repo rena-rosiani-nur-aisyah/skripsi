@@ -100,6 +100,12 @@ class DiagnosisController extends Controller
 
             return view('users.diagnosis.diagnosis-user', compact('allData'));
         }
+        try {
+            // Logika diagnosis
+        } catch (\Exception $e) {
+            Log::error('Error in diagnosis process: ' . $e->getMessage());
+            return view('error.diagnosis')->with('message', 'Terjadi kesalahan dalam proses diagnosis.');
+        }
     }
 
 

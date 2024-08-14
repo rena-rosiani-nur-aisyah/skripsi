@@ -141,6 +141,6 @@ Route::get('/Puser', function () {
 
 
 // Profile user dari sisi user
-Route::get('/profile', function () {
-    return view('users.profile');
-});
+// Route::get('/profile', function () {
+//     return view('users.profile');
+// });

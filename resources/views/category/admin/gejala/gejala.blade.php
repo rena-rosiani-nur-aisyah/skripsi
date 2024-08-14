@@ -38,7 +38,7 @@
                                     - -
                                 @endif
                             </td>
-                            <td>
+                            <td style="white-space: nowrap;">
                                 <a href="/tampilgejala/{{ $post->id }}" class="btn btn-success"> <i
                                         class="bi bi-pencil-square"></i> </a>
                                 <a href="/deletegejala/{{ $post->id }}" class="btn btn-danger"><i

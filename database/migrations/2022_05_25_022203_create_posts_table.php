@@ -17,9 +17,9 @@ class CreatePostsTable extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
             // $table->string('kode_penyakit')->unique();
-            $table->string('name');
-            $table->string('deskripsi')->nullable();
-            $table->text('Penyebab')->nullable();
+            $table->text('name');
+            $table->text('deskripsi')->nullable();
+            // $table->text('Penyebab')->nullable();
             $table->text('Solusi')->nullable();
             $table->timestamp('published_at')->nullable();
             $table->timestamps();

@@ -24,6 +24,27 @@
                             @enderror
                         </div>
 
+                        {{-- ini value untuk menentukan jawaban yang seharusnya  --}}
+                        <div class="form-group">
+                            <div class="section-title"><label for="value1">Value</label></div>
+                            <div class="mb-2">
+                                <div class="custom-control custom-radio custom-control-inline ml-5">
+                                    <input type="radio" id="value1_ya" name="value1"
+                                        class="custom-control-input @error('value') is-invalid @enderror" value="ya"
+                                        {{ old('value1') == 'ya' ? 'checked' : '' }}>
+                                    <label class="custom-control-label" for="value1_ya">Ya</label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="value1_tidak" name="value1"
+                                        class="custom-control-input @error('value1') is-invalid @enderror" value="tidak"
+                                        {{ old('value1') == 'tidak' ? 'checked' : '' }}>
+                                    <label class="custom-control-label" for="value1_tidak">Tidak</label>
+                                </div>
+                                @error('value1')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
 
                         {{-- ini untuk operator  --}}
                         <div class="form-group">

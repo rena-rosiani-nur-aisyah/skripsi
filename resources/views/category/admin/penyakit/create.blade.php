@@ -2,27 +2,26 @@
 @section('content')
     <div class="card">
         <div class="card-header">
-            <h4>Edit Jenis Darah</h4>
+            <h4>Edit Jenis Darah Diagnosis</h4>
         </div>
         <form action="/edit/{{ $post->id }}" method="POST">
             @csrf
 
             <div class="card-body">
                 <div class="mb-3 col-6">
-                    <label for="name" class="form-label">Edit Nama</label>
-                    <input type="text" name="name" class="form-control" placeholder="Edit Name"
-                        value="{{ $post->name }}">
+                    <label for="name" class="form-label">Edit Diagnosis</label>
+                    <textarea name="name" style="width: 100%; height: 200px;">{{ $post->name }}</textarea>
                 </div>
                 <div class="mb-3 col-6">
                     <label for="deskripsi" class="form-label">Edit Deskripsi</label>
                     <textarea name="deskripsi" style="width: 100%; height: 200px;">{{ $post->deskripsi }}</textarea>
                 </div>
-                <div class="mb-3 col-6">
+                {{-- <div class="mb-3 col-6">
                     <label for="Penyebab"> Edit Penyebab</label>
                     <textarea class="form-control" name="Penyebab" style="width: 100%; height: 200px;">{{ $post->Penyebab }}</textarea>
-                </div>
+                </div> --}}
                 <div class="mb-3 col-6">
-                    <label for="Solusi"> Edit Solusi</label>
+                    <label for="Solusi"> Edit Ketentuan Ibadah</label>
                     <textarea class="form-control" name="Solusi" style="width: 100%; height: 200px;">{{ $post->Solusi }}</textarea>
                 </div>
         </form>

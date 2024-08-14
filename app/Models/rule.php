@@ -20,6 +20,7 @@ class rule extends Model
         'signs_id',
         'post_id',
         'operator',
+        'value1',
         'value'
     ];
     protected $with = [

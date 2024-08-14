@@ -2,7 +2,7 @@
 @section('content')
     <div class="card">
         <div class="card-header">
-            <h4>Tambah Jenis</h4>
+            <h4>Tambah Data</h4>
         </div>
 
 
@@ -12,11 +12,11 @@
                 <div class="form-group">
                     <div class="form-group row ">
                         <label for="name" class="col-md-2">
-                            <h6>Jenis Darah :</h6>
+                            <h6>Diagnosis :</h6>
                         </label>
                         <div class="col-md-4">
-                            <input type="text" class="form-control  @error('name') is-invalid @enderror" name="name"
-                                for="name" placeholder="Jenis Darah" required>
+                            <textarea name="name" class="form-control  @error('name') is-invalid @enderror"
+                                placeholder="Masukan jenis diagnosis darah" style="width: 100%; height: 200px;" for="name" required></textarea>
                             @error('name')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -40,7 +40,7 @@
                             @enderror
                         </div>
                     </div>
-                    <div class=" form-group row">
+                    {{-- <div class=" form-group row">
                         <label for="Penyebab" class="col-md-2">
                             <h6>Penyebab:</h6>
                         </label>
@@ -53,14 +53,14 @@
                                 </div>
                             @enderror
                         </div>
-                    </div>
+                    </div> --}}
                     <div class=" form-group row">
                         <label for="Solusi" class="col-md-2">
-                            <h6>Solusi :</h6>
+                            <h6>Ketentuan Ibadah :</h6>
                         </label>
                         <div class="col-md-8">
-                            <textarea class="form-control  @error('Solusi ') is-invalid @enderror" name="Solusi" placeholder="Solusi " required
-                                style="width: 100%; height: 200px;" for="Solusi"></textarea>
+                            <textarea class="form-control  @error('Solusi ') is-invalid @enderror" name="Solusi"
+                                placeholder="Masukan ketentuan ibadah" required style="width: 100%; height: 200px;" for="Solusi"></textarea>
                             @error('Solusi ')
                                 <div class="invalid-feedback">
                                     {{ $message }}

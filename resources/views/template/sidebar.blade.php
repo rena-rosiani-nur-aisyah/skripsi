@@ -14,8 +14,7 @@
 
             <li class="menu-header">Starter</li>
             <li class="nav-item"><a class="nav-link" href="/jenis"><i class="fas fa-clipboard"></i>
-                    <span>Jenis
-                        Darah</span></a></li>
+                    <span>Jenis Diagnosis Darah</span></a></li>
             </li>
             <li class="nav-item"><a class="nav-link" href="/gejala"><i class="fas fa-list"></i>
                     <span>Gejala</span></a></li>

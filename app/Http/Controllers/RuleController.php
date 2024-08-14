@@ -47,7 +47,8 @@ class RuleController extends Controller
             'gejala_id' => 'required',
             'signs_id' => 'required',
             'operator' => 'required|in:AND,OR',
-            'value' => 'required|in:ya,tidak'
+            'value' => 'required|in:ya,tidak',
+            'value1' => 'required|in:ya,tidak'
         ]);
 
         rule::create($validatedData);
@@ -77,7 +78,8 @@ class RuleController extends Controller
             'gejala_id' => 'required',
             'signs_id' => 'required',
             'operator' => 'required|in:AND,OR',
-            'value' => 'required|in:ya,tidak'
+            'value' => 'required|in:ya,tidak',
+            'value1' => 'required|in:ya,tidak'
         ]);
         rule::where('id', $id)->update($validatedData);
         return redirect('/rules')->with('success', 'Data berhasil dirubah');

@@ -29,13 +29,11 @@ class PostController extends Controller
         $validateData = $request->validate([
             'name' => 'required',
             'deskripsi' => 'required',
-            'Penyebab' => 'required',
             'Solusi' => 'required'
         ]);
         $insert =  post::create([
             'name' => $request->name,
             'deskripsi' => $request->deskripsi,
-            'Penyebab' => $request->Penyebab,
             'Solusi' => $request->Solusi,
         ]);
         return redirect(url('/jenis'));

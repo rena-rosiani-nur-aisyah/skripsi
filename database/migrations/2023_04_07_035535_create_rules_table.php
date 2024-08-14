@@ -18,6 +18,7 @@ class CreateRulesTable extends Migration
             $table->id();
             $table->foreignId('post_id');
             $table->foreignId('gejala_id')->references('id')->on('gejalas')->onDelete('cascade');
+            $table->enum('value1', ['ya', 'tidak'])->default('ya');
             $table->enum('operator', ['AND', 'OR'])->default('AND');
             $table->foreignId('signs_id')->references('id')->on('gejalas')->onDelete('cascade');
             $table->enum('value', ['ya', 'tidak'])->default('ya');

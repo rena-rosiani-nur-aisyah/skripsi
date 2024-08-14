@@ -27,6 +27,7 @@
                             <tr>
                                 <th>No</th>
                                 <th>Gejala</th>
+                                <th>Value</th>
                                 <th>Operator</th>
                                 <th>Indikasi Gejala</th>
                                 <th>Value</th>
@@ -38,6 +39,7 @@
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ optional($value->gejala)->keterangan }}</td>
+                                    <td>{{ $value->value1 }}</td>
                                     <td>{{ $value->operator }}</td>
                                     <td>{{ optional($value->signs)->keterangan }}</td>
                                     <td>{{ $value->value }}</td>

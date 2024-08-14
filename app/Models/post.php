@@ -15,7 +15,7 @@ class post extends Model
         // 'kode_penyakit',
         'name',
         'deskripsi',
-        'Penyebab',
+        // 'Penyebab',
         'Solusi'
     ];
     public function rule()
