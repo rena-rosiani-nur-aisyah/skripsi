@@ -19,7 +19,7 @@
             <li class="nav-item"><a class="nav-link" href="/gejala"><i class="fas fa-list"></i>
                     <span>Gejala</span></a></li>
             <li class="nav-item">
-                <a href="/hasilDiagnosis" class="nav-link">
+                <a href="/diagnosis" class="nav-link">
                     <i class="fas fa-stethoscope"></i>
                     <span>Diagnosis</span></a>
             </li>
@@ -33,20 +33,6 @@
             </li>
             <li class="nav-item"><a class="nav-link" href="/rules"><i
                         class="bi bi-diagram-3"></i><span>Rules</span></a></li>
-            <li class="menu-header">Data</li>
-            <li class="nav-item dropdown">
-                <a href="#" class="nav-link has-dropdown"><i class="far fa-user"></i> <span>Profile</span></a>
-                <ul class="dropdown-menu">
-                    <li><a href="/Puser">User</a></li>
-                    {{-- <li><a class="beep beep-sidebar" href="/admin">Admin</a></li> --}}
-                </ul>
-            </li>
         </ul>
-
-        <div class="mt-4 mb-4 p-3 hide-sidebar-mini">
-            <a href="https://getstisla.com/docs" class="btn btn-primary btn-lg btn-block btn-icon-split">
-                <i class="fas fa-rocket"></i> Logout
-            </a>
-        </div>
     </aside>
 </div>

@@ -17,7 +17,7 @@
                         </tr>
                         @foreach ($items as $item)
                             <tr>
-                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $items->firstItem() + $loop->index }}</td>
                                 <td>{{ $item->user->username }}</td>
                                 <td>{{ $item->post->name }}</td>
                                 <td><a href="/jejak/Diagnosis/{{ $item->id }}/show" class="btn btn-primary"><i
@@ -39,13 +39,9 @@
 
             <div class="card-body">
                 <nav aria-label="Page navigation example">
-                    <ul class="pagination">
-                        <li class="page-item"><a class="page-link" href="#">Sebelumnya</a></li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item"><a class="page-link" href="#">Selanjutnya</a></li>
-                    </ul>
+                    <div class="pagination">
+                        {{ $items->links() }}
+                    </div>
                 </nav>
             </div>
         </div>

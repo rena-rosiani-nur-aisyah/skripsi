@@ -73,8 +73,10 @@ Route::middleware(['auth'])->group(function () {
 Route::resource('/Dashboard/Artikel', ArtikelController::class);
 Route::resource('/rules', RuleController::class);
 
-// semua route untuk diagnosis user
-Route::resource('/diagnosis', HasilController::class);
+// semua route untuk diagnosis Admin
+
+Route::get('/diagnosis', [HasilController::class, 'index'])->name('diagnosis');
+
 
 
 Route::get('/diagnosisUser', [DiagnosisController::class, 'create'])->name('diagnosisUser');

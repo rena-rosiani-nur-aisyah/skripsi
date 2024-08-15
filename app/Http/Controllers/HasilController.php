@@ -15,7 +15,7 @@ class HasilController extends Controller
      */
     public function index()
     {
-        $items = hasil::with(['user', 'post'])->get();
+        $items = hasil::with(['user', 'post'])->paginate(10);
         return view('category.admin.diagnosis.HasilDiagnosis', compact('items'));
     }
 

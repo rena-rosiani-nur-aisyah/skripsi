@@ -24,10 +24,9 @@
                                             <th>Ketentuan Ibadah</th>
                                             <th>Action</th>
                                         </tr>
-                                        <?php $no = 1; ?>
                                         @foreach ($items as $value)
                                             <tr>
-                                                <td>{{ $no++ }}</td>
+                                                <td>{{ $items->firstItem() + $loop->index }}</td>
                                                 <td>{{ $value->name }}</td>
                                                 <td>{{ Str::limit($value->deskripsi, 100) }}</td>
                                                 <td>{{ Str::limit($value->Solusi, 100) }}</td>
@@ -43,13 +42,9 @@
                                 </div>
                                 <div class="card-body">
                                     <nav aria-label="Page navigation example">
-                                        <ul class="pagination">
-                                            <li class="page-item"><a class="page-link" href="#">Sebelumnya</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">Selanjutnya</a></li>
-                                        </ul>
+                                        <div class="pagination">
+                                            {{ $items->links() }}
+                                        </div>
                                     </nav>
                                 </div>
                             </div>
