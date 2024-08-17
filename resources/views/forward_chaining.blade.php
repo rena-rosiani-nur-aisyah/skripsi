@@ -14,7 +14,8 @@
         <p>{{ $nextQuestion }}</p>
 
         <form action="{{ url('/forwardchain') }}" method="GET">
-            <input type="hidden" name="step" value="{{ $step + 1 }}">
+            <input type="hidden" name="step" value="{{ $step}}">
+            <input type="hidden" name="dataq" value="{{ json_encode($dataq)}}">
             <label>
                 <input type="radio" name="answer" value="yes" required> Ya
             </label>
@@ -25,5 +26,12 @@
             <button type="submit">Jawab</button>
         </form>
     @endif
+
+    <script>
+        let dataq = <?php echo json_encode($dataq);?>;
+        let data = <?php echo json_encode($data);?>;
+        console.log(data);
+        console.log(dataq);
+    </script>
 </body>
 </html>
