@@ -13,6 +13,7 @@ use App\Http\Controllers\GejalaController;
 use App\Http\Controllers\DiagnosisController;
 use App\Http\Controllers\ArtikelController;
 use App\Http\Controllers\ArtikelUserController;
+use App\Http\Controllers\ForwardChainingController;
 use App\Http\Controllers\HasilController;
 use App\Http\Controllers\RiwayatController;
 // use App\Http\Controllers\Auth\LoginController;
@@ -139,6 +140,9 @@ Route::delete('/gejala/{id}', [GejalaController::class, 'deleteGejala'])->name('
 Route::get('/Puser', function () {
     return view('category.profilUser');
 });
+
+
+Route::get('/forwardchain', [ForwardChainingController::class, 'index']);
 
 
 
