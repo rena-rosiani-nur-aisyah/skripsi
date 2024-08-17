@@ -12,7 +12,6 @@
                 <thead>
                     <tr>
                         <th scope="col">id</th>
-                        <th scope="col">Kode</th>
                         <th scope="col">Keterangan</th>
                         <th scope="col">Kategori</th>
                         <th scope="col">Gambar</th>
@@ -21,11 +20,10 @@
                 </thead>
                 <tbody>
                     {{-- {{ dd($__data) }} --}}
-                    <?php $no = 1; ?>
+
                     @foreach ($items as $post)
                         <tr>
-                            <td>{{ $no++ }}</td>
-                            <td>kode</td>
+                            <td>{{ $items->firstItem() + $loop->index }}</td>
                             <td>{{ $post->keterangan }}</td>
                             <td>{{ $post->type }}</td>
                             <td>
@@ -52,13 +50,9 @@
         </div>
         <div class="card-body">
             <nav aria-label="Page navigation example">
-                <ul class="pagination">
-                    <li class="page-item"><a class="page-link" href="#">Sebelumnya</a></li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item"><a class="page-link" href="#">Selanjutnya</a></li>
-                </ul>
+                <div class="pagination">
+                    {{ $items->links() }}
+                </div>
             </nav>
         </div>
     </div>

@@ -21,7 +21,7 @@ class RuleController extends Controller
      */
     public function index()
     {
-        $items = Rule::with(['gejala', 'signs', 'post'])->get();
+        $items = Rule::with(['gejala', 'signs', 'post'])->paginate(10);
 
         $data = [
             'items' => $items

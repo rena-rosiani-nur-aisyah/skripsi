@@ -37,15 +37,15 @@
 
                             @foreach ($items as $value)
                                 <tr>
-                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $items->firstItem() + $loop->index }}</td>
                                     <td>{{ optional($value->gejala)->keterangan }}</td>
                                     <td>{{ $value->value1 }}</td>
                                     <td>{{ $value->operator }}</td>
                                     <td>{{ optional($value->signs)->keterangan }}</td>
                                     <td>{{ $value->value }}</td>
                                     <td>{{ optional($value->post)->name }}</td>
-                                    <td><a href="/rules/{{ $value->id }}/edit" class="btn btn-success"><i
-                                                class="bi bi-pencil-square"> </i></a>
+                                    <td style="white-space: nowrap;"><a href="/rules/{{ $value->id }}/edit"
+                                            class="btn btn-success"><i class="bi bi-pencil-square"> </i></a>
                                         <form action="/rules/{{ $value->id }}" method="POST" class="d-inline">
                                             @method('delete')
                                             @csrf
@@ -61,20 +61,9 @@
                 </div>
                 <div class="card-footer text-right">
                     <nav class="d-inline-block">
-                        <ul class="pagination mb-0">
-                            <li class="page-item disabled">
-                                <a class="page-link" href="#" tabindex="-1"><i class="fas fa-chevron-left"></i></a>
-                            </li>
-                            <li class="page-item active"><a class="page-link" href="#">1 <span
-                                        class="sr-only">(current)</span></a></li>
-                            <li class="page-item">
-                                <a class="page-link" href="#">2</a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item">
-                                <a class="page-link" href="#"><i class="fas fa-chevron-right"></i></a>
-                            </li>
-                        </ul>
+                        <div class="pagination">
+                            {{ $items->links() }}
+                        </div>
                     </nav>
                 </div>
             </div>

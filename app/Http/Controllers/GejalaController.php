@@ -18,7 +18,7 @@ class GejalaController extends Controller
     public function index()
     {
 
-        $items = DB::table('gejalas')->get();
+        $items = DB::table('gejalas')->paginate(10);
         $data = [
             'items' => $items
         ];

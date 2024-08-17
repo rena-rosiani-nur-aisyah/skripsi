@@ -13,7 +13,7 @@ class PostController extends Controller
 {
     public function index()
     {
-        $items = FacadesDB::table('posts')->get();
+        $items = FacadesDB::table('posts')->paginate(10);
         $data = [
             'items' => $items
         ];
