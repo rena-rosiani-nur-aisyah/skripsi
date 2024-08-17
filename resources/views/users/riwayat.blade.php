@@ -20,7 +20,7 @@
 
                             @foreach ($riwayat as $data)
                                 <tr>
-                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $items->firstItem() + $loop->index }}</td>
                                     <td>{{ $data->user->username }}</td>
                                     <td>{{ $data->post->name }}</td>
                                     </td>
@@ -32,6 +32,13 @@
                                 </tr>
                             @endforeach
                         </table>
+                    </div>
+                    <div class="card-body">
+                        <nav aria-label="Page navigation example">
+                            <div class="pagination">
+                                {{ $items->links() }}
+                            </div>
+                        </nav>
                     </div>
                 </div>
             </div>

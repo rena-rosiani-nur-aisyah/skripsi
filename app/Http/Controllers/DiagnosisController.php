@@ -66,12 +66,11 @@ class DiagnosisController extends Controller
         // nambahin current fact (gejala)
         $currentGejala = Gejala::find($request->input('gejala_id'));
         if ($currentGejala) {
-            $symptom = Gejala::find($request->input('symptoms_id'));
-            $sign = Gejala::find($request->input('signs_id'));
-
-            $this->forwardChaining->addFact($symptom, $sign);
-            // $forwardChaining->addFact($currentGejala);
+            $this->forwardChaining->addFact($currentGejala, $request->input('jawabanUser'));
+        } else {
+            Log::error('Gejala not found', ['gejala_id' => $request->input('gejala_id')]);
         }
+
 
         // jalankan algoritma fc nya bersamaan dengan jawabanUser
         $this->forwardChaining->runForwardChaining($request->input('jawabanUser'));
@@ -86,7 +85,6 @@ class DiagnosisController extends Controller
             // nyimpen hasil diagnosis ke tabel hasil
             Hasil::create([
                 'user_id' => auth()->user()->id,
-                // 'diagnosis_id' => $diagnosis->id,
                 'post_id' => $result->id,
             ]);
 
@@ -117,12 +115,7 @@ class DiagnosisController extends Controller
 
 
 
-    // public function update(Request $request, $id)
-    // {
-    //     $post = diagnosis::find($id);
-    //     $post->update($request->all());
-    //     return redirect(url('/diagnosa'))->with('Berhasil', 'Data telah dihapus.');
-    // }
+
 
 
     public function destroy($id)

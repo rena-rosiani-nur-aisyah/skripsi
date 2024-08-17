@@ -17,7 +17,7 @@ class RiwayatController extends Controller
     public function index()
     {
         return view('users.riwayat', [
-            'riwayat' => hasil::where('user_id', auth()->user()->id)->get()
+            'riwayat' => hasil::where('user_id', auth()->user()->id)->paginate(10)
         ]);
     }
 
