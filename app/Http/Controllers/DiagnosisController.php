@@ -32,20 +32,55 @@ class DiagnosisController extends Controller
         $this->forwardChaining = $forwardChaining;
     }
 
-    public function create()
+    public function create(Request $request)
     {
-        // Ambil fakta awal yang bertipe 'gejala'
-        $initialFact = Gejala::where('type', 'gejala')->first();
+        // // Ambil fakta awal yang bertipe 'gejala'
+        // $initialFact = Gejala::where('type', 'gejala')->first();
 
-        // Tambahkan fakta awal ke forward chaining
-        if ($initialFact) {
-            $this->forwardChaining->addFact($initialFact, null);
-        } else {
-            Log::error('No initial fact found');
+        // // Tambahkan fakta awal ke forward chaining
+        // if ($initialFact) {
+        //     $this->forwardChaining->addFact($initialFact, null);
+        // } else {
+        //     Log::error('No initial fact found');
+        // }
+
+        // // Kirim fakta awal ke view
+        $startstep = 1; //mulai step yang pertama
+        $step = $request->input('step'); // Step pertanyaan
+        $answer = $request->input('answer');
+        $gejalaid = $request->input('gejala_id');
+        $nextQuestion = null;
+        $finalResult = null;
+        //jika step tidak ada
+        if (!$step) {
+            $currentQuestion = DB::table('questions')->where('id', $startstep)->first();
+            $nextQuestion = $currentQuestion;
+            $dataq = $currentQuestion;
+            $step += 1;
         }
 
-        // Kirim fakta awal ke view
-        return view('users.diagnosis.diagnosis-user', ['gejala' => $initialFact]);
+        if ($answer) {
+            $question = DB::table('questions')->where('id', $gejalaid)->first();
+            if ($answer == 'yes') {
+                $nextQuestionText  = $question->is_yes;
+            } else if ($answer == 'no') {
+                $nextQuestionText  = $question->is_no;
+            }
+            $ceknextQuestion = DB::table('questions')->where('pertanyaan', $nextQuestionText)->first();
+            // Cek apakah nextQuestion adalah pertanyaan atau hasil akhir
+            if ($ceknextQuestion) {
+                $step += 1;
+                $nextQuestion = $ceknextQuestion;
+            } else {
+                $finalResult = $nextQuestionText;
+            }
+        }
+
+        return view('users.diagnosis.diagnosis-user', [
+            'step' => $step,
+            'nextQuestion' => $nextQuestion,
+            'finalResult' => $finalResult
+        ]);
     }
 
 
