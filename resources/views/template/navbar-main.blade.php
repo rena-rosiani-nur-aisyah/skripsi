@@ -58,9 +58,9 @@
 
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">
-                            <div class="dropdown-title">Logged in 5 min ago</div>
-                            <a href="features-profile.html" class="dropdown-item has-icon">
-                                <i class="far fa-user"></i> Profile
+                            {{-- <div class="dropdown-title">Logged in 5 min ago</div> --}}
+                            <a href="/Profil" class="dropdown-item has-icon">
+                                <i class="far fa-user"></i> Profil
                             </a>
                             <div class="dropdown-divider"></div>
                             <form action="/logout" method="POST">

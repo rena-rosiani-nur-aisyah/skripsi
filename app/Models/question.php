@@ -13,15 +13,9 @@ class question extends Model
     protected $table = 'questions';
 
     protected $fillable = [
-        'pertanyaan'
+        'pertanyaan',
+        'is_yes',
+        'is_no',
+        'image'
     ];
-
-    public function gejala()
-    {
-        return $this->belongsToMany(gejala::class, 'questions__gejalas');
-    }
-    public function post()
-    {
-        return $this->belongsToMany(post::class, 'questions_posts');
-    }
 }

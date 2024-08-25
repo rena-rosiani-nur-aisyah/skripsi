@@ -16,6 +16,9 @@ class CreateQuestionsTable extends Migration
         Schema::create('questions', function (Blueprint $table) {
             $table->id();
             $table->text('pertanyaan');
+            $table->text('is_yes');
+            $table->text('is_no');
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }

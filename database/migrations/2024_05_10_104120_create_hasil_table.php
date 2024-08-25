@@ -15,9 +15,7 @@ class CreatehasilTable extends Migration
     {
         Schema::create('hasil', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id');
-            $table->foreignId('diagnosis_id');
-            $table->foreignId('post_id');
+            $table->foreignId('riwayats_id');
             $table->timestamps();
         });
     }

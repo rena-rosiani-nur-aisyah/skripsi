@@ -16,8 +16,9 @@ class IsAdmin
      */
     public function handle(Request $request, Closure $next)
     {
-        if (auth()->user()->is_admin == 1)
-            return $next($request);
-        return redirect('dashboardUser')->with('error', "kamu tidak bisa mengakses halaman ini");
+        if (!auth()->check() || !auth()->user()->is_admin) {
+            abort(403);
+        }
+        return $next($request);
     }
 }

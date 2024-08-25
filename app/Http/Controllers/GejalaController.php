@@ -48,8 +48,7 @@ class GejalaController extends Controller
         $validateData =  $request->validate([
             // 'kode_gejala' => 'required',
             'keterangan' => 'required',
-            'image' => 'image|file|max:1024',
-            'type' => 'required|in:gejala,signs'
+            'image' => 'image|file|max:1024'
         ]);
 
 
@@ -60,7 +59,6 @@ class GejalaController extends Controller
         $insert = gejala::create([
             // 'kode_gejala' => $request->kode_gejala,
             'keterangan' => $validateData['keterangan'],
-            'type' => $validateData['type'],
             'image' => $validateData['image'] ?? null
         ]);
         return redirect(url('/gejala'));
@@ -97,8 +95,7 @@ class GejalaController extends Controller
     {
         $validatedData = $request->validate([
             'keterangan' => 'required',
-            'image' => 'image|file|max:1024',
-            'type' => 'required|in:gejala,signs'
+            'image' => 'image|file|max:1024'
         ]);
 
         if ($request->file('image')) {

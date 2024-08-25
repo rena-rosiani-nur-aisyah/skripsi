@@ -8,16 +8,6 @@
             @csrf
             <div class="card-body">
                 <div class="form-group">
-                    {{-- <div class="form-group row col-md-2">
-                        <label for="kode_gejala">Kode</label>
-                        <input type="text" class="form-control @error('kode_gejala') is-invalid @enderror"
-                            name="kode_gejala" placeholder="Masukan kode_gejala">
-                        @error('kode_gejala')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
-                    </div> --}}
                     <div class="form-group col-md-6">
                         <label for="keterangan">Keterangan</label>
                         <input type="text" class="form-control @error('keterangan') is-invalid @enderror"
@@ -26,17 +16,6 @@
                             <div class="invalid-feedback">
                                 {{ $message }}
                             </div>
-                        @enderror
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="type">Kategori</label>
-                        <select class="custom-select ml-0 @error('type') is-invalid @enderror" name="type">
-                            <option value="" disabled selected>pilih satu kategori</option>
-                            <option value="gejala" id="type_gejala">Gejala</option>
-                            <option value="signs" id="type_signs">Tanda-tanda terkait</option>
-                        </select>
-                        @error('type')
-                            <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
                     <div class="form-group col-md-6">

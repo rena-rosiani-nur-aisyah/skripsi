@@ -15,6 +15,8 @@ use App\Http\Controllers\ArtikelController;
 use App\Http\Controllers\ArtikelUserController;
 use App\Http\Controllers\ForwardChainingController;
 use App\Http\Controllers\HasilController;
+use App\Http\Controllers\profilController;
+use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\RiwayatController;
 // use App\Http\Controllers\Auth\LoginController;
 // use App\Http\Controllers\Auth\RegisterController;
@@ -64,6 +66,12 @@ Route::middleware(['auth'])->group(function () {
         return view('users.tentang');
     });
     Route::get('/showArtikel/{id}', [ArtikelUserController::class, 'show'])->name('showArtikel');
+    Route::get('/Puser', function () {
+        return view('category.profiladmin');
+    });
+
+    Route::get('/Profil', [profilController::class, 'show'])->name('profil.show');
+    Route::put('/Profil/{id}', [profilController::class, 'update'])->name('profil.update');
 });
 
 
@@ -72,15 +80,12 @@ Route::middleware(['auth'])->group(function () {
 //route untuk artikel kita coba pake resource
 
 Route::resource('/Dashboard/Artikel', ArtikelController::class);
-Route::resource('/rules', RuleController::class);
-
-// semua route untuk diagnosis Admin
+//question
+Route::resource('/rules', QuestionController::class);
 
 Route::get('/diagnosis', [HasilController::class, 'index'])->name('diagnosis');
-
-
-
 Route::get('/diagnosisUser', [DiagnosisController::class, 'create'])->name('diagnosisUser');
+Route::post('/simpanhasildiagnosis', [DiagnosisController::class, 'simpanhasil'])->name('simpanhasildiagnosis');
 Route::get('/emptyState', function () {
     return view('users.diagnosis.emptyView');
 });
@@ -89,27 +94,16 @@ Route::get('/hasilUser', function () {
 })->name('hasilUser');
 Route::post('/diagnosis/store', [DiagnosisController::class, 'store'])->name('diagnosis.store');
 
-
-
-// route untuk menu jenis
+//jeni darah
 Route::get('/jenis', [PostController::class, 'index']);
-
 Route::get('/show/{id}', [PostController::class, 'show'])->name('show');
-
 Route::post('/edit/{id}', [PostController::class, 'update'])->name('edit');
-
 Route::get('/delete/{id}', [PostController::class, 'destroy'])->name('delete');
-
 Route::post('/tjenis', [PostController::class, 'store'])->name('prosesinputjenis');
-
 Route::get('/tjenis', function () {
     return view('category.admin.penyakit.tjenis');
 });
-
 Route::delete('/penyakit/{id}', [PostController::class, 'deletePenyakit'])->name('penyakit.delete');
-
-
-
 
 // route untuk semua gejala
 Route::get('/gejala', [GejalaController::class, 'index']);
@@ -118,35 +112,16 @@ Route::get('/tampilgejala/{id}', [GejalaController::class, 'show'])->name('tampi
 Route::post('/updategejala/{id}', [GejalaController::class, 'update'])->name('updategejala');
 Route::get('/editgejala/{id}', [GejalaController::class, 'edit'])->name('editgejala');
 Route::get('/deletegejala/{id}', [GejalaController::class, 'destroy'])->name('deletegejala');
-
 Route::get('/tgejala', function () {
     return view('category.admin.gejala.tgejala');
 });
-
 Route::get('/editgejala', function () {
     return view('category.admin.gejala.editgejala');
 });
-
 Route::delete('/gejala/{id}', [GejalaController::class, 'deleteGejala'])->name('gejala.delete');
 
-
-
-
-
-
-
-
-//rout profil dari sisi admin
-Route::get('/Puser', function () {
-    return view('category.profilUser');
-});
-
-
 Route::get('/forwardchain', [ForwardChainingController::class, 'index']);
-
-
-
 // Profile user dari sisi user
-// Route::get('/profile', function () {
-//     return view('users.profile');
-// });
+Route::get('/profile', function () {
+    return view('users.profile');
+});

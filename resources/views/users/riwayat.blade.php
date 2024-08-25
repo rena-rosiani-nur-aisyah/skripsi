@@ -12,23 +12,14 @@
                         <table class="table table-striped">
                             <tr>
                                 <th>No.</th>
-                                <th>Username</th>
                                 <th>Hasil Diagnosis</th>
                                 <th>Tanggal</th>
-                                <th>Aksi</th>
                             </tr>
 
                             @foreach ($riwayat as $data)
                                 <tr>
-                                    <td>{{ $items->firstItem() + $loop->index }}</td>
-                                    <td>{{ $data->user->username }}</td>
-                                    <td>{{ $data->post->name }}</td>
-                                    </td>
-                                    <td>{{ $data->created_at->diffForHumans() }}</td>
-                                    <td>
-                                        <a href="/jejak/Diagnosis/{{ $item->id }}/show" class="btn btn-primary"><i
-                                                class="bi bi-eye"></i></a>
-                                    </td>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $data->hasil }}</td>
                                 </tr>
                             @endforeach
                         </table>
@@ -36,7 +27,7 @@
                     <div class="card-body">
                         <nav aria-label="Page navigation example">
                             <div class="pagination">
-                                {{ $items->links() }}
+                                {{-- {{ $items->links() }} --}}
                             </div>
                         </nav>
                     </div>

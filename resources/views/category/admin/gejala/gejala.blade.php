@@ -13,7 +13,6 @@
                     <tr>
                         <th scope="col">id</th>
                         <th scope="col">Keterangan</th>
-                        <th scope="col">Kategori</th>
                         <th scope="col">Gambar</th>
                         <th scope="col">Action</th>
                     </tr>
@@ -25,7 +24,6 @@
                         <tr>
                             <td>{{ $items->firstItem() + $loop->index }}</td>
                             <td>{{ $post->keterangan }}</td>
-                            <td>{{ $post->type }}</td>
                             <td>
                                 @if ($post->image)
                                     <div>

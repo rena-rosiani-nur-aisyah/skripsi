@@ -6,122 +6,69 @@
                 <div class="card-header">
                     <h4>Tambah Aturan</h4>
                 </div>
-                <form action="/rules" method="POST" class="ml-3">
+                <form action="/rules" method="POST" class="ml-3" enctype="multipart/form-data">
                     @csrf
                     <div class="card-body">
-                        {{-- Ini option untuk gejala pertama --}}
 
-                        <div class="section-title mt-0"><label for="gejala"></label>Pilih Gejala</div>
-                        <div class="form-group col-lg-8">
-                            <select class="custom-select @error('gejala_id') is-invalid @enderror" name="gejala_id">
-                                <option value="" disabled selected>pilih satu gejala</option>
-                                @foreach ($gejalas as $gejala)
-                                    <option value="{{ $gejala->id }}">{{ $gejala->keterangan }}</option>
-                                @endforeach
-                            </select>
-                            @error('gejala_id')
-                                <div class="invalid-feedback">{{ $message }}</div>
+                        <div class="mb-3">
+                            <label for="pertanyaan">Masukan Pertanyaan</label>
+                            <textarea class="form-control @error('pertanyaan') is-invalid
+                            @enderror" id="pertanyaan"
+                                placeholder="Masukan Pertanyaan" required name="pertanyaan"></textarea>
+                            @error('pertanyaan')
+                                <div class="invalid-feedback">
+                                    Masukan Pertanyaan
+                                </div>
                             @enderror
+
                         </div>
 
-                        {{-- ini value untuk menentukan jawaban yang seharusnya  --}}
-                        <div class="form-group">
-                            <div class="section-title"><label for="value1">Value</label></div>
-                            <div class="mb-2">
-                                <div class="custom-control custom-radio custom-control-inline ml-5">
-                                    <input type="radio" id="value1_ya" name="value1"
-                                        class="custom-control-input @error('value') is-invalid @enderror" value="ya"
-                                        {{ old('value1') == 'ya' ? 'checked' : '' }}>
-                                    <label class="custom-control-label" for="value1_ya">Ya</label>
+                        <div class="mb-3">
+                            <label for="is_yes">Masukan Langkah Selanjutnya Jika Ya</label>
+                            <textarea class="form-control @error('is_yes')is-invalid
+                            @enderror" id="is_yes"
+                                placeholder="Masukan Langkah Selanjutnya Jika Ya" required name="is_yes"></textarea>
+                            @error('is_yes')
+                                <div class="invalid-feedback">
+                                    Masukan Langkah Selanjutnya Jika Ya
                                 </div>
-                                <div class="custom-control custom-radio custom-control-inline">
-                                    <input type="radio" id="value1_tidak" name="value1"
-                                        class="custom-control-input @error('value1') is-invalid @enderror" value="tidak"
-                                        {{ old('value1') == 'tidak' ? 'checked' : '' }}>
-                                    <label class="custom-control-label" for="value1_tidak">Tidak</label>
+                            @enderror
+
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="is_no">Masukan Langkah Selanjutnya Jika Tidak</label>
+                            <textarea class="form-control @error('is_no')is-invalid
+                            @enderror " id="is_no"
+                                placeholder="Masukan Langkah Selanjutnya Jika Tidak" required name="is_no"></textarea>
+                            @error('is_no')
+                                <div class="invalid-feedback">
+                                    Masukan Langkah Selanjutnya Jika Tidak
                                 </div>
-                                @error('value1')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
+                            @enderror
+
+                        </div>
+                        <div class="mb-3">
+                            <div class="form-group col-md-6">
+                                <label for="image">Pilih Gambar</label>
+                                <div class="custom-file">
+                                    <label class="custom-file-label" for="image">Pilih Gambar</label>
+                                    <div class="col-sm-12 col-md-7">
+                                        <input type="file"
+                                            class="custom-file-input @error('image') is-invalid @enderror col-md-7"
+                                            id="image" name="image" onchange="previewImage()">
+                                        <div class="col-lg-10 mt-4 mb-0" style="max-height: 250px; overflow:hidden;">
+                                            <img class="img-preview img-fluid col-lg-12 col-md-12 d-block">
+                                        </div>
+                                        @error('image')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                </div>
                             </div>
                         </div>
-
-                        {{-- ini untuk operator  --}}
-                        <div class="form-group">
-                            <div class="section-title"><label for="operator">Operator</label></div>
-                            <div class="custom-control custom-radio custom-control-inline ml-5">
-                                <input type="radio" id="operator_AND" name="operator"
-                                    class="custom-control-input @error('operator') is-invalid @enderror" value="AND"
-                                    {{ old('operator') == 'AND' ? 'checked' : '' }}>
-                                <label class="custom-control-label" for="operator_AND">AND</label>
-                            </div>
-                            <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" id="operator_OR" name="operator"
-                                    class="custom-control-input @error('operator') is-invalid @enderror" value="OR"
-                                    {{ old('operator') == 'OR' ? 'checked' : '' }}>
-                                <label class="custom-control-label" for="operator_OR">OR </label>
-                            </div>
-                            @error('operator')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-
-
-                        {{-- ini untuk gejala kedua atau gejlaa selanjutnya yang related dengan gejala sebelumnya --}}
-
-                        <div class="section-title mt-4"><label for="signs">Pilih indikasi gejala
-                                sebelumnya</label></div>
-                        <div class="form-group col-lg-8">
-                            <select class="custom-select  @error('signs_id') is-invalid @enderror" name="signs_id">
-                                <option value="" disabled selected>Pilih Indikasi</option>
-                                @foreach ($signs as $sign)
-                                    <option value="{{ $sign->id }}">{{ $sign->keterangan }}</option>
-                                @endforeach
-                            </select>
-                            @error('signs_id')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-
-
-                        {{-- ini value untuk menentukan jawaban yang seharusnya  --}}
-                        <div class="form-group">
-                            <div class="section-title"><label for="value">Value</label></div>
-                            <div class="mb-2">
-                                <div class="custom-control custom-radio custom-control-inline ml-5">
-                                    <input type="radio" id="value_ya" name="value"
-                                        class="custom-control-input @error('value') is-invalid @enderror" value="ya"
-                                        {{ old('value') == 'ya' ? 'checked' : '' }}>
-                                    <label class="custom-control-label" for="value_ya">Ya</label>
-                                </div>
-                                <div class="custom-control custom-radio custom-control-inline">
-                                    <input type="radio" id="value_tidak" name="value"
-                                        class="custom-control-input @error('value') is-invalid @enderror" value="tidak"
-                                        {{ old('value') == 'tidak' ? 'checked' : '' }}>
-                                    <label class="custom-control-label" for="value_tidak">Tidak</label>
-                                </div>
-                                @error('value')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
-
-
-                        {{-- ini option untuk menentukan jenis darah atau penyakitnya  --}}
-                        <div class="section-title mt-4"><label for="post">Pilih jenis darah yang sesuai dengan
-                                gejala</label></div>
-                        <div class="form-group col-lg-8">
-                            <select class="custom-select  @error('post_id') is-invalid @enderror" name="post_id">
-                                <option value="" disabled selected>pilih satu jenis darah</option>
-                                @foreach ($penyakit as $post)
-                                    <option value="{{ $post->id }}">{{ $post->name }}</option>
-                                @endforeach
-                            </select>
-                            @error('post_id')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-
                     </div>
                     <div class="card-footer">
                         <a href="/rules" class="btn btn-primary">Kembali</a>
@@ -131,4 +78,18 @@
             </div>
         </div>
     </div>
+    <script>
+        function previewImage() {
+            const image = document.querySelector('#image');
+            const imgPreview = document.querySelector('.img-preview');
+            imgPreview.style.display = 'block';
+
+            const oFReader = new FileReader();
+            oFReader.readAsDataURL(image.files[0]);
+
+            oFReader.onload = function(oFREvent) {
+                imgPreview.src = oFREvent.target.result;
+            }
+        }
+    </script>
 @endsection

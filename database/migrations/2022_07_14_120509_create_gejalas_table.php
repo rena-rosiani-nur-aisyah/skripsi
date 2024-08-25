@@ -15,9 +15,7 @@ class CreateGejalasTable extends Migration
     {
         Schema::create('gejalas', function (Blueprint $table) {
             $table->id('id');
-            // $table->string('kode_gejala')->unique();
             $table->text('keterangan');
-            $table->enum('type', ['gejala', 'signs'])->default('gejala');
             $table->string('image')->nullable();
             $table->timestamps();
         });

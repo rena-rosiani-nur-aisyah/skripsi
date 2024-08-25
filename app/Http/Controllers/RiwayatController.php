@@ -6,6 +6,7 @@ use App\Models\riwayat;
 use App\Http\Requests\StoreriwayatRequest;
 use App\Http\Requests\UpdateriwayatRequest;
 use App\Models\hasil;
+use Illuminate\Support\Facades\DB;
 
 class RiwayatController extends Controller
 {
@@ -16,8 +17,10 @@ class RiwayatController extends Controller
      */
     public function index()
     {
+
+
         return view('users.riwayat', [
-            'riwayat' => hasil::where('user_id', auth()->user()->id)->paginate(10)
+            'riwayat' => DB::table('riwayats')->get()
         ]);
     }
 

@@ -26,24 +26,27 @@
                         <table class="table table-striped table-md">
                             <tr>
                                 <th>No</th>
-                                <th>Gejala</th>
-                                <th>Value</th>
-                                <th>Operator</th>
-                                <th>Indikasi Gejala</th>
-                                <th>Value</th>
-                                <th>Jenis Darah</th>
+                                <th>Pertanyaan</th>
+                                <th>Jawab Ya</th>
+                                <th>Jawab Tidak</th>
+                                <th>Gambar</th>
                                 <th>Action</th>
                             </tr>
 
                             @foreach ($items as $value)
                                 <tr>
                                     <td>{{ $items->firstItem() + $loop->index }}</td>
-                                    <td>{{ optional($value->gejala)->keterangan }}</td>
-                                    <td>{{ $value->value1 }}</td>
-                                    <td>{{ $value->operator }}</td>
-                                    <td>{{ optional($value->signs)->keterangan }}</td>
-                                    <td>{{ $value->value }}</td>
-                                    <td>{{ optional($value->post)->name }}</td>
+                                    <td>{{ $value->pertanyaan }}</td>
+                                    <td>{{ $value->is_yes }}</td>
+                                    <td>{{ $value->is_no }}</td>
+                                    <td>
+                                        @if ($value->image)
+                                            <img src="{{ asset('storage/' . $item->image) }}" alt="Gambar" width="50"
+                                                height="auto">
+                                        @else
+                                            --
+                                        @endif
+                                    </td>
                                     <td style="white-space: nowrap;"><a href="/rules/{{ $value->id }}/edit"
                                             class="btn btn-success"><i class="bi bi-pencil-square"> </i></a>
                                         <form action="/rules/{{ $value->id }}" method="POST" class="d-inline">

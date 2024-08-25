@@ -12,20 +12,15 @@ class hasil extends Model
 
     protected $fillable = [
         'user_id',
-        'post_id',
-        'diagnosis_id'
+        'riwayats_id'
     ];
 
     public function user()
     {
         return $this->belongsTo(user::class, 'user_id');
     }
-    public function post()
+    public function riwayat()
     {
-        return $this->belongsTo(post::class, 'post_id');
-    }
-    public function diagnosis()
-    {
-        return $this->belongsTo(diagnosis::class, 'diagnosis_id');
+        return $this->belongsTo(riwayat::class, 'riwayats_id');
     }
 }

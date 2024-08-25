@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\diagnosis;
 use App\Models\hasil;
+use App\Models\riwayat;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class HasilController extends Controller
 {
@@ -15,7 +17,7 @@ class HasilController extends Controller
      */
     public function index()
     {
-        $items = hasil::with(['user', 'post'])->paginate(10);
+        $items = DB::table('riwayats')->paginate(10);
         return view('category.admin.diagnosis.HasilDiagnosis', compact('items'));
     }
 

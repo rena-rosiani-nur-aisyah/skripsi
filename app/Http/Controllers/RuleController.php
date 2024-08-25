@@ -21,38 +21,38 @@ class RuleController extends Controller
      */
     public function index()
     {
-        $items = Rule::with(['gejala', 'signs', 'post'])->paginate(10);
+        // $items = Rule::with(['gejala', 'signs', 'post'])->paginate(10);
 
-        $data = [
-            'items' => $items
-        ];
-        return view('category.admin.diagnosis.rule.rule', $data);
+        // $data = [
+        //     'items' => $items
+        // ];
+        // return view('category.admin.diagnosis.rule.rule', $data);
     }
 
     public function create()
     {
-        return view('category.admin.diagnosis.rule.tambahRules', [
-            'gejalas' => gejala::all(),
-            'signs' => gejala::all(),
-            'penyakit' => post::all()
-        ]);
+        // return view('category.admin.diagnosis.rule.tambahRules', [
+        //     'gejalas' => gejala::all(),
+        //     'signs' => gejala::all(),
+        //     'penyakit' => post::all()
+        // ]);
     }
     // $jenisDarah = post::all();
 
     public function store(Request $request)
     {
         // dd($request->all());
-        $validatedData = $request->validate([
-            'post_id' => 'required',
-            'gejala_id' => 'required',
-            'signs_id' => 'required',
-            'operator' => 'required|in:AND,OR',
-            'value' => 'required|in:ya,tidak',
-            'value1' => 'required|in:ya,tidak'
-        ]);
+        // $validatedData = $request->validate([
+        //     'post_id' => 'required',
+        //     'gejala_id' => 'required',
+        //     'signs_id' => 'required',
+        //     'operator' => 'required|in:AND,OR',
+        //     'value' => 'required|in:ya,tidak',
+        //     'value1' => 'required|in:ya,tidak'
+        // ]);
 
-        rule::create($validatedData);
-        return redirect('/rules')->with('success', 'Aturan baru sudah ditambahkan!');
+        // rule::create($validatedData);
+        // return redirect('/rules')->with('success', 'Aturan baru sudah ditambahkan!');
     }
 
 
@@ -63,26 +63,26 @@ class RuleController extends Controller
 
     public function edit(rule $rule)
     {
-        return view('category.admin.diagnosis.rule.editRules', [
-            'rule' => $rule,
-            'gejalas' => gejala::all(),
-            'signs' => gejala::all(),
-            'penyakit' => post::all()
-        ]);
+        // return view('category.admin.diagnosis.rule.editRules', [
+        //     'rule' => $rule,
+        //     'gejalas' => gejala::all(),
+        //     'signs' => gejala::all(),
+        //     'penyakit' => post::all()
+        // ]);
     }
 
     public function update(Request $request, $id)
     {
-        $validatedData = $request->validate([
-            'post_id' => 'required',
-            'gejala_id' => 'required',
-            'signs_id' => 'required',
-            'operator' => 'required|in:AND,OR',
-            'value' => 'required|in:ya,tidak',
-            'value1' => 'required|in:ya,tidak'
-        ]);
-        rule::where('id', $id)->update($validatedData);
-        return redirect('/rules')->with('success', 'Data berhasil dirubah');
+        // $validatedData = $request->validate([
+        //     'post_id' => 'required',
+        //     'gejala_id' => 'required',
+        //     'signs_id' => 'required',
+        //     'operator' => 'required|in:AND,OR',
+        //     'value' => 'required|in:ya,tidak',
+        //     'value1' => 'required|in:ya,tidak'
+        // ]);
+        // rule::where('id', $id)->update($validatedData);
+        // return redirect('/rules')->with('success', 'Data berhasil dirubah');
     }
 
     /**
@@ -93,7 +93,7 @@ class RuleController extends Controller
      */
     public function destroy(rule $rule)
     {
-        rule::destroy($rule->id);
-        return redirect('/rules')->with('success', 'Data aturan terhapus!');
+        // rule::destroy($rule->id);
+        // return redirect('/rules')->with('success', 'Data aturan terhapus!');
     }
 }

@@ -13,8 +13,7 @@ class gejala extends Model
 
     protected $fillable = [
         'keterangan',
-        'image',
-        'type'
+        'image'
     ];
 
     public function rule()
